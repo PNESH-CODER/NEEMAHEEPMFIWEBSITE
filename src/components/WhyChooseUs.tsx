@@ -15,7 +15,6 @@ export default function WhyChooseUs() {
       description: "Financial, educational, and health support working together."
     },
     {
-      iconImage: "/integrity_darkgreen.png",
       icon: ShieldCheck,
       title: "Integrity and Accountability",
       description: "Transparent, professional, responsible operations."
@@ -65,16 +64,7 @@ export default function WhyChooseUs() {
               className="bg-[#F9FAFB] border border-gray-100 p-8 rounded-3xl hover:shadow-[0_20px_40px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 group flex flex-col"
             >
               <div className="w-14 h-14 rounded-2xl bg-[#074504]/10 border border-[#074504]/20 flex items-center justify-center shrink-0 shadow-xs mb-6 group-hover:scale-110 group-hover:bg-[#074504] group-hover:border-[#074504] transition-all duration-300">
-                {item.iconImage ? (
-                  <img 
-                    src={item.iconImage} 
-                    alt={item.title} 
-                    className="w-7 h-7 object-contain" 
-                    onError={(e) => { e.currentTarget.src = "/integrity_gold.png"; }}
-                  />
-                ) : (
-                  <item.icon className="w-7 h-7 text-[#074504] group-hover:text-[#C0991B] transition-colors duration-300" />
-                )}
+                <item.icon className="w-7 h-7 text-[#074504] group-hover:text-[#C0991B] transition-colors duration-300" />
               </div>
               <h4 className="text-xl font-extrabold text-gray-900 mb-3 tracking-tight">{item.title}</h4>
               <p className="text-gray-600 font-medium leading-relaxed">{item.description}</p>

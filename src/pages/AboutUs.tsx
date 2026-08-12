@@ -237,12 +237,7 @@ export default function AboutUs() {
 
              <div className="p-8 border border-white/10 rounded-[2.5rem] bg-white/5 hover:bg-white/10 transition-all group hover:-translate-y-1">
                 <div className="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center mb-6 shadow-md group-hover:scale-110 transition-transform">
-                  <img 
-                    src="/integrity_gold.png" 
-                    alt="Integrity" 
-                    className="w-7 h-7 object-contain"
-                    onError={(e) => { e.currentTarget.src = "/integrity_icon.png"; }}
-                  />
+                  <ShieldCheck className="w-6 h-6 text-[#C0991B]" />
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-white">Integrity</h3>
                 <p className="text-sm text-white/70 font-medium leading-relaxed">
@@ -356,9 +351,8 @@ export default function AboutUs() {
               { 
                 title: "Transparency", 
                 desc: "Every transaction, rate, and policy is clear and honest. No hidden fees, just straightforward banking.",
-                iconImage: "/transparency_gold.png",
                 icon: ShieldCheck,
-                color: "bg-[#074504]"
+                color: "bg-[#C0991B]"
               },
               { 
                 title: "Impact Focused", 
@@ -376,16 +370,7 @@ export default function AboutUs() {
                 className="bg-[#F4F7F6] p-10 rounded-[2.5rem] border border-gray-100 shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)] transition-all duration-500 group hover:-translate-y-2"
               >
                 <div className={`w-16 h-16 rounded-[1.25rem] ${item.color} flex items-center justify-center mb-8 rotate-3 group-hover:rotate-0 transition-all duration-500 shadow-lg`}>
-                  {item.iconImage ? (
-                    <img 
-                      src={item.iconImage} 
-                      alt={item.title} 
-                      className="w-8 h-8 object-contain filter drop-shadow-sm" 
-                      onError={(e) => { e.currentTarget.src = "/transparency_icon.png"; }}
-                    />
-                  ) : (
-                    <item.icon className="w-8 h-8 text-white group-hover:scale-110 transition-transform" />
-                  )}
+                  <item.icon className="w-8 h-8 text-white group-hover:scale-110 transition-transform" />
                 </div>
                 <h4 className="font-extrabold text-[#074504] text-xl mb-4 group-hover:text-[#C0991B] transition-colors">{item.title}</h4>
                 <p className="text-gray-500 font-medium leading-relaxed text-sm">{item.desc}</p>
