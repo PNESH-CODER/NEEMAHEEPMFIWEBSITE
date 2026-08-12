@@ -29,20 +29,18 @@ export default function WhoWeAre() {
           </div>
 
           {/* Title */}
-          <h2 className="text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-black text-[#074504] leading-[0.98] mb-6 uppercase tracking-tight">
-            CATALYZING <br />
-            PROGRESS <br />
-            <span className="text-[#C0991B]">BUILDING LEGACIES</span>
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-4xl font-black text-[#074504] leading-tight mb-6 uppercase tracking-tight">
+            CATALYZING PROGRESS <span className="text-[#C0991B]">BUILDING LEGACIES</span>
           </h2>
 
           {/* Description Paragraph */}
-          <div className="space-y-6 text-gray-700 font-medium leading-relaxed text-base lg:text-lg mb-8">
-            <p>
+          <div className="space-y-6 text-gray-700 font-medium leading-relaxed text-base lg:text-lg mb-8 text-left">
+            <p className="text-left text-pretty">
               Through these offerings, combined with tailored credit facilities and financial literacy programs, the institution leverages technology enabled operations and mobile money systems to drive efficiency, transparency, and scalability while empowering communities to grow incomes, build resilience, and achieve sustainable prosperity.
             </p>
 
             {/* Checkmark Features Grid */}
-            <div className="grid sm:grid-cols-2 gap-4 py-2">
+            <div className="grid sm:grid-cols-2 gap-4 py-2 text-left">
               {[
                 "Consistent community engagement",
                 "Responsible lending practices",
@@ -59,7 +57,7 @@ export default function WhoWeAre() {
             </div>
 
             {/* Links Paragraph */}
-            <p className="text-sm lg:text-base text-gray-700">
+            <p className="text-sm lg:text-base text-gray-700 text-left text-pretty">
               Today, Neema HEEP is a trusted financial partner serving individuals, farmers and businesses across Kenya with accessible{' '}
               <Link to="/loans" className="text-[#C0991B] font-extrabold hover:underline">
                 business loans
