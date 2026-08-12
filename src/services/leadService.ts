@@ -1,16 +1,4 @@
-import { 
-  collection, 
-  addDoc, 
-  updateDoc, 
-  doc, 
-  query, 
-  orderBy, 
-  onSnapshot,
-  limit,
-  serverTimestamp,
-  Timestamp,
-  db
-} from '../lib/firebase';
+import { supabase } from '../lib/supabase';
 
 export type LeadType = 'Registration' | 'Pre-Qualification' | 'Contact' | 'Resource' | 'Career' | 'Partnership' | 'Callback' | 'Volunteer' | 'Member Activation' | 'Sponsorship';
 
@@ -31,10 +19,9 @@ class LeadService {
   private static instance: LeadService;
   private leads: Lead[] = [];
   private listeners: ((leads: Lead[]) => void)[] = [];
+  private channel: any = null;
 
-  private constructor() {
-    // Sync is now triggered explicitly to avoid permission errors for non-admins
-  }
+  private constructor() {}
 
   public static getInstance(): LeadService {
     if (!LeadService.instance) {
@@ -43,39 +30,73 @@ class LeadService {
     return LeadService.instance;
   }
 
-  private unsubscribe: (() => void) | null = null;
+  public async startSync() {
+    try {
+      const { data, error } = await supabase
+        .from('leads')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(100);
 
-  public startSync() {
-    if (this.unsubscribe) return;
+      if (!error && data) {
+        this.leads = data.map((item: any) => ({
+          id: item.id,
+          type: item.type || 'Contact',
+          name: item.full_name || item.name || 'Anonymous',
+          email: item.email,
+          phone: item.phone,
+          details: item.details,
+          status: item.status || 'New',
+          timestamp: item.created_at ? new Date(item.created_at).getTime() : Date.now(),
+          signupSource: item.signup_source
+        }));
+        this.notify();
+      }
 
-    // Combine all relevant lead-like collections into one view for the admin dashboard
-    const q = query(collection(db, 'leads'), orderBy('timestamp', 'desc'), limit(100));
-    this.unsubscribe = onSnapshot(q, (snapshot) => {
-      const firestoreLeads: Lead[] = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data(),
-        timestamp: doc.data().timestamp?.toMillis() || Date.now()
-      } as Lead));
-      
-      this.leads = firestoreLeads;
-      this.notify();
-    }, (error) => {
-      console.error("Lead Sync Error:", error);
-      // We don't throw here to avoid crashing the whole app, 
-      // but the permission error will be logged.
-    });
+      // Realtime subscription via Supabase
+      if (!this.channel) {
+        this.channel = supabase
+          .channel('public:leads')
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'leads' }, () => {
+            this.fetchLeads();
+          })
+          .subscribe();
+      }
+    } catch (error) {
+      console.warn("Supabase Lead Sync Notice:", error);
+    }
+  }
+
+  private async fetchLeads() {
+    try {
+      const { data } = await supabase.from('leads').select('*').order('created_at', { ascending: false }).limit(100);
+      if (data) {
+        this.leads = data.map((item: any) => ({
+          id: item.id,
+          type: item.type || 'Contact',
+          name: item.full_name || item.name || 'Anonymous',
+          email: item.email,
+          phone: item.phone,
+          details: item.details,
+          status: item.status || 'New',
+          timestamp: item.created_at ? new Date(item.created_at).getTime() : Date.now()
+        }));
+        this.notify();
+      }
+    } catch (err) {
+      console.warn("Fetch leads error:", err);
+    }
   }
 
   public stopSync() {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-      this.unsubscribe = null;
+    if (this.channel) {
+      supabase.removeChannel(this.channel);
+      this.channel = null;
     }
   }
 
   public async syncPartialLead(partialData: { name?: string; email: string; phone?: string; type: string; step?: number }) {
     try {
-      console.log('[Real-time API Sync - Partial Contact Step 1]', partialData);
       await fetch('/api/leads/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -93,36 +114,22 @@ class LeadService {
 
   public async submitLead(leadData: Omit<Lead, 'id' | 'status' | 'timestamp'>) {
     try {
-      const response = await fetch('/api/leads/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(leadData)
-      });
-      
-      const result = await response.json();
+      const { data, error } = await supabase.from('leads').insert([{
+        full_name: leadData.name,
+        email: leadData.email,
+        phone: leadData.phone || '',
+        type: leadData.type,
+        details: leadData.details || {},
+        status: 'New'
+      }]).select().single();
 
-      // We still update local firestore for those specific collections for now
-      // but the centralized 'leads' collection is handled by the server endpoint
-      const typeMap: Record<string, string> = {
-        'Career': 'career_applications',
-        'Contact': 'contact_messages',
-        'Volunteer': 'volunteer_applications',
-        'Partnership': 'partnership_applications',
-        'Callback': 'callback_requests'
-      };
+      if (error) {
+        throw error;
+      }
 
-      const targetCollection = typeMap[leadData.type] || 'leads';
-      
-      const docRef = await addDoc(collection(db, targetCollection), {
-        ...leadData,
-        status: 'New',
-        timestamp: serverTimestamp(),
-        audit: result.audit
-      });
-
-      return { id: docRef.id, ...leadData };
+      return { id: data.id, ...leadData };
     } catch (error) {
-      console.error("Error submitting lead: ", error);
+      console.error("Error submitting lead to Supabase: ", error);
       return { id: 'temp-' + Date.now(), ...leadData };
     }
   }
@@ -133,10 +140,10 @@ class LeadService {
 
   public async updateLeadStatus(id: string, status: Lead['status']) {
     try {
-      const leadRef = doc(db, 'leads', id);
-      await updateDoc(leadRef, { status });
+      await supabase.from('leads').update({ status }).eq('id', id);
+      this.fetchLeads();
     } catch (error) {
-      console.error("Error updating lead status: ", error);
+      console.error("Error updating lead status in Supabase: ", error);
     }
   }
 

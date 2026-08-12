@@ -226,7 +226,7 @@ const INITIAL_MEDIA_ITEMS: MediaItem[] = [
   {
     id: 'media_2',
     filename: 'women_chama_group_meeting.jpg',
-    displayName: 'Embu Women Chama Group Savings Meeting',
+    displayName: 'Embu Women Chama Group Meeting',
     fileType: 'image',
     mimeType: 'image/jpeg',
     extension: 'jpg',
@@ -252,10 +252,10 @@ const INITIAL_MEDIA_ITEMS: MediaItem[] = [
     ],
     metadata: {
       filename: 'women_chama_group_meeting.jpg',
-      displayName: 'Embu Women Chama Group Savings Meeting',
+      displayName: 'Embu Women Chama Group Meeting',
       altText: 'Neema HEEP women chama group leader conducting weekly financial literacy session.',
       caption: 'Women group-guaranteed micro-loans expanding retail businesses in Embu town.',
-      description: 'Chama group members holding savings passbooks during field officer appraisal.',
+      description: 'Chama group members holding group record books during field officer appraisal.',
       keywords: ['Chama', 'Women', 'Embu', 'Financial Literacy'],
       copyright: '© 2026 Neema HEEP Microfinance Ltd.',
       photographer: 'Dr. Jane Muturi',
@@ -511,7 +511,7 @@ const INITIAL_MEDIA_ITEMS: MediaItem[] = [
   {
     id: 'media_8',
     filename: 'chama_financial_literacy_podcast.mp3',
-    displayName: 'Chama Growth & Savings Podcast Episode 04',
+    displayName: 'Chama Growth & Development Podcast Episode 04',
     fileType: 'audio',
     mimeType: 'audio/mpeg',
     extension: 'mp3',
@@ -533,7 +533,7 @@ const INITIAL_MEDIA_ITEMS: MediaItem[] = [
     ],
     metadata: {
       filename: 'chama_financial_literacy_podcast.mp3',
-      displayName: 'Chama Growth & Savings Podcast Episode 04',
+      displayName: 'Chama Growth & Development Podcast Episode 04',
       altText: 'Audio recording icon for Swahili podcast episode discussing revolving loan funds.',
       caption: '10-minute audio guide in English & Swahili on avoiding M-PESA over-indebtedness.',
       description: 'Educational audio resource broadcast across regional radio partners in Mount Kenya.',

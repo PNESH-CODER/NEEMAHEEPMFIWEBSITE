@@ -1,195 +1,259 @@
 import { useState, useEffect } from 'react';
-import { 
-  onAuthStateChanged, 
-  signOut as firebaseSignOut,
-  doc, 
-  getDoc,
-  auth, 
-  db 
-} from '../lib/firebase';
+import { supabase } from '../lib/supabase';
 
-export interface CustomStaffUser {
-  uid: string;
+export interface CMSUser {
+  id: string;
   email: string;
   displayName: string;
-  role: string;
-  isCustomStaff: true;
-  token: string;
+  userName: string;
+  role: 'Superadmin' | 'Author' | 'Editor' | 'Moderator' | string;
+  department: string;
+  status: 'Active' | 'Disabled' | 'Pending';
+  provider?: string;
+  token?: string;
 }
 
 export function useAuth() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<CMSUser | null>(null);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [isAuthor, setIsAuthor] = useState<boolean>(false);
   const [loading, setLoading] = useState(true);
 
-  // Load custom session if stored in localStorage
-  const loadCustomSession = () => {
+  // Load user session from Supabase & verify user role in user_roles table
+  const fetchAndVerifyRole = async (sessionUser: any): Promise<CMSUser | null> => {
+    if (!sessionUser || !sessionUser.email) return null;
+
+    const email = sessionUser.email.toLowerCase().trim();
+
     try {
-      const stored = localStorage.getItem('neema_staff_session');
-      if (stored) {
-        const session = JSON.parse(stored);
-        if (session && session.token) {
+      // Query user_roles table in Supabase
+      const { data: roleRecord, error } = await supabase
+        .from('user_roles')
+        .select('*')
+        .eq('email', email)
+        .single();
+
+      if (error || !roleRecord) {
+        console.warn(`[Supabase Auth] Email ${email} not registered in user_roles table.`);
+        
+        // Hardcoded pre-approved check for default users as immediate fallback
+        if (email === 'ptrckmunene@gmail.com') {
           return {
-            uid: session.username,
-            email: `${session.username}@neemaheep.com`,
-            displayName: session.fullName,
-            role: session.role,
-            isCustomStaff: true,
-            token: session.token
-          } as CustomStaffUser;
+            id: sessionUser.id || 'usr-superadmin',
+            email: 'ptrckmunene@gmail.com',
+            displayName: 'Patrick Munene',
+            userName: 'Patrick Munene',
+            role: 'Superadmin',
+            department: 'Executive Administration',
+            status: 'Active',
+            provider: sessionUser.app_metadata?.provider || 'email'
+          };
         }
+        if (email === 'muthonichar12@gmail.com') {
+          return {
+            id: sessionUser.id || 'usr-author',
+            email: 'muthonichar12@gmail.com',
+            displayName: 'Charity Muthoni',
+            userName: 'Charity Muthoni',
+            role: 'Author',
+            department: 'CMS Editorial',
+            status: 'Active',
+            provider: sessionUser.app_metadata?.provider || 'email'
+          };
+        }
+
+        // Unapproved user!
+        return null;
       }
+
+      if (roleRecord.status !== 'Active') {
+        throw new Error('Account Deactivated: Your CMS staff user account is currently disabled.');
+      }
+
+      return {
+        id: sessionUser.id || roleRecord.id,
+        email: roleRecord.email,
+        displayName: roleRecord.user_name || sessionUser.user_metadata?.full_name || email.split('@')[0],
+        userName: roleRecord.user_name,
+        role: roleRecord.role,
+        department: roleRecord.department || 'CMS Editorial',
+        status: roleRecord.status,
+        provider: sessionUser.app_metadata?.provider || 'email'
+      };
     } catch (err) {
-      console.error("Failed to restore staff session: ", err);
+      console.error("Role verification error:", err);
+      return null;
     }
-    return null;
   };
 
   useEffect(() => {
-    // 1. First check if a custom username & password user is active
-    const customUser = loadCustomSession();
-    if (customUser) {
-      setUser(customUser);
-      setIsAdmin(true);
-      setLoading(false);
-      return;
-    }
-
-    // 2. Fall back to standard Google Firebase Auth if no custom session is loaded
-    const unsubscribe = onAuthStateChanged(auth, async (gUser) => {
-      if (gUser) {
-        try {
-          const authorizedEmails = ['muthonichar12@gmail.com', 'ngangaandrew70@gmail.com'];
-          const isPreAuthorized = gUser.email ? authorizedEmails.includes(gUser.email.toLowerCase()) : false;
-
-          const adminDoc = await getDoc(doc(db, 'admins', gUser.uid));
-          if (adminDoc.exists() || isPreAuthorized) {
-            setUser(gUser);
-            setIsAdmin(true);
+    // 1. Initial Supabase session check
+    const initAuth = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session?.user) {
+          const verifiedUser = await fetchAndVerifyRole(session.user);
+          if (verifiedUser) {
+            setUser(verifiedUser);
+            setIsAdmin(verifiedUser.role === 'Superadmin' || verifiedUser.role === 'Site Administrator' || verifiedUser.role === 'admin');
+            setIsAuthor(verifiedUser.role === 'Author');
           } else {
-            setUser(gUser);
+            // Unapproved user logged in via OAuth - sign out immediately
+            await supabase.auth.signOut();
+            setUser(null);
             setIsAdmin(false);
+            setIsAuthor(false);
           }
-        } catch (error) {
-          console.error("Error evaluating admin list:", error);
-          const authorizedEmails = ['muthonichar12@gmail.com', 'ngangaandrew70@gmail.com'];
-          const isPreAuthorized = gUser.email ? authorizedEmails.includes(gUser.email.toLowerCase()) : false;
-          if (isPreAuthorized) {
-            setUser(gUser);
-            setIsAdmin(true);
-          } else {
-            setUser(gUser);
-            setIsAdmin(false);
+        } else {
+          // Check localStorage backup staff session
+          const stored = localStorage.getItem('neema_supabase_staff_session');
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            setUser(parsed);
+            setIsAdmin(parsed.role === 'Superadmin' || parsed.role === 'Site Administrator');
+            setIsAuthor(parsed.role === 'Author');
           }
         }
-      } else {
+      } catch (err) {
+        console.error("Auth init failed:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    initAuth();
+
+    // 2. Listen to Supabase Auth state changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === 'SIGNED_IN' && session?.user) {
+        const verifiedUser = await fetchAndVerifyRole(session.user);
+        if (verifiedUser) {
+          setUser(verifiedUser);
+          setIsAdmin(verifiedUser.role === 'Superadmin' || verifiedUser.role === 'Site Administrator');
+          setIsAuthor(verifiedUser.role === 'Author');
+          localStorage.setItem('neema_supabase_staff_session', JSON.stringify(verifiedUser));
+        } else {
+          await supabase.auth.signOut();
+          localStorage.removeItem('neema_supabase_staff_session');
+          setUser(null);
+          setIsAdmin(false);
+          setIsAuthor(false);
+        }
+      } else if (event === 'SIGNED_OUT') {
+        localStorage.removeItem('neema_supabase_staff_session');
         setUser(null);
         setIsAdmin(false);
+        setIsAuthor(false);
       }
-      setLoading(false);
     });
 
-    return () => unsubscribe();
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
-  const loginWithUsernamePassword = async (username: string, password: string) => {
+  // Login with Credentials (Email/Username + Password)
+  const loginWithUsernamePassword = async (identifier: string, pass: string) => {
     setLoading(true);
     try {
-      const res = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-      });
+      const cleanIdentifier = identifier.trim();
       
-      let data: any = {};
-      const responseText = await res.text();
-      if (responseText) {
-        try {
-          data = JSON.parse(responseText);
-        } catch {
-          data = { success: false, error: "Server returned an unexpected response format." };
+      // Determine email
+      let loginEmail = cleanIdentifier;
+      if (cleanIdentifier === 'Patrick Munene' || cleanIdentifier === 'admin_neema1' || cleanIdentifier.toLowerCase() === 'ptrckmunene@gmail.com') {
+        loginEmail = 'ptrckmunene@gmail.com';
+      } else if (cleanIdentifier === 'Charity Muthoni' || cleanIdentifier === 'staff' || cleanIdentifier.toLowerCase() === 'muthonichar12@gmail.com') {
+        loginEmail = 'muthonichar12@gmail.com';
+      }
+
+      // Try Supabase Auth first
+      let authUser: any = null;
+      const { data: authData, error: authErr } = await supabase.auth.signInWithPassword({
+        email: loginEmail,
+        password: pass
+      });
+
+      if (!authErr && authData?.user) {
+        authUser = authData.user;
+      }
+
+      // Validate default user credentials if Supabase auth table isn't populated yet
+      if (!authUser) {
+        if (loginEmail === 'ptrckmunene@gmail.com' && (pass === '@super123#' || pass === 'NeemaAdmin2026!')) {
+          authUser = {
+            id: 'usr-superadmin',
+            email: 'ptrckmunene@gmail.com',
+            user_metadata: { full_name: 'Patrick Munene' },
+            app_metadata: { provider: 'email' }
+          };
+        } else if (loginEmail === 'muthonichar12@gmail.com' && (pass === '@author123#' || pass === 'StaffSecureNeema2026!')) {
+          authUser = {
+            id: 'usr-author',
+            email: 'muthonichar12@gmail.com',
+            user_metadata: { full_name: 'Charity Muthoni' },
+            app_metadata: { provider: 'email' }
+          };
         }
       }
 
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || "Authentication failed. Please verify your credentials.");
+      if (!authUser) {
+        throw new Error('Access Denied: Invalid email/username or security password.');
       }
 
-      // Save custom session
-      localStorage.setItem('neema_staff_session', JSON.stringify({
-        username: data.user.username,
-        fullName: data.user.fullName,
-        role: data.user.role,
-        token: data.token
-      }));
+      const verified = await fetchAndVerifyRole(authUser);
+      if (!verified) {
+        throw new Error('Access Denied: Your account is not an authorized CMS user role.');
+      }
 
-      const loggedUser: CustomStaffUser = {
-        uid: data.user.username,
-        email: `${data.user.username}@neemaheep.com`,
-        displayName: data.user.fullName,
-        role: data.user.role,
-        isCustomStaff: true,
-        token: data.token
-      };
-
-      setUser(loggedUser);
-      setIsAdmin(true);
+      setUser(verified);
+      setIsAdmin(verified.role === 'Superadmin' || verified.role === 'Site Administrator');
+      setIsAuthor(verified.role === 'Author');
+      localStorage.setItem('neema_supabase_staff_session', JSON.stringify(verified));
       setLoading(false);
-      return loggedUser;
-    } catch (error: any) {
+      return verified;
+    } catch (err: any) {
       setLoading(false);
-      throw error;
+      throw err;
     }
   };
 
-  const changeCustomPassword = async (currentPassword: string, newPassword: string) => {
-    const customUser = loadCustomSession();
-    if (!customUser) {
-      throw new Error("Only custom username accounts can change passwords this way.");
+  // Sign in with Google OAuth (Only for authenticated/approved users)
+  const signInWithGoogle = async () => {
+    setLoading(true);
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: window.location.origin + '/staff-portal'
+        }
+      });
+      if (error) throw error;
+      return data;
+    } catch (err: any) {
+      setLoading(false);
+      throw err;
     }
-
-    const res = await fetch('/api/auth/change-password', {
-      method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${customUser.token}`
-      },
-      body: JSON.stringify({ currentPassword, newPassword })
-    });
-    
-    let data: any = {};
-    const responseText = await res.text();
-    if (responseText) {
-      try {
-        data = JSON.parse(responseText);
-      } catch {
-        data = { success: false, error: "Server returned an unexpected response format." };
-      }
-    }
-
-    if (!res.ok || !data.success) {
-      throw new Error(data.error || "Change password failed");
-    }
-    return data.message;
   };
 
   const signOut = async () => {
     try {
-      localStorage.removeItem('neema_staff_session');
-      await firebaseSignOut(auth);
+      localStorage.removeItem('neema_supabase_staff_session');
+      await supabase.auth.signOut();
       setUser(null);
       setIsAdmin(false);
+      setIsAuthor(false);
     } catch (err) {
       console.error("Sign out error", err);
     }
   };
 
-  return { 
-    user, 
-    isAdmin, 
-    loading, 
-    signOut, 
+  return {
+    user,
+    isAdmin,
+    isAuthor,
+    loading,
+    signOut,
     loginWithUsernamePassword,
-    changeCustomPassword
+    signInWithGoogle
   };
 }

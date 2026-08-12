@@ -47,7 +47,7 @@ Neema HEEP Credit Operations`
 
 Greetings from Neema HEEP Microfinance. We received your inquiry regarding group financing and Chama training.
 
-Our community empowerment team offers customized group loans, financial literacy workshops, and competitive savings dividends. A loan officer will reach out on {SenderPhone} to schedule a group meeting.
+Our community empowerment team offers customized group loans, financial literacy workshops, and flexible microfinance solutions. A loan officer will reach out on {SenderPhone} to schedule a group meeting.
 
 Sincerely,
 Neema HEEP Community Development Team`

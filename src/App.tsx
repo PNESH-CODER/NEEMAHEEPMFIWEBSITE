@@ -10,7 +10,6 @@ import FloatingCTA from './components/FloatingCTA';
 import ScrollHandler from './components/ScrollHandler';
 import PageNavigation from './components/PageNavigation';
 import StickyWhatsApp from './components/StickyWhatsApp';
-import ExitIntentPopup from './components/ExitIntentPopup';
 import TrackingManager from './components/TrackingManager';
 import AdminGuard from './components/AdminGuard';
 
@@ -137,7 +136,6 @@ function AppContent() {
       {!isAdmin && <Footer />}
       {!hideFloatingButtons && <FloatingCTA />}
       {!hideFloatingButtons && <StickyWhatsApp />}
-      {!hideFloatingButtons && <ExitIntentPopup />}
       <TrackingManager />
     </div>
   );

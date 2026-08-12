@@ -128,7 +128,7 @@ const STORAGE_KEY_NOTIFS = 'neema_community_notifs_v1';
 const INITIAL_RULES: ModerationRules = {
   keywordFilters: ['guaranteed loan', 'crypto investment', 'whatsapp me for cash', 'instant wealth', 'free m-pesa', 'click here for prize'],
   blockedWords: ['scam', 'fool', 'fraudster', 'idiot', 'stupid', 'corrupt', 'fake news', 'bastard'],
-  allowedWords: ['microfinance', 'embu', 'heep', 'kilimo', 'imara', 'sacco', 'table banking', 'business loan'],
+  allowedWords: ['microfinance', 'embu', 'heep', 'kilimo', 'imara', 'chama', 'table banking', 'business loan'],
   spamThreshold: 70,
   maxLinks: 2,
   maxMentions: 3,
@@ -416,7 +416,7 @@ const INITIAL_COMMENTS: EnterpriseComment[] = [
     postTitle: 'Transforming Rural Household Economies Through Table Banking',
     authorName: 'Anonymized Member',
     authorEmail: 'anon.user@gmail.com',
-    content: 'These politicians and microfinance managers are all corrupt frauds who steal our savings! Fools!',
+    content: 'These politicians and microfinance managers are all corrupt frauds who steal our money! Fools!',
     status: 'Pending',
     aiRiskScore: 82,
     aiAnalysis: {

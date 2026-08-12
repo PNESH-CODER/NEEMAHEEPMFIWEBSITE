@@ -128,8 +128,8 @@ export const calculateLoan = (input: LoanInput): LoanOutput => {
       
       out.fees.push({ label: 'Fees (5%)', amount: loanAmount * 0.05, isDeducted: true });
       out.lockedFunds.push(
-        { label: 'Savings (26%)', amount: loanAmount * 0.26 },
-        { label: 'Shares (10%)', amount: loanAmount * 0.10 }
+        { label: 'Security Guarantee (26%)', amount: loanAmount * 0.26 },
+        { label: 'Group Collateral Fund (10%)', amount: loanAmount * 0.10 }
       );
       break;
 
@@ -143,7 +143,7 @@ export const calculateLoan = (input: LoanInput): LoanOutput => {
       monthlyRate = 0.02;
 
       out.fees.push({ label: 'Fees (5%)', amount: loanAmount * 0.05, isDeducted: true });
-      out.lockedFunds.push({ label: 'Savings (26%)', amount: loanAmount * 0.26 });
+      out.lockedFunds.push({ label: 'Security Guarantee (26%)', amount: loanAmount * 0.26 });
       
       if (repaymentFrequency !== 'weekly') {
         out.warnings?.push("Nawiri loans support weekly repayment only. Values calculated as weekly.");
@@ -178,7 +178,7 @@ export const calculateLoan = (input: LoanInput): LoanOutput => {
       monthlyRate = 0.02;
       
       out.fees.push({ label: 'Fees (5%)', amount: loanAmount * 0.05, isDeducted: true });
-      out.lockedFunds.push({ label: 'Savings (26%)', amount: loanAmount * 0.26 });
+      out.lockedFunds.push({ label: 'Security Guarantee (26%)', amount: loanAmount * 0.26 });
       break;
 
     case 'dairy':
@@ -186,7 +186,7 @@ export const calculateLoan = (input: LoanInput): LoanOutput => {
       out.rateType = 'monthly';
       monthlyRate = 0.02;
       
-      out.lockedFunds.push({ label: 'Savings (26%)', amount: loanAmount * 0.26 });
+      out.lockedFunds.push({ label: 'Security Guarantee (26%)', amount: loanAmount * 0.26 });
       if (repaymentFrequency !== 'weekly') {
         out.warnings?.push("Dairy loans target weekly repayment. Values calculated accordingly.");
       }
@@ -240,7 +240,7 @@ export const calculateLoan = (input: LoanInput): LoanOutput => {
       monthlyRate = 0.02;
       
       out.fees.push({ label: 'Fees (5%)', amount: loanAmount * 0.05, isDeducted: true });
-      out.lockedFunds.push({ label: 'Savings (26%)', amount: loanAmount * 0.26 });
+      out.lockedFunds.push({ label: 'Security Guarantee (26%)', amount: loanAmount * 0.26 });
       
       if (repaymentFrequency !== 'weekly') {
         out.warnings?.push("Boresha loans support weekly repayment only. Values calculated as weekly.");

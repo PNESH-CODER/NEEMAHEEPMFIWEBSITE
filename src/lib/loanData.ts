@@ -73,7 +73,7 @@ export const LOAN_PRODUCTS: Record<string, { id: string, name: string, tagline: 
     id: 'mali',
     name: 'Mali loan',
     tagline: 'Acquire high-value assets securely and affordably.',
-    description: 'Asset acquisition is a critical step toward wealth creation. The Mali Loan is a specialized asset financing product designed to help clients procure essential small-to-medium assets safely. Rather than depleting your savings, this facility allows you to spread the cost over manageable installments. Driven by transparent lending practices, the Mali loan is structured to match your proven repayment capability, ensuring sustainable wealth accumulation.',
+    description: 'Asset acquisition is a critical step toward wealth creation. The Mali Loan is a specialized asset financing product designed to help clients procure essential small-to-medium assets safely. Rather than depleting your working capital, this facility allows you to spread the cost over manageable installments. Driven by transparent lending practices, the Mali loan is structured to match your proven repayment capability, ensuring sustainable wealth accumulation.',
     targetMarket: 'Ideal for individuals and households looking to meet specific small-asset financing needs, ranging from solar installations to business equipment, tailored strictly to their verified financial capabilities.',
     features: ['Finances household and business equipment', 'The acquired asset serves as primary security', 'Structured to match client capability', 'Fosters long-term wealth accumulation'],
     image: '/mali_loan.jpg',

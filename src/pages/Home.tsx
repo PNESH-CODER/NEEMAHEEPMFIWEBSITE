@@ -9,7 +9,6 @@ import TestimonialCarousel from '../components/TestimonialCarousel';
 import TrustBadges from '../components/TrustBadges';
 import StickyApplyBar from '../components/StickyApplyBar';
 import ProvenProcess from '../components/ProvenProcess';
-import TimedNewsletterPopup from '../components/TimedNewsletterPopup';
 
 const HERO_IMAGES = [
   { src: "/slider_1.jpg", driveFallback: "https://lh3.googleusercontent.com/d/1-YvLfz-HNAfDvcxc0nLeNi6K2C2Hhq4a" },
@@ -97,7 +96,7 @@ export default function Home() {
                 className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-[#599200]/30 backdrop-blur-md border border-[#599200]/40 text-white text-[10px] font-bold tracking-[0.2em] uppercase mb-8"
               >
                 <span className="w-2 h-2 rounded-full bg-[#599200] animate-pulse" />
-                AMFI KENYA LICENSED · EST. 2010
+                AMFI KENYA MEMBER · EST. 2010
               </motion.div>
 
               <motion.h1 
@@ -116,7 +115,7 @@ export default function Home() {
                 transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                 className="text-xl md:text-2xl text-white/90 mb-12 max-w-2xl font-medium leading-relaxed"
               >
-                From business financing to savings groups, Neema HEEP is committed to helping communities prosper.
+                From business financing to community empowerment groups, Neema HEEP is committed to helping communities prosper.
               </motion.p>
  
               <motion.div 
@@ -131,13 +130,12 @@ export default function Home() {
                 >
                   Join Neema HEEP
                 </Link>
-                <button 
-                  type="button"
-                  onClick={() => window.dispatchEvent(new CustomEvent('neema_open_quiz_modal'))}
+                <Link 
+                  to="/pre-qualification" 
                   className="bg-[#C0991B] hover:bg-[#A38217] text-[#074504] font-black py-4 px-8 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 w-full sm:w-auto text-base uppercase tracking-wider shadow-2xl cursor-pointer"
                 >
-                  Take Financial Quiz
-                </button>
+                  Check Eligibility
+                </Link>
                 <Link 
                   to="/about-us" 
                   className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border-2 border-white font-black py-4 px-8 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 w-full sm:w-auto text-base uppercase tracking-wider shadow-2xl"
@@ -331,7 +329,6 @@ export default function Home() {
 
         <TestimonialCarousel />
         <StickyApplyBar />
-        <TimedNewsletterPopup />
         
       </main>
     </>

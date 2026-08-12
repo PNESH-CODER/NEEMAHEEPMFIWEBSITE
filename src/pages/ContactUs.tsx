@@ -97,7 +97,7 @@ export default function ContactUs() {
                     label: 'Interested In', 
                     type: 'select', 
                     required: true,
-                    options: ['Microfinance Loan', 'Business Loan', 'Asset Financing', 'Emergency Loan', 'Savings Account']
+                    options: ['Microfinance Loan', 'Business Loan', 'Asset Financing', 'Emergency Loan', 'Group Loan']
                   },
                   { 
                     name: 'urgency', 
@@ -135,7 +135,7 @@ export default function ContactUs() {
                       label: 'I want to talk about', 
                       type: 'select', 
                       required: true,
-                      options: ['General Loan Inquiry', 'Mali Plus Loan', 'Jijenge Plus Account', 'Savings Products', 'Arise & Shine Program', 'Careers']
+                      options: ['General Loan Inquiry', 'Mali Plus Loan', 'Jijenge Facility', 'Microfinance Credit Solutions', 'Arise & Shine Program', 'Careers']
                     },
                     { 
                        name: 'preferredTime', 

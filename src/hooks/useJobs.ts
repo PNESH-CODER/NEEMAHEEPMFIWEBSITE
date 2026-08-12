@@ -156,7 +156,7 @@ const INITIAL_VACANCIES: Vacancy[] = [
       'Bachelor’s Degree in Microfinance, Finance, Economics, or Business Administration.',
       'Certified Credit Professional (CCP-K) or equivalent professional accreditation.'
     ],
-    requiredExperience: 'At least 4 years of hands-on credit officer experience in a licensed Kenyan MFI or SACCO.',
+    requiredExperience: 'At least 4 years of hands-on credit officer experience in a licensed Kenyan MFI or credit institution.',
     requiredSkills: ['Group Lending (Chama)', 'M-PESA B2C Credit Systems', 'Financial Ratio Analysis', 'Swahili & English Fluency'],
     preferredSkills: ['Agricultural Lending Experience', 'Driving License (Motorcycle/Vehicle)'],
     benefits: ['Competitive Basic Salary + Performance Allowance', 'Comprehensive Medical Cover', 'Airtime & Field Transport Allowance'],

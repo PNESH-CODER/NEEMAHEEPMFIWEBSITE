@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { supabase } from '../lib/supabase';
 import { 
   Sliders, Shield, ShieldCheck, ShieldAlert, Users, UserCheck, UserX, UserPlus, 
   CheckCircle2, XCircle, Search, Filter, Plus, Trash2, Edit3, Eye, Copy, Check, 
@@ -141,62 +142,26 @@ const INITIAL_ROLES: EnterpriseRole[] = [
 const INITIAL_USER_MAPPINGS: UserRoleMapping[] = [
   {
     id: 'usr-1',
-    username: 'admin_neema1',
-    name: 'Neema Chief Administrator',
-    email: 'admin@neemaheep.com',
-    role: 'Site Administrator',
+    username: 'ptrckmunene@gmail.com',
+    name: 'Patrick Munene',
+    email: 'ptrckmunene@gmail.com',
+    role: 'Superadmin',
     department: 'Executive Administration',
     status: 'Active',
     assignedDate: '2025-01-10',
-    assignedBy: 'System Init',
+    assignedBy: 'System Initializer',
     hasCustomOverrides: false,
   },
   {
     id: 'usr-2',
-    username: 'staff_editor',
-    name: 'Grace Wanjiku (Editor)',
-    email: 'grace.wanjiku@neemaheep.com',
-    role: 'Editor',
-    department: 'Editorial & Content',
+    username: 'muthonichar12@gmail.com',
+    name: 'Charity Muthoni',
+    email: 'muthonichar12@gmail.com',
+    role: 'Author',
+    department: 'CMS Editorial',
     status: 'Active',
     assignedDate: '2025-03-15',
-    assignedBy: 'admin_neema1',
-    hasCustomOverrides: false,
-  },
-  {
-    id: 'usr-3',
-    username: 'author_sam',
-    name: 'Samuel Ochieng',
-    email: 'samuel.ochieng@neemaheep.com',
-    role: 'Author',
-    department: 'Microfinance Insights',
-    status: 'Active',
-    assignedDate: '2025-06-01',
-    assignedBy: 'staff_editor',
-    hasCustomOverrides: false,
-  },
-  {
-    id: 'usr-4',
-    username: 'dr_jane_m',
-    name: 'Dr. Jane Muturi',
-    email: 'jane.muturi@neemaheep.com',
-    role: 'Webmaster',
-    department: 'Community Outreach',
-    status: 'Active',
-    assignedDate: '2025-09-20',
-    assignedBy: 'admin_neema1',
-    hasCustomOverrides: false,
-  },
-  {
-    id: 'usr-5',
-    username: 'auditor_pete',
-    name: 'Peter Kamau (Auditor)',
-    email: 'peter.kamau@neemaheep.com',
-    role: 'Auditor',
-    department: 'Internal Audit',
-    status: 'Active',
-    assignedDate: '2026-02-14',
-    assignedBy: 'admin_neema1',
+    assignedBy: 'Patrick Munene',
     hasCustomOverrides: false,
   },
 ];
@@ -240,6 +205,41 @@ export default function RolesManagerModule({ className = '' }: { className?: str
   const [roles, setRoles] = useState<EnterpriseRole[]>(INITIAL_ROLES);
   const [userMappings, setUserMappings] = useState<UserRoleMapping[]>(INITIAL_USER_MAPPINGS);
   const [auditLogs, setAuditLogs] = useState<RolesAuditLog[]>(INITIAL_AUDIT_LOGS);
+
+  // New User Creation Modal State
+  const [showAddUserModal, setShowAddUserModal] = useState(false);
+  const [newUserName, setNewUserName] = useState('');
+  const [newUserEmail, setNewUserEmail] = useState('');
+  const [newUserRole, setNewUserRole] = useState<'Superadmin' | 'Author' | 'Editor' | 'Moderator'>('Author');
+  const [isSubmittingUser, setIsSubmittingUser] = useState(false);
+
+  // Sync with Supabase user_roles
+  const fetchSupabaseUserRoles = async () => {
+    try {
+      const { data, error } = await supabase.from('user_roles').select('*').order('created_at', { ascending: true });
+      if (!error && data && data.length > 0) {
+        const mapped: UserRoleMapping[] = data.map((u: any) => ({
+          id: u.id,
+          username: u.email,
+          name: u.user_name || u.email.split('@')[0],
+          email: u.email,
+          role: u.role,
+          department: u.department || (u.role === 'Superadmin' ? 'Executive Administration' : 'CMS Editorial'),
+          status: u.status || 'Active',
+          assignedDate: u.created_at ? new Date(u.created_at).toISOString().split('T')[0] : '2026-08-12',
+          assignedBy: u.assigned_by || 'Patrick Munene',
+          hasCustomOverrides: false,
+        }));
+        setUserMappings(mapped);
+      }
+    } catch (err) {
+      console.warn("Supabase user roles fetch notice:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchSupabaseUserRoles();
+  }, []);
 
   // Modal States
   const [showCreateRoleModal, setShowCreateRoleModal] = useState(false);
@@ -855,11 +855,20 @@ export default function RolesManagerModule({ className = '' }: { className?: str
       {/* ================= TAB 4: USER ASSIGNMENTS ================= */}
       {activeTab === 'user_assignments' && (
         <div className="space-y-6 animate-in fade-in duration-300">
-          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-xs">
-            <h3 className="font-black text-sm text-[#074504] uppercase flex items-center gap-2">
-              <Users className="w-4 h-4 text-[#C0991B]" /> User-Role Mapping Directory
-            </h3>
-            <p className="text-xs text-gray-500 font-medium mt-0.5">Assign staff members to roles and manage departmental permissions</p>
+          <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <h3 className="font-black text-sm text-[#074504] uppercase flex items-center gap-2">
+                <Users className="w-4 h-4 text-[#C0991B]" /> User-Role Mapping Directory (Supabase Backend)
+              </h3>
+              <p className="text-xs text-gray-500 font-medium mt-0.5">Note: CMS Users can only be created and assigned by the Superadmin.</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowAddUserModal(true)}
+              className="px-4 py-2.5 bg-[#074504] text-[#C0991B] font-black text-xs uppercase tracking-wider rounded-xl hover:bg-[#053203] transition-all flex items-center gap-2 cursor-pointer shadow-sm"
+            >
+              <UserPlus className="w-4 h-4 text-[#C0991B]" /> Register New CMS User
+            </button>
           </div>
 
           <div className="bg-white rounded-2xl border border-gray-200 shadow-xs overflow-hidden">
@@ -877,12 +886,19 @@ export default function RolesManagerModule({ className = '' }: { className?: str
                 {userMappings.map(u => (
                   <tr key={u.id} className="hover:bg-gray-50/80">
                     <td className="p-4 font-bold">
-                      <div className="text-[#074504] font-black">{u.name}</div>
-                      <div className="text-[10px] text-gray-400 font-normal">{u.email}</div>
+                      <div className="text-[#074504] font-black flex items-center gap-1.5">
+                        {u.role === 'Superadmin' ? <Shield className="w-3.5 h-3.5 text-[#C0991B]" /> : <UserCheck className="w-3.5 h-3.5 text-[#2563EB]" />}
+                        {u.name}
+                      </div>
+                      <div className="text-[10px] text-gray-500 font-mono mt-0.5">{u.email}</div>
                     </td>
                     <td className="p-4 font-medium text-gray-700">{u.department}</td>
                     <td className="p-4">
-                      <span className="px-2.5 py-1 bg-amber-50 text-[#826507] text-[10px] font-black rounded-full border border-[#C0991B]/30 uppercase">
+                      <span className={`px-2.5 py-1 text-[10px] font-black rounded-full border uppercase ${
+                        u.role === 'Superadmin' 
+                          ? 'bg-emerald-50 text-[#074504] border-[#074504]/30'
+                          : 'bg-blue-50 text-blue-800 border-blue-200'
+                      }`}>
                         {u.role}
                       </span>
                     </td>
@@ -894,7 +910,16 @@ export default function RolesManagerModule({ className = '' }: { className?: str
                     <td className="p-4 text-right">
                       <select
                         value={u.role}
-                        onChange={e => handleReassignUserRole(u.id, e.target.value)}
+                        onChange={async e => {
+                          const newRole = e.target.value;
+                          handleReassignUserRole(u.id, newRole);
+                          try {
+                            await supabase.from('user_roles').update({ role: newRole }).eq('email', u.email);
+                            showToast(`Updated ${u.name}'s role to ${newRole} in Supabase.`);
+                          } catch (err) {
+                            console.warn("Role update notice:", err);
+                          }
+                        }}
                         className="p-1.5 bg-gray-50 border border-gray-200 rounded-xl text-xs font-bold text-[#074504]"
                       >
                         {roles.map(r => (
@@ -907,6 +932,118 @@ export default function RolesManagerModule({ className = '' }: { className?: str
               </tbody>
             </table>
           </div>
+
+          {/* REGISTER NEW CMS USER MODAL */}
+          <AnimatePresence>
+            {showAddUserModal && (
+              <div className="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full border border-gray-100 shadow-2xl space-y-5"
+                >
+                  <div className="flex items-center justify-between border-b border-gray-100 pb-4">
+                    <div className="flex items-center gap-2">
+                      <UserPlus className="w-5 h-5 text-[#074504]" />
+                      <h3 className="font-black text-sm text-[#074504] uppercase">Register New CMS User</h3>
+                    </div>
+                    <button
+                      onClick={() => setShowAddUserModal(false)}
+                      className="text-gray-400 hover:text-gray-600 transition-colors"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
+                  </div>
+
+                  <form onSubmit={async (e) => {
+                    e.preventDefault();
+                    if (!newUserName.trim() || !newUserEmail.trim()) {
+                      showToast('User Name and Email are required.', 'error');
+                      return;
+                    }
+                    setIsSubmittingUser(true);
+                    try {
+                      const email = newUserEmail.toLowerCase().trim();
+                      const { error } = await supabase.from('user_roles').insert([{
+                        user_name: newUserName.trim(),
+                        email: email,
+                        role: newUserRole,
+                        department: newUserRole === 'Superadmin' ? 'Executive Administration' : 'CMS Editorial',
+                        status: 'Active',
+                        assigned_by: 'Patrick Munene (Superadmin)'
+                      }]);
+
+                      if (error) throw error;
+
+                      showToast(`CMS User "${newUserName}" created successfully as ${newUserRole}!`);
+                      setShowAddUserModal(false);
+                      setNewUserName('');
+                      setNewUserEmail('');
+                      fetchSupabaseUserRoles();
+                    } catch (err: any) {
+                      showToast(err.message || 'Error creating user role in Supabase.', 'error');
+                    } finally {
+                      setIsSubmittingUser(false);
+                    }
+                  }} className="space-y-4 text-left">
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-black uppercase text-gray-500">Full Name</label>
+                      <input
+                        type="text"
+                        placeholder="e.g. John Doe"
+                        value={newUserName}
+                        onChange={e => setNewUserName(e.target.value)}
+                        className="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-2xl font-bold text-xs text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#074504]"
+                      />
+                    </div>
+
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-black uppercase text-gray-500">Email Address</label>
+                      <input
+                        type="email"
+                        placeholder="e.g. johndoe@gmail.com"
+                        value={newUserEmail}
+                        onChange={e => setNewUserEmail(e.target.value)}
+                        className="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-2xl font-bold text-xs text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#074504]"
+                      />
+                    </div>
+
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-black uppercase text-gray-500">CMS Access Role</label>
+                      <select
+                        value={newUserRole}
+                        onChange={(e: any) => setNewUserRole(e.target.value)}
+                        className="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-2xl font-bold text-xs text-[#074504] focus:outline-none focus:ring-2 focus:ring-[#074504]"
+                      >
+                        <option value="Superadmin">Superadmin (All rights & privileges)</option>
+                        <option value="Author">Author (Limited rights & publishing)</option>
+                        <option value="Editor">Editor (Editorial control)</option>
+                        <option value="Moderator">Moderator (Comments & webmaster)</option>
+                      </select>
+                    </div>
+
+                    <div className="pt-3 flex items-center justify-end gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setShowAddUserModal(false)}
+                        className="px-4 py-2.5 bg-gray-100 text-gray-600 font-bold text-xs rounded-xl hover:bg-gray-200"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        disabled={isSubmittingUser}
+                        className="px-5 py-2.5 bg-[#074504] text-[#C0991B] font-black text-xs uppercase rounded-xl hover:bg-[#053203] shadow-md flex items-center gap-2"
+                      >
+                        {isSubmittingUser ? 'Registering...' : 'Register User'}
+                      </button>
+                    </div>
+                  </form>
+                </motion.div>
+              </div>
+            )}
+          </AnimatePresence>
         </div>
       )}
 

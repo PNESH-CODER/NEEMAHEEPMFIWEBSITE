@@ -113,13 +113,12 @@ export default function LoanProductsIndex() {
                 <Link to="/registration" className="bg-[#C0991B] hover:bg-[#A38217] text-[#074504] px-6 py-3.5 rounded-xl font-extrabold shadow-lg transition-transform hover:-translate-y-1 flex items-center justify-center gap-2 text-center uppercase text-xs tracking-wider">
                   Register to Apply <ArrowRight className="w-4 h-4"/>
                 </Link>
-                <button
-                  type="button"
-                  onClick={() => window.dispatchEvent(new CustomEvent('neema_open_quiz_modal'))}
-                  className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border-2 border-[#C0991B] px-6 py-3.5 rounded-xl font-extrabold shadow-lg transition-transform hover:-translate-y-1 flex items-center justify-center gap-2 uppercase text-xs tracking-wider cursor-pointer"
+                <Link
+                  to="/checklists"
+                  className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border-2 border-[#C0991B] px-6 py-3.5 rounded-xl font-extrabold shadow-lg transition-transform hover:-translate-y-1 flex items-center justify-center gap-2 uppercase text-xs tracking-wider"
                 >
-                  Take Financial Quiz
-                </button>
+                  View Requirements
+                </Link>
                 <Link to="/pre-qualification" className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 px-6 py-3.5 rounded-xl font-extrabold shadow-lg transition-transform hover:-translate-y-1 flex items-center justify-center gap-2 uppercase text-xs tracking-wider">
                   <Calculator className="w-4 h-4 text-[#C0991B]"/> Calculate Eligibility
                 </Link>

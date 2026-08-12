@@ -53,18 +53,6 @@ export default function FloatingCTA() {
         ? 'bottom-[4.25rem] right-3 sm:bottom-20 sm:right-6' 
         : 'bottom-4 right-3 md:bottom-6 md:right-6'
     }`}>
-      {/* Financial Quiz Floating CTA */}
-      <motion.button
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 0.8, type: "spring", stiffness: 200, damping: 20 }}
-        onClick={() => window.dispatchEvent(new CustomEvent('neema_open_quiz_modal'))}
-        className="pointer-events-auto flex items-center justify-center gap-1.5 bg-[#C0991B] hover:bg-[#a38012] text-[#074504] font-black py-2 px-3 rounded-full shadow-lg transition-transform hover:-translate-y-0.5 group border border-white/30 text-[10px] sm:text-xs uppercase tracking-wider cursor-pointer whitespace-nowrap"
-        aria-label="Take Financial Quiz"
-      >
-        <span className="font-extrabold tracking-wider">Take Quiz</span>
-      </motion.button>
-
       {/* Request a Call Back Floating CTA (Hidden on Home Page and inside Who We Are section) */}
       <AnimatePresence>
         {!isHomePage && !inWhoWeAreSection && (

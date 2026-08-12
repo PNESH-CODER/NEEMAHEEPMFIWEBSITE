@@ -38,7 +38,7 @@ export default function WhoWeAre() {
           {/* Description Paragraph */}
           <div className="space-y-6 text-gray-700 font-medium leading-relaxed text-base lg:text-lg mb-8">
             <p>
-              Through these offerings, combined with savings services and financial literacy programs, the institution leverages technology enabled operations and mobile money systems to drive efficiency, transparency, and scalability while empowering communities to grow incomes, build resilience, and achieve sustainable prosperity.
+              Through these offerings, combined with tailored credit facilities and financial literacy programs, the institution leverages technology enabled operations and mobile money systems to drive efficiency, transparency, and scalability while empowering communities to grow incomes, build resilience, and achieve sustainable prosperity.
             </p>
 
             {/* Checkmark Features Grid */}

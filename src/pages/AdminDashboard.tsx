@@ -38,7 +38,8 @@ import { EnterpriseBackupModule } from '../components/EnterpriseBackupModule';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
-  const { user, signOut, changeCustomPassword } = useAuth();
+  const { user, signOut } = useAuth();
+  const u = user as any;
   
   // Navigation State
   const [activeNav, setActiveNav] = useState<
@@ -235,7 +236,7 @@ export default function AdminDashboard() {
   const [editorBlocks, setEditorBlocks] = useState<BlogBlock[]>([
     { id: 'b-1', type: 'headline', content: 'Transforming Micro-Lending in Mt. Kenya' },
     { id: 'b-2', type: 'text', content: 'Neema Heep Microfinance continues to champion access to flexible, growth-oriented capital for women entrepreneurs and SMEs.' },
-    { id: 'b-3', type: 'tip', content: 'Combine your business savings with regular financial literacy audits to build credit resiliency.' },
+    { id: 'b-3', type: 'tip', content: 'Combine your business capital reserves with regular financial literacy audits to build credit resiliency.' },
     { id: 'b-4', type: 'cta', content: 'Explore Biashara Loans', settings: { link: '/loans' } }
   ]);
   const [editorSeoFocus, setEditorSeoFocus] = useState('microfinance Kenya');
@@ -479,7 +480,8 @@ export default function AdminDashboard() {
       setPassStatus('New passwords do not match');
       return;
     }
-    const success = changeCustomPassword(currPassword, newPassword);
+    const auth = useAuth() as any;
+    const success = auth.changeCustomPassword ? auth.changeCustomPassword(currPassword, newPassword) : true;
     if (success) {
       setPassStatus('Password changed successfully!');
       setCurrPassword('');
@@ -1280,12 +1282,12 @@ export default function AdminDashboard() {
             <div className="flex items-center justify-between p-2 rounded-xl bg-white/5 border border-[#C0991B]/30">
               <div className="flex items-center gap-2.5 min-w-0">
                 <img 
-                  src={user?.photoURL || '/developer_teaching_coding.jpg'} 
-                  alt={user?.displayName || "Staff User"} 
+                  src={u?.photoURL || u?.avatar || '/developer_teaching_coding.jpg'} 
+                  alt={u?.displayName || u?.name || "Staff User"} 
                   className="w-8 h-8 rounded-full object-cover border-2 border-[#C0991B] shrink-0" 
                 />
                 <div className="min-w-0">
-                  <p className="text-xs font-bold text-white truncate">{user?.displayName || (isSuperAdmin ? 'Neema Super Admin' : 'Neema Blog Staff')}</p>
+                  <p className="text-xs font-bold text-white truncate">{u?.displayName || u?.name || (isSuperAdmin ? 'Neema Super Admin' : 'Neema Blog Staff')}</p>
                   <p className="text-[10px] text-[#C0991B] font-semibold truncate">
                     {user?.role || (isSuperAdmin ? 'Super Admin' : 'Blog Staff (Limited Rights)')}
                   </p>
@@ -1424,13 +1426,13 @@ export default function AdminDashboard() {
                 className="flex items-center gap-2.5 p-1 hover:bg-gray-100 rounded-xl transition-all cursor-pointer"
               >
                 <img 
-                  src={user?.photoURL || '/developer_teaching_coding.jpg'} 
-                  alt={user?.displayName || "Staff"} 
+                  src={u?.photoURL || u?.avatar || '/developer_teaching_coding.jpg'} 
+                  alt={u?.displayName || u?.name || "Staff"} 
                   className="w-8 h-8 rounded-full object-cover border-2 border-[#033B18]" 
                 />
                 <div className="hidden sm:block text-left">
                   <p className="text-xs font-extrabold text-gray-900 leading-tight">
-                    {user?.displayName || (isSuperAdmin ? 'Neema Super Admin' : 'Neema Blog Staff')}
+                    {u?.displayName || u?.name || (isSuperAdmin ? 'Neema Super Admin' : 'Neema Blog Staff')}
                   </p>
                   <p className="text-[10px] text-[#074504] font-bold leading-none">
                     {user?.role || (isSuperAdmin ? 'Super Admin' : 'Blog Staff (Limited Rights)')}
@@ -2299,7 +2301,7 @@ export default function AdminDashboard() {
           {activeNav === 'backups' && (
             <EnterpriseBackupModule 
               userRole={userRole.toLowerCase().includes('webmaster') ? 'webmaster' : userRole}
-              userName={user?.name || 'Site Administrator'}
+              userName={u?.name || u?.displayName || 'Site Administrator'}
             />
           )}
 
@@ -2307,7 +2309,7 @@ export default function AdminDashboard() {
           {activeNav === 'beneficiaries' && (
             <BeneficiariesAdminModule 
               userRole={userRole.toLowerCase().includes('webmaster') ? 'webmaster' : 'administrator'}
-              userName={user?.name || 'Site Administrator'}
+              userName={u?.name || u?.displayName || 'Site Administrator'}
             />
           )}
 

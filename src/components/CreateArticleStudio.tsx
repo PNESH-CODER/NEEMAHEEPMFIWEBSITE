@@ -182,14 +182,15 @@ export default function CreateArticleStudio({
   }, [expiryDate, autoArchive, editorStatus, setEditorStatus]);
 
   // Default Author Profile based on Logged-In User
+  const u = user as any;
   const activeUserAuthor = (authors || []).find(
-    (a: any) => a.id === user?.uid || a.email === user?.email || a.name === (user?.displayName || user?.name)
+    (a: any) => a.id === u?.uid || a.id === u?.id || a.email === u?.email || a.name === (u?.displayName || u?.name)
   ) || {
-    id: user?.uid || 'author_current_user',
-    name: user?.displayName || user?.name || user?.email?.split('@')[0] || 'Patrick Munene',
-    role: user?.role || 'Lead Editor & Contributor',
+    id: u?.uid || u?.id || 'author_current_user',
+    name: u?.displayName || u?.name || u?.email?.split('@')[0] || 'Patrick Munene',
+    role: u?.role || 'Lead Editor & Contributor',
     avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
-    email: user?.email || 'ptrckmunene@gmail.com',
+    email: u?.email || 'ptrckmunene@gmail.com',
   };
 
   // Sync author ID to default logged-in user profile on load

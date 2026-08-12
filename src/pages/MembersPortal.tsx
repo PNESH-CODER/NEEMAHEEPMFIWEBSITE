@@ -3,18 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { 
   Lock, User, ShieldCheck, ShieldAlert, LogIn,
   Loader2, KeySquare, Eye, EyeOff, Sparkles, BookOpen,
-  Mail, Phone, ArrowLeft, CheckCircle2, RotateCw, KeyRound
+  Mail, Phone, ArrowLeft, CheckCircle2, RotateCw, KeyRound,
+  Shield, UserCheck
 } from 'lucide-react';
 import { motion } from 'motion/react';
-import { 
-  signInWithPopup, 
-  GoogleAuthProvider,
-  doc, 
-  getDoc, 
-  setDoc,
-  auth, 
-  db 
-} from '../lib/firebase';
 import { useAuth } from '../hooks/useAuth';
 import { trackMemberDashboardVisit } from '../services/trackingService';
 import PasswordSecurityModule from '../components/PasswordSecurityModule';
@@ -23,7 +15,7 @@ type ViewMode = 'login' | 'forgot-identifier' | 'forgot-otp' | 'forgot-new-passw
 
 export default function MembersPortal() {
   const navigate = useNavigate();
-  const { user, isAdmin, loading: authLoading, loginWithUsernamePassword } = useAuth();
+  const { user, isAdmin, loading: authLoading, loginWithUsernamePassword, signInWithGoogle } = useAuth();
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
@@ -38,9 +30,6 @@ export default function MembersPortal() {
   const [deliveryMethod, setDeliveryMethod] = useState<'email' | 'phone'>('email');
   const [sentOtp, setSentOtp] = useState('482910');
   const [enteredOtp, setEnteredOtp] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [showNewPassword, setShowNewPassword] = useState(false);
   const [isSubmittingForgot, setIsSubmittingForgot] = useState(false);
   const [countdown, setCountdown] = useState(60);
 
@@ -49,10 +38,10 @@ export default function MembersPortal() {
   }, []);
 
   useEffect(() => {
-    if (user && isAdmin) {
+    if (user) {
       navigate('/admin');
     }
-  }, [user, isAdmin, navigate]);
+  }, [user, navigate]);
 
   // Countdown timer for OTP resend
   useEffect(() => {
@@ -68,7 +57,7 @@ export default function MembersPortal() {
   const handleCredentialsLogin = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     if (!username.trim() || !password) {
-      setError('Please provide both your staff username and security password.');
+      setError('Please provide your staff username or email and security password.');
       return;
     }
     setIsAuthenticating(true);
@@ -81,7 +70,22 @@ export default function MembersPortal() {
       }
     } catch (err: any) {
       console.error("[PORTAL LOGIN ERROR]", err);
-      setError(err.message || 'Access Denied: Invalid credentials or inactive staff status.');
+      setError(err.message || 'Access Denied: Invalid credentials or unapproved staff user.');
+    } finally {
+      setIsAuthenticating(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setIsAuthenticating(true);
+    setError(null);
+    try {
+      if (signInWithGoogle) {
+        await signInWithGoogle();
+      }
+    } catch (err: any) {
+      console.error("[GOOGLE LOGIN ERROR]", err);
+      setError(err.message || 'Google Sign-In failed. Please verify that your Google email is an approved CMS user.');
     } finally {
       setIsAuthenticating(false);
     }
@@ -103,21 +107,6 @@ export default function MembersPortal() {
       return;
     }
 
-    // Format validation
-    if (deliveryMethod === 'email') {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(val)) {
-        setError('Invalid Email Format: Please enter a valid email address (e.g. staff@neemaheep.co.ke).');
-        return;
-      }
-    } else {
-      const phoneRegex = /^[+\d\s\-()]{8,18}$/;
-      if (!phoneRegex.test(val)) {
-        setError('Invalid Phone Format: Please enter a valid mobile number (e.g. 0712345678 or +254712345678).');
-        return;
-      }
-    }
-
     setIsSubmittingForgot(true);
     setError(null);
 
@@ -137,7 +126,6 @@ export default function MembersPortal() {
         setError(data.error || 'Failed to dispatch verification code.');
       }
     } catch {
-      // Fallback local code generation
       const mockOtp = Math.floor(100000 + Math.random() * 900000).toString();
       setSentOtp(mockOtp);
       setCountdown(60);
@@ -163,37 +151,6 @@ export default function MembersPortal() {
     setViewMode('forgot-new-password');
   };
 
-  // Handler: Update Password
-  const handleResetPassword = async (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
-    if (!newPassword || newPassword.length < 6) {
-      setError('Password must be at least 6 characters long.');
-      return;
-    }
-    if (newPassword !== confirmPassword) {
-      setError('Passwords do not match. Please retype carefully.');
-      return;
-    }
-    setIsSubmittingForgot(true);
-    setError(null);
-
-    try {
-      await fetch('/api/auth/reset-password', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: forgotIdentifier.trim(), newPassword })
-      });
-    } catch (err) {
-      console.warn("Reset password API notice:", err);
-    } finally {
-      setIsSubmittingForgot(false);
-      setUsername(forgotIdentifier.trim());
-      setPassword(newPassword);
-      setSuccessMsg('Your security password has been updated successfully! Log in now with your new password.');
-      setViewMode('login');
-    }
-  };
-
   if (authLoading) {
     return (
       <div className="min-h-screen bg-[#F4F7F6] flex flex-col items-center justify-center">
@@ -207,21 +164,21 @@ export default function MembersPortal() {
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="max-w-md w-full bg-white rounded-[3rem] shadow-2xl p-10 md:p-12 border border-gray-100"
+        className="max-w-lg w-full bg-white rounded-[3rem] shadow-2xl p-8 md:p-12 border border-gray-100"
       >
-        <div className="text-center mb-10">
-          <div className="w-20 h-20 bg-[#074504] rounded-[2rem] flex items-center justify-center mx-auto mb-8 shadow-xl rotate-3">
+        <div className="text-center mb-8">
+          <div className="w-20 h-20 bg-[#074504] rounded-[2rem] flex items-center justify-center mx-auto mb-6 shadow-xl rotate-3">
             <Lock className="w-10 h-10 text-white" />
           </div>
           <h1 className="text-3xl md:text-4xl font-black text-[#074504] uppercase tracking-tighter">
             {viewMode === 'login' ? (
-              <>Portal <span className="text-[#C0991B]">Login</span></>
+              <>CMS Portal <span className="text-[#C0991B]">Login</span></>
             ) : (
               <>Forgot <span className="text-[#C0991B]">Password</span></>
             )}
           </h1>
-          <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest mt-2 px-6 leading-relaxed text-center">
-            Blogging CMS & Staff Dashboard Access • Neema HEEP Enterprise
+          <p className="text-[11px] font-black text-gray-500 uppercase tracking-widest mt-2 px-4 leading-relaxed text-center">
+            Supabase Backend CMS & Staff Portal Access • Neema HEEP
           </p>
         </div>
 
@@ -234,9 +191,9 @@ export default function MembersPortal() {
             <ShieldAlert className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
             <div>
                <p className="text-[11px] font-black text-red-600 uppercase tracking-tight">
-                 Error
+                 Access Error
                </p>
-               <p className="text-[10px] font-bold text-red-500/80 mt-0.5 leading-relaxed">{error}</p>
+               <p className="text-[11px] font-bold text-red-500 mt-0.5 leading-relaxed">{error}</p>
             </div>
           </motion.div>
         )}
@@ -252,7 +209,7 @@ export default function MembersPortal() {
                <p className="text-[11px] font-black text-emerald-800 uppercase tracking-tight">
                  Success
                </p>
-               <p className="text-[10px] font-bold text-emerald-700 mt-0.5 leading-relaxed">{successMsg}</p>
+               <p className="text-[11px] font-bold text-emerald-700 mt-0.5 leading-relaxed">{successMsg}</p>
             </div>
           </motion.div>
         )}
@@ -263,13 +220,36 @@ export default function MembersPortal() {
             <div className="bg-[#074504]/5 p-4 rounded-2xl border border-[#074504]/10 flex items-center gap-3">
               <BookOpen className="w-5 h-5 text-[#074504] shrink-0" />
               <p className="text-[11px] font-bold text-[#074504] leading-tight">
-                Authenticating leads directly to the <span className="font-black text-[#C0991B]">Blogging & CMS Dashboard</span>.
+                Log in to access the <span className="font-black text-[#C0991B]">CMS Admin & Editorial Dashboard</span>.
               </p>
             </div>
 
-            <p className="text-center text-[11px] font-bold text-gray-500 px-2">
-              Enter your assigned staff username and password to log in.
-            </p>
+            {/* Google OAuth Provider Sign In (Approved Staff Only) */}
+            <div>
+              <button
+                type="button"
+                onClick={handleGoogleSignIn}
+                disabled={isAuthenticating}
+                className="w-full bg-white border-2 border-gray-200 hover:border-[#074504] text-gray-800 py-4 px-6 rounded-2xl font-extrabold text-xs tracking-wider shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50 group"
+              >
+                <svg className="w-5 h-5" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+                </svg>
+                <span>Sign in with Google <span className="text-[#C0991B] font-black">(Approved Staff Only)</span></span>
+              </button>
+              <p className="text-[10px] text-center text-gray-500 font-bold mt-2">
+                Note: Google SSO is restricted to pre-approved CMS users registered by Superadmin.
+              </p>
+            </div>
+
+            <div className="relative flex py-1 items-center">
+              <div className="flex-grow border-t border-gray-200"></div>
+              <span className="flex-shrink mx-4 text-gray-400 text-[10px] font-black uppercase tracking-widest">Or Sign In with Username / Email</span>
+              <div className="flex-grow border-t border-gray-200"></div>
+            </div>
             
             <div className="space-y-4">
               <div className="relative">
@@ -278,7 +258,7 @@ export default function MembersPortal() {
                 </span>
                 <input
                   type="text"
-                  placeholder="Username (e.g. admin_neema1 or staff)"
+                  placeholder="Email or Username (e.g. ptrckmunene@gmail.com)"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   disabled={isAuthenticating}
@@ -308,7 +288,7 @@ export default function MembersPortal() {
                     {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                   </button>
                 </div>
-                {/* FORGOT PASSWORD LINK */}
+
                 <div className="flex justify-end pt-2 pr-2">
                   <button
                     type="button"
@@ -326,59 +306,63 @@ export default function MembersPortal() {
               </div>
             </div>
 
-            {/* Quick Demo Staff Credentials with Explicit Rights */}
+            {/* Default Users Quick Login Fill */}
             <div className="bg-gradient-to-br from-amber-50/60 to-emerald-50/40 p-4 rounded-2xl border border-[#C0991B]/30 text-left space-y-3">
               <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-wider">
                 <span className="flex items-center gap-1.5 text-[#074504]">
                   <Sparkles className="w-3.5 h-3.5 text-[#C0991B]" />
-                  <span>Quick Fill Staff Logins:</span>
+                  <span>Configured CMS Default Logins:</span>
                 </span>
                 <span className="text-[9px] text-[#074504] bg-white px-2 py-0.5 rounded-full font-extrabold border border-[#C0991B]/40">
-                  Role-Based Rights
+                  Supabase Roles
                 </span>
               </div>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 gap-2">
+                {/* User 1: Patrick Munene */}
                 <button
                   type="button"
-                  onClick={() => fillQuickCredentials('admin_neema1', 'NeemaAdmin2026!')}
-                  className="p-2.5 bg-white border border-gray-200 hover:border-[#074504] rounded-xl text-left transition-all cursor-pointer shadow-xs hover:shadow-md group"
+                  onClick={() => fillQuickCredentials('ptrckmunene@gmail.com', '@super123#')}
+                  className="p-3 bg-white border border-gray-200 hover:border-[#074504] rounded-xl text-left transition-all cursor-pointer shadow-xs hover:shadow-md group"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-black text-[#074504] group-hover:text-[#053203]">
-                      Super Admin
+                    <span className="text-[12px] font-black text-[#074504] group-hover:text-[#053203] flex items-center gap-1.5">
+                      <Shield className="w-3.5 h-3.5 text-[#C0991B]" /> User 1: Patrick Munene
                     </span>
-                    <span className="text-[8px] font-black uppercase px-1.5 py-0.5 bg-amber-100 text-[#074504] rounded-md border border-[#C0991B]/30">
-                      Full Rights
+                    <span className="text-[9px] font-black uppercase px-2 py-0.5 bg-emerald-100 text-[#074504] rounded-md border border-[#074504]/30">
+                      Superadmin (Full Access)
                     </span>
                   </div>
-                  <div className="text-[10px] font-bold text-gray-500 mt-0.5">
-                    User: <code>admin_neema1</code>
+                  <div className="text-[10px] font-bold text-gray-600 mt-1 flex justify-between">
+                    <span>Email: <code>ptrckmunene@gmail.com</code></span>
+                    <span>Pass: <code>@super123#</code></span>
                   </div>
                 </button>
 
+                {/* User 2: Charity Muthoni */}
                 <button
                   type="button"
-                  onClick={() => fillQuickCredentials('staff', 'StaffSecureNeema2026!')}
-                  className="p-2.5 bg-white border border-gray-200 hover:border-[#074504] rounded-xl text-left transition-all cursor-pointer shadow-xs hover:shadow-md group"
+                  onClick={() => fillQuickCredentials('muthonichar12@gmail.com', '@author123#')}
+                  className="p-3 bg-white border border-gray-200 hover:border-[#074504] rounded-xl text-left transition-all cursor-pointer shadow-xs hover:shadow-md group"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-black text-[#074504] group-hover:text-[#053203]">
-                      Blog Staff
+                    <span className="text-[12px] font-black text-[#074504] group-hover:text-[#053203] flex items-center gap-1.5">
+                      <UserCheck className="w-3.5 h-3.5 text-[#2563EB]" /> User 2: Charity Muthoni
                     </span>
-                    <span className="text-[8px] font-black uppercase px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded-md border border-gray-200">
-                      Limited Access
+                    <span className="text-[9px] font-black uppercase px-2 py-0.5 bg-blue-50 text-blue-800 rounded-md border border-blue-200">
+                      Author (Limited Rights)
                     </span>
                   </div>
-                  <div className="text-[10px] font-bold text-gray-500 mt-0.5">
-                    User: <code>staff</code>
+                  <div className="text-[10px] font-bold text-gray-600 mt-1 flex justify-between">
+                    <span>Email: <code>muthonichar12@gmail.com</code></span>
+                    <span>Pass: <code>@author123#</code></span>
                   </div>
                 </button>
               </div>
 
-              <div className="text-[10px] text-gray-600 font-medium pt-1 border-t border-[#C0991B]/20 space-y-1">
-                <p>• <strong className="text-[#074504]">Super Admin (admin_neema1):</strong> Full administrative rights across all system modules, backup manager & security policy.</p>
-                <p>• <strong className="text-[#074504]">Blog Staff (staff):</strong> Limited access rights restricted to editorial content creation and publishing.</p>
+              <div className="text-[10px] text-gray-600 font-medium pt-2 border-t border-[#C0991B]/20 space-y-1">
+                <p>• <strong className="text-[#074504]">User Rules & Scope:</strong> Superadmin has full rights across CMS settings & user management. Authors can only write/edit articles.</p>
+                <p>• <strong className="text-amber-800 font-bold">Important:</strong> CMS User accounts can ONLY be created and assigned by the Superadmin.</p>
               </div>
             </div>
 
@@ -392,12 +376,12 @@ export default function MembersPortal() {
               ) : (
                 <LogIn className="w-4 h-4 text-[#C0991B]" />
               )}
-              {isAuthenticating ? 'Authorizing Session...' : 'Enter Blogging Dashboard'}
+              {isAuthenticating ? 'Authorizing Session...' : 'Enter CMS Dashboard'}
             </button>
           </form>
         )}
 
-        {/* VIEW 2: FORGOT PASSWORD - STEP 1: IDENTIFIER & DELIVERY METHOD */}
+        {/* FORGOT PASSWORD STEPS */}
         {viewMode === 'forgot-identifier' && (
           <form onSubmit={handleRequestOtp} className="space-y-6">
             <div className="p-4 bg-amber-50/60 border border-[#C0991B]/30 rounded-2xl text-left space-y-1">
@@ -409,7 +393,6 @@ export default function MembersPortal() {
               </p>
             </div>
 
-            {/* Delivery Method Toggle Buttons */}
             <div>
               <label className="block text-[10px] font-black uppercase text-gray-500 mb-2 text-left">
                 Select Dispatch Method:
@@ -417,10 +400,7 @@ export default function MembersPortal() {
               <div className="grid grid-cols-2 gap-2">
                 <button
                   type="button"
-                  onClick={() => {
-                    setDeliveryMethod('email');
-                    setError(null);
-                  }}
+                  onClick={() => { setDeliveryMethod('email'); setError(null); }}
                   className={`p-3 rounded-2xl border text-xs font-bold flex items-center justify-center gap-2 cursor-pointer transition-all ${
                     deliveryMethod === 'email'
                       ? 'bg-[#074504] text-white border-[#074504] shadow-sm'
@@ -431,10 +411,7 @@ export default function MembersPortal() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => {
-                    setDeliveryMethod('phone');
-                    setError(null);
-                  }}
+                  onClick={() => { setDeliveryMethod('phone'); setError(null); }}
                   className={`p-3 rounded-2xl border text-xs font-bold flex items-center justify-center gap-2 cursor-pointer transition-all ${
                     deliveryMethod === 'phone'
                       ? 'bg-[#074504] text-white border-[#074504] shadow-sm'
@@ -446,7 +423,6 @@ export default function MembersPortal() {
               </div>
             </div>
 
-            {/* Dynamic Target Input Field */}
             <div className="space-y-2 text-left">
               <label className="block text-[11px] font-black uppercase text-[#074504] flex items-center justify-between">
                 <span>{deliveryMethod === 'email' ? 'Registered Email Address' : 'Registered Phone Number'}</span>
@@ -455,37 +431,16 @@ export default function MembersPortal() {
 
               <div className="relative">
                 <span className="absolute left-5 top-4.5 text-gray-400">
-                  {deliveryMethod === 'email' ? (
-                    <Mail className="w-5 h-5 text-[#074504]" />
-                  ) : (
-                    <Phone className="w-5 h-5 text-[#074504]" />
-                  )}
+                  {deliveryMethod === 'email' ? <Mail className="w-5 h-5 text-[#074504]" /> : <Phone className="w-5 h-5 text-[#074504]" />}
                 </span>
                 <input
                   type={deliveryMethod === 'email' ? 'email' : 'tel'}
-                  placeholder={
-                    deliveryMethod === 'email'
-                      ? 'e.g. staff@neemaheep.co.ke or admin@domain.com'
-                      : 'e.g. 0712345678 or +254712345678'
-                  }
+                  placeholder={deliveryMethod === 'email' ? 'e.g. ptrckmunene@gmail.com' : 'e.g. 0712345678'}
                   value={forgotIdentifier}
                   onChange={(e) => setForgotIdentifier(e.target.value)}
                   disabled={isSubmittingForgot}
                   className="w-full bg-gray-50 border border-gray-200 pl-14 pr-6 py-4 rounded-2xl font-bold text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#074504]/20 focus:bg-white transition-all placeholder:text-gray-400"
                 />
-              </div>
-
-              {/* Acceptable Format Guidance Box */}
-              <div className="p-3 bg-gray-50 border border-gray-200 rounded-xl flex items-start gap-2 text-[10px] text-gray-600 font-medium">
-                <Sparkles className="w-3.5 h-3.5 text-[#C0991B] shrink-0 mt-0.5" />
-                <div>
-                  <strong className="text-gray-800">Format Guide: </strong>
-                  {deliveryMethod === 'email' ? (
-                    <span>Enter a valid staff email address (e.g., <code>name@domain.com</code> or <code>staff@neemaheep.co.ke</code>).</span>
-                  ) : (
-                    <span>Enter a valid Kenyan phone number (e.g., <code>0712345678</code>, <code>0112345678</code>, or <code>+254712345678</code>).</span>
-                  )}
-                </div>
               </div>
             </div>
 
@@ -514,7 +469,6 @@ export default function MembersPortal() {
           </form>
         )}
 
-        {/* VIEW 3: FORGOT PASSWORD - STEP 2: ENTER OTP */}
         {viewMode === 'forgot-otp' && (
           <form onSubmit={handleVerifyOtp} className="space-y-6">
             <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-left space-y-1">
@@ -522,11 +476,10 @@ export default function MembersPortal() {
                 Step 2 of 3: Enter Verification Code
               </span>
               <p className="text-[11px] text-emerald-700 font-medium leading-relaxed">
-                OTP sent to registered {deliveryMethod === 'phone' ? 'phone number' : 'email address'} for <strong className="text-gray-900">{forgotIdentifier}</strong>.
+                OTP sent to <strong className="text-gray-900">{forgotIdentifier}</strong>.
               </p>
             </div>
 
-            {/* DEMO OTP DISPLAY BANNER */}
             <div className="p-3 bg-amber-50 border border-[#C0991B]/40 rounded-xl text-center space-y-1.5">
               <div className="text-[10px] font-black text-amber-900 uppercase flex items-center justify-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-[#C0991B]" /> Demo OTP Code: <span className="font-mono text-sm tracking-widest text-[#074504]">{sentOtp}</span>
@@ -581,7 +534,6 @@ export default function MembersPortal() {
           </form>
         )}
 
-        {/* VIEW 4: FORGOT PASSWORD - STEP 3: NEW PASSWORD */}
         {viewMode === 'forgot-new-password' && (
           <div className="space-y-6">
             <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-left space-y-1">
@@ -589,7 +541,7 @@ export default function MembersPortal() {
                 Step 3 of 3: Create New Password
               </span>
               <p className="text-[11px] text-gray-700 font-medium leading-relaxed">
-                OTP verified! Choose a new secure password for <strong className="text-gray-900">{forgotIdentifier}</strong> using the interactive security module below.
+                OTP verified! Choose a new password for <strong className="text-gray-900">{forgotIdentifier}</strong>.
               </p>
             </div>
 
@@ -612,13 +564,13 @@ export default function MembersPortal() {
           </div>
         )}
 
-        <div className="mt-12 p-6 bg-gray-50 rounded-[2rem] border border-gray-100">
+        <div className="mt-10 p-6 bg-gray-50 rounded-[2rem] border border-gray-100">
           <div className="flex items-start gap-4">
             <ShieldCheck className="w-5 h-5 text-[#599200] shrink-0 mt-1" />
             <div>
-              <p className="text-[10px] font-black text-[#074504] uppercase tracking-widest mb-1">Corporate Security</p>
+              <p className="text-[10px] font-black text-[#074504] uppercase tracking-widest mb-1">Corporate Security & Supabase Backend</p>
               <p className="text-[9px] text-gray-500 font-bold leading-relaxed">
-                All logins are fully audited under Neema security guidelines. Unauthorized access to Neema HEEP systems is a criminal offense under the Computer Misuse and Cybercrimes Act.
+                All logins and actions are synced directly with the Supabase PostgreSQL backend. New users can only be registered and assigned roles by the Superadmin.
               </p>
             </div>
           </div>
@@ -627,4 +579,3 @@ export default function MembersPortal() {
     </main>
   );
 }
-

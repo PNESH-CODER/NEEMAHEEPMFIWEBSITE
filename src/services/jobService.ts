@@ -1,27 +1,49 @@
-import { collection, addDoc, getDocs, deleteDoc, doc, serverTimestamp, query, orderBy, db } from '../lib/firebase';
+import { supabase } from '../lib/supabase';
 import { Job } from '../hooks/useJobs';
-
-const JOBS_COLLECTION = 'jobs';
 
 export const jobService = {
   async getJobs(): Promise<Job[]> {
-    const q = query(collection(db, JOBS_COLLECTION), orderBy('createdAt', 'desc'));
-    const snapshot = await getDocs(q);
-    return snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    })) as Job[];
+    try {
+      const { data, error } = await supabase
+        .from('jobs')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error || !data) return [];
+      return data.map(item => ({
+        id: item.id,
+        title: item.title,
+        department: item.department,
+        type: item.type,
+        location: item.location,
+        description: item.description,
+        requirements: item.requirements || [],
+        responsibilities: item.responsibilities || [],
+        deadline: item.deadline,
+        status: item.status || 'Active'
+      })) as unknown as Job[];
+    } catch {
+      return [];
+    }
   },
 
   async addJob(job: Omit<Job, 'id'>): Promise<string> {
-    const docRef = await addDoc(collection(db, JOBS_COLLECTION), {
-      ...job,
-      createdAt: serverTimestamp()
-    });
-    return docRef.id;
+    const { data, error } = await supabase
+      .from('jobs')
+      .insert([job])
+      .select('id')
+      .single();
+
+    if (error) throw error;
+    return data.id;
   },
 
   async removeJob(id: string): Promise<void> {
-    await deleteDoc(doc(db, JOBS_COLLECTION, id));
+    const { error } = await supabase
+      .from('jobs')
+      .delete()
+      .eq('id', id);
+
+    if (error) throw error;
   }
 };

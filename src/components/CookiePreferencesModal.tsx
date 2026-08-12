@@ -110,7 +110,7 @@ export default function CookiePreferencesModal({ isOpen, onClose }: Props) {
                   Marketing & Personalization
                 </h4>
                 <p className="text-[11px] text-gray-600 font-medium mt-1">
-                  Allows us to deliver relevant SACCO updates, mentorship invites, and loan campaign alerts on partner networks.
+                  Allows us to deliver relevant microfinance updates, mentorship invites, and loan campaign alerts on partner networks.
                 </p>
               </div>
             </div>

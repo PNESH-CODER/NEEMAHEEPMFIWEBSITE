@@ -451,7 +451,7 @@ export default function AboutUs() {
               {
                 year: "2015",
                 title: "Regional Branch Footprint",
-                desc: "Expanded community outreach offices across Nyeri, Embu, Meru, and Laikipia, establishing trusted relationships with local SACCOs and traders."
+                desc: "Expanded community outreach offices across Nyeri, Embu, Meru, and Laikipia, establishing trusted relationships with local trader groups and businesses."
               },
               {
                 year: "2018",
