@@ -1,0 +1,8 @@
+{
+  "name": "Remix: NEEMA HEEP MICROFINANCE WEBSITE",
+  "description": "A modern, mobile first website for Neema heep micro finanace ",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
