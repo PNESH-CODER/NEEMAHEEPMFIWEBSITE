@@ -116,62 +116,6 @@ export const INITIAL_PROFILES_SEED: ExtendedUserProfile[] = [
       memberSince: 'January 2022'
     },
     achievements: ['First Article', '100 Articles', 'Impact Champion', 'Verified Author', 'Featured Writer', 'Top Editor']
-  },
-  {
-    id: 'usr-2',
-    firstName: 'Jane',
-    middleName: 'Wanjiku',
-    lastName: 'Muturi',
-    displayName: 'Dr. Jane Muturi',
-    username: 'jmuturi',
-    email: 'jane@neemaheep.co.ke',
-    phone: '+254 722 987 654',
-    whatsApp: '+254 722 987 654',
-    gender: 'Female',
-    dateOfBirth: '1988-11-20',
-    jobTitle: 'Head of Community Health & Welfare',
-    department: 'Social Impact & Healthcare',
-    employeeId: 'NH-EMP-2023-014',
-    departmentExtension: 'Ext. 204 (Community Health)',
-    canCreateArticles: true,
-    physicalAddress: 'Neema Heep Hub, Nanyuki Town',
-    role: 'Editor',
-    status: 'Active',
-    verificationStatus: 'Verified',
-    profilePhoto: '/Grace Wanjiku.jpeg',
-    coverPhoto: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80',
-    bio: 'Medical doctor dedicated to pairing preventive healthcare initiatives with micro-loans for rural women entrepreneurs.',
-    shortBio: 'Community Health Lead & Preventive Medicine Specialist.',
-    levelOfEducation: 'Bachelor of Medicine & Surgery (MBChB), Master of Public Health (MPH)',
-    yearsOfExperience: '10+ Years in Community Health & Rural Health Finance',
-    workExperience: [
-      'Head of Community Health & Welfare - Neema HEEP (2023-Present)',
-      'Medical Officer & Public Health Coordinator - Nyeri County Referral Hospital (2018-2023)'
-    ],
-    publicHeadline: 'Head of Community Health & Preventive Care',
-    publicBio: 'Promoting healthcare accessibility and health finance solutions for rural farming families in Laikipia and Nyeri counties.',
-    publicPagePublished: true,
-    showPublicContact: true,
-    preferredLanguage: 'English (UK)',
-    timezone: 'Africa/Nairobi (UTC+3)',
-    expertise: ['Community Healthcare Pairing', 'WASH Sanitation Loans', 'Preventive Health Advisory'],
-    certifications: ['Medical Practitioner License (KMPDC)', 'Public Health Leadership'],
-    education: ['MBChB Medicine - University of Nairobi', 'MPH Public Health - Moi University'],
-    memberships: ['Kenya Medical Association (KMA)', 'Global Rural Health Council'],
-    createdAt: '2023-06-10 10:15 AM',
-    createdBy: 'Patrick Munene (Super Admin)',
-    stats: {
-      articlesPublished: 14,
-      draftArticles: 1,
-      mediaUploaded: 42,
-      commentsModerated: 89,
-      communityImpactScore: 94,
-      readingCount: 22100,
-      guidedLoansCount: 680,
-      lastLogin: '2026-08-03 11:00 AM',
-      memberSince: 'June 2023'
-    },
-    achievements: ['First Article', 'Verified Author', 'Top Editor']
   }
 ];
 

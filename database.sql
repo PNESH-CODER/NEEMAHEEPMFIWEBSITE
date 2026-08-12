@@ -265,9 +265,7 @@ DROP POLICY IF EXISTS "Public read user_roles" ON user_roles;
 CREATE POLICY "Public read user_roles" ON user_roles FOR SELECT USING (true);
 
 DROP POLICY IF EXISTS "Auth or owner modify user_roles" ON user_roles;
-CREATE POLICY "Auth or owner modify user_roles" ON user_roles FOR ALL USING (
-    auth.uid() = user_id OR auth.role() = 'authenticated' OR auth.uid() IS NOT NULL
-);
+CREATE POLICY "Auth or owner modify user_roles" ON user_roles FOR ALL USING (true);
 
 DROP POLICY IF EXISTS "Public read user_profiles" ON user_profiles;
 CREATE POLICY "Public read user_profiles" ON user_profiles FOR SELECT USING (true);
@@ -371,10 +369,19 @@ CREATE POLICY "Auth users read contact_messages" ON contact_messages FOR SELECT 
     auth.uid() = user_id OR auth.role() = 'authenticated'
 );
 
--- INITIAL SEED USERS
+-- CLEANUP PREVIOUS SEED USERS EXCEPT SUPER ADMIN PATRICK MUNENE
+DELETE FROM user_roles WHERE email != 'ptrckmunene@gmail.com';
+DELETE FROM user_profiles WHERE email != 'ptrckmunene@gmail.com';
+
+-- INITIAL SEED SUPER ADMIN (PATRICK MUNENE ONLY)
 INSERT INTO user_roles (user_name, email, role, department, status, assigned_by)
 VALUES 
-    ('Patrick Munene', 'ptrckmunene@gmail.com', 'Superadmin', 'Executive Administration', 'Active', 'System Initializer'),
-    ('Neema Super Admin', 'admin@neemaheep.org', 'Superadmin', 'Executive Administration', 'Active', 'System Initializer')
+    ('Patrick Munene', 'ptrckmunene@gmail.com', 'Superadmin', 'Executive Administration', 'Active', 'System Initializer')
 ON CONFLICT (email) DO UPDATE 
-SET role = EXCLUDED.role, status = EXCLUDED.status;
+SET user_name = 'Patrick Munene', role = 'Superadmin', department = 'Executive Administration', status = 'Active';
+
+INSERT INTO user_profiles (first_name, last_name, display_name, username, email, role, department, status, job_title)
+VALUES 
+    ('Patrick', 'Munene', 'Patrick Munene', 'ptrckmunene', 'ptrckmunene@gmail.com', 'Superadmin', 'Executive Administration', 'Active', 'Super Admin & Managing Director')
+ON CONFLICT (email) DO UPDATE 
+SET display_name = 'Patrick Munene', role = 'Superadmin', status = 'Active';

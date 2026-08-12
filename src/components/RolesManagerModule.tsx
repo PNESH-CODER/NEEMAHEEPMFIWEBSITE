@@ -152,18 +152,6 @@ const INITIAL_USER_MAPPINGS: UserRoleMapping[] = [
     assignedBy: 'System Initializer',
     hasCustomOverrides: false,
   },
-  {
-    id: 'usr-2',
-    username: 'muthonichar12@gmail.com',
-    name: 'Charity Muthoni',
-    email: 'muthonichar12@gmail.com',
-    role: 'Author',
-    department: 'CMS Editorial',
-    status: 'Active',
-    assignedDate: '2025-03-15',
-    assignedBy: 'Patrick Munene',
-    hasCustomOverrides: false,
-  },
 ];
 
 const INITIAL_AUDIT_LOGS: RolesAuditLog[] = [
@@ -879,7 +867,7 @@ export default function RolesManagerModule({ className = '' }: { className?: str
                   <th className="p-4">Department</th>
                   <th className="p-4">Assigned Role</th>
                   <th className="p-4">Status</th>
-                  <th className="p-4 text-right">Reassign Role</th>
+                  <th className="p-4 text-right">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100 text-xs">
@@ -907,7 +895,7 @@ export default function RolesManagerModule({ className = '' }: { className?: str
                         {u.status}
                       </span>
                     </td>
-                    <td className="p-4 text-right">
+                    <td className="p-4 text-right flex items-center justify-end gap-2">
                       <select
                         value={u.role}
                         onChange={async e => {
@@ -926,6 +914,29 @@ export default function RolesManagerModule({ className = '' }: { className?: str
                           <option key={r.id} value={r.name}>{r.name}</option>
                         ))}
                       </select>
+
+                      <button
+                        type="button"
+                        onClick={async () => {
+                          if (u.email.toLowerCase() === 'ptrckmunene@gmail.com') {
+                            showToast('Primary Superadmin (Patrick Munene) cannot be deleted.', 'error');
+                            return;
+                          }
+                          if (window.confirm(`Are you sure you want to delete user "${u.name}" (${u.email})?`)) {
+                            try {
+                              await supabase.from('user_roles').delete().eq('email', u.email);
+                              setUserMappings(prev => prev.filter(m => m.id !== u.id && m.email !== u.email));
+                              showToast(`User "${u.name}" deleted successfully.`);
+                            } catch (err: any) {
+                              showToast(err.message || 'Error deleting user.', 'error');
+                            }
+                          }
+                        }}
+                        title="Delete User"
+                        className="p-1.5 bg-rose-50 text-rose-600 hover:bg-rose-100 rounded-xl border border-rose-200 transition-colors"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
                     </td>
                   </tr>
                 ))}

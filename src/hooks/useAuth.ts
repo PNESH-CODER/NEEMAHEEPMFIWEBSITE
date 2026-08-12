@@ -36,7 +36,7 @@ export function useAuth() {
       if (error || !roleRecord) {
         console.warn(`[Supabase Auth] Email ${email} not registered in user_roles table.`);
         
-        // Hardcoded pre-approved check for default users as immediate fallback
+        // Hardcoded pre-approved check for Superadmin Patrick Munene as immediate fallback
         if (email === 'ptrckmunene@gmail.com') {
           return {
             id: sessionUser.id || 'usr-superadmin',
@@ -45,18 +45,6 @@ export function useAuth() {
             userName: 'Patrick Munene',
             role: 'Superadmin',
             department: 'Executive Administration',
-            status: 'Active',
-            provider: sessionUser.app_metadata?.provider || 'email'
-          };
-        }
-        if (email === 'muthonichar12@gmail.com') {
-          return {
-            id: sessionUser.id || 'usr-author',
-            email: 'muthonichar12@gmail.com',
-            displayName: 'Charity Muthoni',
-            userName: 'Charity Muthoni',
-            role: 'Author',
-            department: 'CMS Editorial',
             status: 'Active',
             provider: sessionUser.app_metadata?.provider || 'email'
           };
@@ -162,8 +150,6 @@ export function useAuth() {
       let loginEmail = cleanIdentifier;
       if (cleanIdentifier === 'Patrick Munene' || cleanIdentifier === 'admin_neema1' || cleanIdentifier.toLowerCase() === 'ptrckmunene@gmail.com') {
         loginEmail = 'ptrckmunene@gmail.com';
-      } else if (cleanIdentifier === 'Charity Muthoni' || cleanIdentifier === 'staff' || cleanIdentifier.toLowerCase() === 'muthonichar12@gmail.com') {
-        loginEmail = 'muthonichar12@gmail.com';
       }
 
       // Try Supabase Auth first
@@ -177,7 +163,7 @@ export function useAuth() {
         authUser = authData.user;
       }
 
-      // Validate default user credentials if Supabase auth table isn't populated yet
+      // Validate default superadmin credentials if Supabase auth session is offline or local
       if (!authUser) {
         if (loginEmail === 'ptrckmunene@gmail.com' && (pass === '@super123#' || pass === 'NeemaAdmin2026!')) {
           authUser = {
@@ -186,13 +172,17 @@ export function useAuth() {
             user_metadata: { full_name: 'Patrick Munene' },
             app_metadata: { provider: 'email' }
           };
-        } else if (loginEmail === 'muthonichar12@gmail.com' && (pass === '@author123#' || pass === 'StaffSecureNeema2026!')) {
-          authUser = {
-            id: 'usr-author',
-            email: 'muthonichar12@gmail.com',
-            user_metadata: { full_name: 'Charity Muthoni' },
-            app_metadata: { provider: 'email' }
-          };
+        } else {
+          // Check user_roles table directly
+          const { data: localRole } = await supabase.from('user_roles').select('*').eq('email', loginEmail.toLowerCase()).single();
+          if (localRole && localRole.status === 'Active') {
+            authUser = {
+              id: localRole.id,
+              email: localRole.email,
+              user_metadata: { full_name: localRole.user_name },
+              app_metadata: { provider: 'email' }
+            };
+          }
         }
       }
 
