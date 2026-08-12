@@ -60,15 +60,15 @@ export default function WhoWeAre() {
 
             {/* Links Paragraph */}
             <p className="text-sm lg:text-base text-gray-700">
-              Today, we are a reliable partner for individuals and businesses seeking{' '}
+              Today, Neema HEEP is a trusted financial partner serving individuals, farmers and businesses across Kenya with accessible{' '}
               <Link to="/loans" className="text-[#C0991B] font-extrabold hover:underline">
-                business loans in Embu
+                business loans
               </Link>
               ,{' '}
               <Link to="/loans/mali" className="text-[#C0991B] font-extrabold hover:underline">
-                asset financing in Mt. Kenya
+                asset financing
               </Link>
-              , and other inclusive financial services.
+              {' '}and inclusive financial solutions designed to support enterprise growth and improve livelihoods.
             </p>
           </div>
           

@@ -91,13 +91,6 @@ export default function MembersPortal() {
     }
   };
 
-  const fillQuickCredentials = (u: string, p: string) => {
-    setUsername(u);
-    setPassword(p);
-    setError(null);
-    setSuccessMsg(null);
-  };
-
   // Handler: Request OTP
   const handleRequestOtp = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -303,66 +296,6 @@ export default function MembersPortal() {
                     <KeyRound className="w-3.5 h-3.5 text-[#C0991B]" /> Forgot Password?
                   </button>
                 </div>
-              </div>
-            </div>
-
-            {/* Default Users Quick Login Fill */}
-            <div className="bg-gradient-to-br from-amber-50/60 to-emerald-50/40 p-4 rounded-2xl border border-[#C0991B]/30 text-left space-y-3">
-              <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-wider">
-                <span className="flex items-center gap-1.5 text-[#074504]">
-                  <Sparkles className="w-3.5 h-3.5 text-[#C0991B]" />
-                  <span>Configured CMS Default Logins:</span>
-                </span>
-                <span className="text-[9px] text-[#074504] bg-white px-2 py-0.5 rounded-full font-extrabold border border-[#C0991B]/40">
-                  Supabase Roles
-                </span>
-              </div>
-              
-              <div className="grid grid-cols-1 gap-2">
-                {/* User 1: Patrick Munene */}
-                <button
-                  type="button"
-                  onClick={() => fillQuickCredentials('ptrckmunene@gmail.com', '@super123#')}
-                  className="p-3 bg-white border border-gray-200 hover:border-[#074504] rounded-xl text-left transition-all cursor-pointer shadow-xs hover:shadow-md group"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-[12px] font-black text-[#074504] group-hover:text-[#053203] flex items-center gap-1.5">
-                      <Shield className="w-3.5 h-3.5 text-[#C0991B]" /> User 1: Patrick Munene
-                    </span>
-                    <span className="text-[9px] font-black uppercase px-2 py-0.5 bg-emerald-100 text-[#074504] rounded-md border border-[#074504]/30">
-                      Superadmin (Full Access)
-                    </span>
-                  </div>
-                  <div className="text-[10px] font-bold text-gray-600 mt-1 flex justify-between">
-                    <span>Email: <code>ptrckmunene@gmail.com</code></span>
-                    <span>Pass: <code>@super123#</code></span>
-                  </div>
-                </button>
-
-                {/* User 2: Charity Muthoni */}
-                <button
-                  type="button"
-                  onClick={() => fillQuickCredentials('muthonichar12@gmail.com', '@author123#')}
-                  className="p-3 bg-white border border-gray-200 hover:border-[#074504] rounded-xl text-left transition-all cursor-pointer shadow-xs hover:shadow-md group"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-[12px] font-black text-[#074504] group-hover:text-[#053203] flex items-center gap-1.5">
-                      <UserCheck className="w-3.5 h-3.5 text-[#2563EB]" /> User 2: Charity Muthoni
-                    </span>
-                    <span className="text-[9px] font-black uppercase px-2 py-0.5 bg-blue-50 text-blue-800 rounded-md border border-blue-200">
-                      Author (Limited Rights)
-                    </span>
-                  </div>
-                  <div className="text-[10px] font-bold text-gray-600 mt-1 flex justify-between">
-                    <span>Email: <code>muthonichar12@gmail.com</code></span>
-                    <span>Pass: <code>@author123#</code></span>
-                  </div>
-                </button>
-              </div>
-
-              <div className="text-[10px] text-gray-600 font-medium pt-2 border-t border-[#C0991B]/20 space-y-1">
-                <p>• <strong className="text-[#074504]">User Rules & Scope:</strong> Superadmin has full rights across CMS settings & user management. Authors can only write/edit articles.</p>
-                <p>• <strong className="text-amber-800 font-bold">Important:</strong> CMS User accounts can ONLY be created and assigned by the Superadmin.</p>
               </div>
             </div>
 

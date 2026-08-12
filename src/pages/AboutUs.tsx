@@ -123,7 +123,7 @@ export default function AboutUs() {
               <p className="text-4xl font-extrabold text-[#074504] mb-2">
                 <CountUp end={10000} duration={2.5} separator="," suffix="+" enableScrollSpy scrollSpyOnce />
               </p>
-              <p className="text-xs uppercase tracking-wider text-gray-500 font-bold">Trusted Partners</p>
+              <p className="text-xs uppercase tracking-wider text-gray-500 font-bold">Trusted Partners (Clients Served)</p>
             </div>
             <div className="px-4">
               <p className="text-4xl font-extrabold text-[#074504] mb-2">
