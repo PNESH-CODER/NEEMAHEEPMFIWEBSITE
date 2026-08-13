@@ -6,7 +6,7 @@ export default function Programs() {
   const stats = [
     {
       icon: <Users className="w-10 h-10" />,
-      value: "Thousands",
+      value: "1000+",
       label: "Entrepreneurs Supported",
       description: "Through our core microfinance loans, we've helped scale thousands of businesses and livelihoods across 7 counties.",
       to: "/programs/economic-empowerment",

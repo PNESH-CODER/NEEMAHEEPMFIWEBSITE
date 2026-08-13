@@ -114,7 +114,7 @@ export default function EconomicEmpowerment() {
            <div className="absolute top-0 left-0 w-64 h-64 bg-[#C0991B]/10 rounded-full blur-[100px]"></div>
            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center relative z-10">
               {[
-                { icon: BarChart3, color: '#C0991B', value: 'Thousands', label: 'Active Enterprises' },
+                { icon: BarChart3, color: '#C0991B', value: '1000+', label: 'Active Enterprises' },
                 { icon: Globe, color: '#599200', value: '7', label: 'Counties Reached' },
                 { icon: Zap, color: '#C0991B', value: '98%', label: 'Loan Success Rate' }
               ].map((stat, i) => (
