@@ -8,8 +8,8 @@ export default function Timeline() {
     {
       number: '01',
       title: 'Application & Registration',
-      desc: 'Fill simple details online or visit your nearest branch with your National ID for instant registration.',
-      tag: '2 Mins Online',
+      desc: 'Visit your nearest branch with your National ID for registration.',
+      tag: 'Simple Registration',
       icon: FileText,
       color: 'from-[#074504] to-[#0a5c06]',
       accentColor: '#C0991B'
@@ -120,7 +120,7 @@ export default function Timeline() {
             </div>
             <div>
               <h4 className="text-lg font-extrabold text-white">Ready to Access Growth Capital?</h4>
-              <p className="text-sm text-white/80 font-medium">Check your pre-qualification status online in under 2 minutes.</p>
+              <p className="text-sm text-white/80 font-medium">Check your pre-qualification status in under 2 minutes.</p>
             </div>
           </div>
           <div className="flex items-center gap-3 w-full sm:w-auto shrink-0">

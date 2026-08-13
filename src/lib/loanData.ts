@@ -1,13 +1,13 @@
 export const PRODUCT_LINKS = [
   { id: 'nawiri', label: 'Nawiri loan' },
+  { id: 'dairy', label: 'Climate Smart Dairy Loan' },
   { id: 'imara', label: 'Imara loan' },
+  { id: 'wash', label: 'WASH loan' },
+  { id: 'busara', label: 'Busara loan' },
   { id: 'boresha', label: 'Boresha loan' },
   { id: 'logbook', label: 'Log book loan' },
-  { id: 'dharura', label: 'Dharura loan' },
-  { id: 'busara', label: 'Busara loan' },
-  { id: 'dairy', label: 'Dairy loan' },
-  { id: 'wash', label: 'WASH loan' },
   { id: 'mali', label: 'Mali loan' },
+  { id: 'dharura', label: 'Dharura loan' },
   { id: 'housing', label: 'Housing loan' },
   { id: 'ipf', label: 'IPF loan' },
   { id: 'green-energy', label: 'Green energy loan' }
@@ -29,55 +29,6 @@ export const LOAN_PRODUCTS: Record<string, {
   image?: string, 
   driveFallback?: string 
 }> = {
-  'boresha': {
-    id: 'boresha',
-    name: 'Boresha loan',
-    tagline: 'A rapid-clear weekly loan designed to resolve temporary cash needs swiftly.',
-    description: 'The NEEMA HEEP Boresha Loan is a fast-clear credit product designed for customers who want to secure a short-term loan and settle it within the shortest period. With a focus on rapid financial injection and swift, flexible recovery, it is structured around a 1-month repayment cycle with weekly installments, supporting up to a maximum duration of 3 months. The customer is intended to take the loan and clear it within the shortest period.',
-    targetMarket: 'Ideal for microfinance customers, small traders, and individuals looking for quick bridging finance with an initial loan limit of up to KES 10,000, which increases on subsequent successful repayments.',
-    features: [
-      'Repayment period of 1 month (maximum period is 3 months)',
-      'Structured weekly repayment schedule to match immediate cash flows',
-      'Maximum of KES 10,000 for the first loan, with limits increasing on subsequent loans',
-      'Designed for customers aiming to borrow and clear within the shortest period'
-    ],
-    image: '/boresha_loan.jpg',
-    driveFallback: 'https://lh3.googleusercontent.com/d/1IlTlmJ6weoNsKKZ-CtYiNz6DfYaBmegE'
-  },
-  'logbook': {
-    id: 'logbook',
-    name: 'Log book loan',
-    tagline: 'Unlock the hidden equity in your vehicle without surrendering your keys.',
-    description: 'The NEEMA HEEP Logbook Loan is a highly competitive secured credit facility engineered for vehicle owners who require substantial capital injections. As an industry-leading logbook financing provider, we enable you to leverage your motor vehicle\'s logbook as collateral, providing immediate liquidity while you retain full driving rights. This product is meticulously designed for individuals experiencing temporary cash flow bridging needs or seeking capital investment without liquidating personal assets.',
-    targetMarket: 'Aimed at both established business owners and Group (Chama) clients who require collateralized lending but prefer not to involve third-party guarantors or complex secondary mechanisms.',
-    features: ['Competitive motor vehicle valuation-based lending', 'Retain full use of your vehicle during repayment', 'Fast-tracked appraisal and disbursement', 'No third-party guarantors required'],
-    image: '/logbook_loan.jpg',
-    driveFallback: 'https://lh3.googleusercontent.com/d/1n40-YIOAkRizg9GOyBOOSOqvhjanRrgO'
-  },
-  'imara': {
-    id: 'imara',
-    name: 'Imara loan',
-    tagline: 'Reliable working capital to stabilize and scale your day-to-day operations.',
-    description: 'Engineered with the micro-entrepreneur in mind, the Imara Loan serves as an essential financial lifeline for sustainable business operations. Grounded in our decade of microfinance expertise, this credit facility injects vital working capital directly into micro, small, and medium enterprises (MSMEs). By easing cash flow bottlenecks, the Imara loan empowers you to restock inventory, pay suppliers, and maintain steady operational momentum without straining your personal finances.',
-    targetMarket: 'Specifically tailored for small micro-business owners and sole proprietors who require consistent short-term capital for daily business running and operational liquidity.',
-    features: [
-      'Own a business that has been in operation for at least 6 months',
-      'Requires 6 months bank statements',
-      'Flexible, sales-aligned repayment schedules',
-      'Competitive interest structures for MSMEs'
-    ],
-    eligibility: [
-      'Valid Kenyan National ID',
-      'Own a business that has been in operation for at least 6 months',
-      'Age 18-70 years'
-    ],
-    requiredDocuments: [
-      'National ID / Passport',
-      '6 months bank statements'
-    ],
-    image: '/imara_loan.jpg',
-    driveFallback: 'https://lh3.googleusercontent.com/d/1h0NJI1e4y10YMmaENJ6954diwn05eK-S'
-  },
   'nawiri': {
     id: 'nawiri',
     name: 'Nawiri Loan',
@@ -111,6 +62,50 @@ export const LOAN_PRODUCTS: Record<string, {
     image: '/nawiri_loan.jpg',
     driveFallback: 'https://lh3.googleusercontent.com/d/1l0DD7hzzX23TzNLV6BpvByxaaJl3UIBc'
   },
+  'dairy': {
+    id: 'dairy',
+    name: 'Climate Smart Dairy Loan',
+    tagline: 'Modernize your agribusiness with premium dairy and biogas financing.',
+    description: 'Aimed at strengthening the rural agricultural economy, the Dairy Cow Loan provides targeted funding for livestock and farm infrastructure. Backed by agricultural experts, this loan not only facilitates the purchase of high-yield dairy breeds but also finances modern ecological solutions like biogas installations. This dual approach boosts immediate milk-income while dramatically reducing household energy costs, defining a blueprint for sustainable farming success.',
+    targetMarket: 'Designed explicitly for dairy farmers and agricultural clients focused on purchasing good-breed cows and investing in farm upgrades like biogas installations.',
+    features: ['Finances high-yield dairy cattle breeds', 'Covers biogas and infrastructure installations', 'Repayment mapped to milk production cycles', 'Promotes zero-waste agricultural ecosystems'],
+    image: '/dairy_loan.jpg',
+    driveFallback: 'https://lh3.googleusercontent.com/d/197C_Hz2xbWteS6Ur8cZL9PIeKc_nhvlr'
+  },
+  'imara': {
+    id: 'imara',
+    name: 'Imara loan',
+    tagline: 'Reliable working capital to stabilize and scale your day-to-day operations.',
+    description: 'Engineered with the micro-entrepreneur in mind, the Imara Loan serves as an essential financial lifeline for sustainable business operations. Grounded in our decade of microfinance expertise, this credit facility injects vital working capital directly into micro, small, and medium enterprises (MSMEs). By easing cash flow bottlenecks, the Imara loan empowers you to restock inventory, pay suppliers, and maintain steady operational momentum without straining your personal finances.',
+    targetMarket: 'Specifically tailored for small micro-business owners and sole proprietors who require consistent short-term capital for daily business running and operational liquidity.',
+    features: [
+      'Own a business that has been in operation for at least 6 months',
+      'Requires 6 months bank statements',
+      'Flexible, sales-aligned repayment schedules',
+      'Competitive interest structures for MSMEs'
+    ],
+    eligibility: [
+      'Valid Kenyan National ID',
+      'Own a business that has been in operation for at least 6 months',
+      'Age 18-70 years'
+    ],
+    requiredDocuments: [
+      'National ID / Passport',
+      '6 months bank statements'
+    ],
+    image: '/imara_loan.jpg',
+    driveFallback: 'https://lh3.googleusercontent.com/d/1h0NJI1e4y10YMmaENJ6954diwn05eK-S'
+  },
+  'wash': {
+    id: 'wash',
+    name: 'WASH loan',
+    tagline: 'Enhance community health with premium Water, Sanitation, and Hygiene financing.',
+    description: 'Physical health and financial health are intrinsically linked. The WASH (Water, Sanitation, and Hygiene) Loan demonstrates NEEMA HEEP\'s deep commitment to holistic community wellness. This loan ring-fences capital specifically for the acquisition of critical sanitation infrastructure, such as high-capacity water tanks, filtration systems, and piping. By improving household sanitation, we reduce medical vulnerabilities and enhance overall quality of life.',
+    targetMarket: 'Targeted at households and community groups dedicated to enhancing their wellbeing through the installation of critical water and sanitation products (e.g., Tanks, Water generators, Pipes, Dispensers).',
+    features: ['Finances water tanks, pipes, and dispensers', 'Focuses on preventative health and hygiene', 'Subsidized rates for social impact projects', 'Improves community living standards'],
+    image: '/wash_loan.jpg',
+    driveFallback: 'https://lh3.googleusercontent.com/d/1PlyHJ5ApAjpzNqf452b4VD4xlropAica'
+  },
   'busara': {
     id: 'busara',
     name: 'Busara loan',
@@ -120,6 +115,31 @@ export const LOAN_PRODUCTS: Record<string, {
     features: ['Direct disbursement to educational institutions', 'Aligns with school term calendars', 'Affordable interest rates for families', 'Covers both tuition and educational materials'],
     image: '/busara_loan.jpg',
     driveFallback: 'https://lh3.googleusercontent.com/d/1d1nNEDP3oeojIipqadSUDWYq4vDUtSFU'
+  },
+  'boresha': {
+    id: 'boresha',
+    name: 'Boresha loan',
+    tagline: 'A rapid-clear weekly loan designed to resolve temporary cash needs swiftly.',
+    description: 'The NEEMA HEEP Boresha Loan is a fast-clear credit product designed for customers who want to secure a short-term loan and settle it within the shortest period. With a focus on rapid financial injection and swift, flexible recovery, it is structured around a 1-month repayment cycle with weekly installments, supporting up to a maximum duration of 3 months. The customer is intended to take the loan and clear it within the shortest period.',
+    targetMarket: 'Ideal for microfinance customers, small traders, and individuals looking for quick bridging finance with an initial loan limit of up to KES 10,000, which increases on subsequent successful repayments.',
+    features: [
+      'Repayment period of 1 month (maximum period is 3 months)',
+      'Structured weekly repayment schedule to match immediate cash flows',
+      'Maximum of KES 10,000 for the first loan, with limits increasing on subsequent loans',
+      'Designed for customers aiming to borrow and clear within the shortest period'
+    ],
+    image: '/boresha_loan.jpg',
+    driveFallback: 'https://lh3.googleusercontent.com/d/1IlTlmJ6weoNsKKZ-CtYiNz6DfYaBmegE'
+  },
+  'logbook': {
+    id: 'logbook',
+    name: 'Log book loan',
+    tagline: 'Unlock the hidden equity in your vehicle without surrendering your keys.',
+    description: 'The NEEMA HEEP Logbook Loan is a highly competitive secured credit facility engineered for vehicle owners who require substantial capital injections. As an industry-leading logbook financing provider, we enable you to leverage your motor vehicle\'s logbook as collateral, providing immediate liquidity while you retain full driving rights. This product is meticulously designed for individuals experiencing temporary cash flow bridging needs or seeking capital investment without liquidating personal assets.',
+    targetMarket: 'Aimed at both established business owners and Group (Chama) clients who require collateralized lending but prefer not to involve third-party guarantors or complex secondary mechanisms.',
+    features: ['Competitive motor vehicle valuation-based lending', 'Retain full use of your vehicle during repayment', 'Fast-tracked appraisal and disbursement', 'No third-party guarantors required'],
+    image: '/logbook_loan.jpg',
+    driveFallback: 'https://lh3.googleusercontent.com/d/1n40-YIOAkRizg9GOyBOOSOqvhjanRrgO'
   },
   'mali': {
     id: 'mali',
@@ -140,26 +160,6 @@ export const LOAN_PRODUCTS: Record<string, {
     features: ['Rapid response and intervention', 'Operates seamlessly within group setups', 'Minimal bureaucratic friction', 'Short-term relief bridging'],
     image: '/dharura_loan.jpg',
     driveFallback: 'https://lh3.googleusercontent.com/d/19ThITFrsg7aMIpgSoA_HHxc6iig-Cgch'
-  },
-  'dairy': {
-    id: 'dairy',
-    name: 'Dairy loan',
-    tagline: 'Modernize your agribusiness with premium dairy and biogas financing.',
-    description: 'Aimed at strengthening the rural agricultural economy, the Dairy Cow Loan provides targeted funding for livestock and farm infrastructure. Backed by agricultural experts, this loan not only facilitates the purchase of high-yield dairy breeds but also finances modern ecological solutions like biogas installations. This dual approach boosts immediate milk-income while dramatically reducing household energy costs, defining a blueprint for sustainable farming success.',
-    targetMarket: 'Designed explicitly for dairy farmers and agricultural clients focused on purchasing good-breed cows and investing in farm upgrades like biogas installations.',
-    features: ['Finances high-yield dairy cattle breeds', 'Covers biogas and infrastructure installations', 'Repayment mapped to milk production cycles', 'Promotes zero-waste agricultural ecosystems'],
-    image: '/dairy_loan.jpg',
-    driveFallback: 'https://lh3.googleusercontent.com/d/197C_Hz2xbWteS6Ur8cZL9PIeKc_nhvlr'
-  },
-  'wash': {
-    id: 'wash',
-    name: 'WASH loan',
-    tagline: 'Enhance community health with premium Water, Sanitation, and Hygiene financing.',
-    description: 'Physical health and financial health are intrinsically linked. The WASH (Water, Sanitation, and Hygiene) Loan demonstrates NEEMA HEEP\'s deep commitment to holistic community wellness. This loan ring-fences capital specifically for the acquisition of critical sanitation infrastructure, such as high-capacity water tanks, filtration systems, and piping. By improving household sanitation, we reduce medical vulnerabilities and enhance overall quality of life.',
-    targetMarket: 'Targeted at households and community groups dedicated to enhancing their wellbeing through the installation of critical water and sanitation products (e.g., Tanks, Water generators, Pipes, Dispensers).',
-    features: ['Finances water tanks, pipes, and dispensers', 'Focuses on preventative health and hygiene', 'Subsidized rates for social impact projects', 'Improves community living standards'],
-    image: '/wash_loan.jpg',
-    driveFallback: 'https://lh3.googleusercontent.com/d/1PlyHJ5ApAjpzNqf452b4VD4xlropAica'
   },
   'housing': {
     id: 'housing',

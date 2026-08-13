@@ -54,7 +54,7 @@ export default function ThankYou() {
       const pdfText = `
 NEEMA HEEP LENDING INTEGRITY
 ============================================================
-THE ULTIMATE BANK-READY LOAN APPLICATION CHECKLIST & ROADMAP
+THE ULTIMATE FUNDING-READY LOAN APPLICATION CHECKLIST & ROADMAP
 ============================================================
 This certified checklist is distributed to pre-verified entries under Neema HEEP guidelines.
 
@@ -164,10 +164,10 @@ Authorized by: Neema HEEP Program Committee
                 Lead Magnet Download Ready
               </span>
               <h3 className="text-xl font-black text-[#074504] uppercase tracking-tight pt-1">
-                The Ultimate 'Bank-Ready' Checklist
+                The Ultimate 'Funding-Ready' Checklist
               </h3>
               <p className="text-xs text-gray-500 font-semibold max-w-sm">
-                Get immediate access to the critical structural checklist that minimizes bank application rejection.
+                Get immediate access to the critical structural checklist that minimizes loan application rejection.
               </p>
             </div>
             <button

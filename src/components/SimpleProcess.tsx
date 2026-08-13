@@ -13,8 +13,8 @@ export default function SimpleProcess({ className = '' }: { className?: string }
     { 
       num: '2', 
       title: 'Apply', 
-      desc: 'Submit your ID and MPESA statement online or at our nearest branch. Reach us through 0705 759 365.',
-      badge: '📍 Easy and digital'
+      desc: 'Submit your ID and MPESA statement at our nearest branch or reach us through 0705 759 365.',
+      badge: '📍 Branch & Assisted'
     },
     { 
       num: '3', 

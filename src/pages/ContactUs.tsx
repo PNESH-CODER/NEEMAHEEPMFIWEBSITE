@@ -242,7 +242,7 @@ export default function ContactUs() {
                   Ready to Grow Your <span className="text-[#C0991B]">Business?</span>
                 </h3>
                 <p className="text-white/80 text-xs font-medium leading-relaxed">
-                  Join over 15,000+ satisfied entrepreneurs across Kenya. Register online in 4 simple steps or check your instant credit eligibility today.
+                  Join thousands of satisfied entrepreneurs across Kenya. Register or check your credit eligibility today.
                 </p>
 
                 <div className="pt-2 space-y-3">
@@ -347,7 +347,7 @@ export default function ContactUs() {
              <div className="relative z-10">
                <h3 className="text-3xl lg:text-4xl font-extrabold text-white mb-4">Can't visit in person?</h3>
                <p className="text-white/80 max-w-lg mx-auto mb-8 font-medium">
-                 Apply online, call us, or WhatsApp: our loan officers handle the entire process remotely via M-PESA.
+                 Call us or WhatsApp: our loan officers handle the process directly or via M-PESA.
                </p>
                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                  <button className="bg-[#25D366] hover:bg-[#20bd5a] text-white px-8 py-4 rounded-xl font-bold transition-colors w-full sm:w-auto text-sm shadow-[0_4px_14px_rgba(37,211,102,0.3)] gap-2 flex items-center justify-center">

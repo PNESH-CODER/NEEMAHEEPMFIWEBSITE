@@ -452,7 +452,7 @@ export default function LoanProductsIndex() {
             <span className="text-[#C0991B]">GET FUNDED TODAY.</span>
           </h2>
           <p className="text-lg text-white/80 mb-10 font-medium">
-            Walk into any Neema HEEP branch or apply online. Our loan officers will guide you through every step.
+            Walk into any Neema HEEP branch or contact our loan officers. We will guide you through every step.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 w-full max-w-lg mx-auto">

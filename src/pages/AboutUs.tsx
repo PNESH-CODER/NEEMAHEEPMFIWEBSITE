@@ -3,7 +3,6 @@ import { ShieldCheck, HeartHandshake, Lightbulb, Users, BarChart3, BookOpen, Che
 import { motion } from 'motion/react';
 import CountUp from 'react-countup';
 import IconGrid from '../components/IconGrid';
-import Timeline from '../components/Timeline';
 import SimpleProcess from '../components/SimpleProcess';
 import SmartLeadForm from '../components/SmartLeadForm';
 import WhoWeAre from '../components/WhoWeAre';
@@ -118,18 +117,12 @@ export default function AboutUs() {
               We combine real community experience with professional financial systems to deliver sustainable financial solutions that create long-term stability and growth.
             </p>
           </div>
-          <div className="bg-white rounded-[2.5rem] shadow-[0_8px_40px_rgba(0,0,0,0.06)] border border-gray-100 p-10 grid grid-cols-2 lg:grid-cols-4 gap-8 divide-x-0 lg:divide-x divide-gray-100 text-center">
+          <div className="bg-white rounded-[2.5rem] shadow-[0_8px_40px_rgba(0,0,0,0.06)] border border-gray-100 p-10 grid grid-cols-1 md:grid-cols-3 gap-8 divide-x-0 md:divide-x divide-gray-100 text-center">
             <div className="px-4">
               <p className="text-4xl font-extrabold text-[#074504] mb-2">
                 <CountUp end={10000} duration={2.5} separator="," suffix="+" enableScrollSpy scrollSpyOnce />
               </p>
-              <p className="text-xs uppercase tracking-wider text-gray-500 font-bold">Trusted Partners (Clients Served)</p>
-            </div>
-            <div className="px-4">
-              <p className="text-4xl font-extrabold text-[#074504] mb-2">
-                KES <CountUp end={2} duration={2} suffix="B+" enableScrollSpy scrollSpyOnce />
-              </p>
-              <p className="text-xs uppercase tracking-wider text-gray-500 font-bold">Growth Capital</p>
+              <p className="text-xs uppercase tracking-wider text-gray-500 font-bold">Clients Served</p>
             </div>
             <div className="px-4">
               <p className="text-4xl font-extrabold text-[#074504] mb-2">
@@ -143,9 +136,9 @@ export default function AboutUs() {
               </p>
               <p className="text-xs uppercase tracking-wider text-gray-500 font-bold">Established</p>
             </div>
+          </div>
         </div>
-      </div>
-</section>
+      </section>
 
       {/* 1. WHO WE ARE */}
       <WhoWeAre />
@@ -275,9 +268,9 @@ export default function AboutUs() {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { title: "Business Loans in Embu and Mt. Kenya", text: "We provide accessible and affordable financing tailored for SMEs, traders, and entrepreneurs to support business growth and expansion.", icon: Store },
-              { title: "Asset Financing in Mt. Kenya", text: "We enable clients to acquire productive assets such as tools, equipment, and machinery through flexible financing options.", icon: Target },
-              { title: "Agricultural Financing for Farmers", text: "We support small-scale farmers with financing solutions that improve productivity, increase yields, and stabilize income.", icon: Sprout },
+              { title: "Business Loans", text: "We provide accessible and affordable financing tailored for SMEs, traders, and entrepreneurs to support business growth and expansion.", icon: Store },
+              { title: "Asset Financing", text: "We enable clients to acquire productive assets such as tools, equipment, and machinery through flexible financing options.", icon: Target },
+              { title: "Climate Smart Agriculture Solutions", text: "Financing sustainable agriculture by empowering farmers with high-impact, climate-smart solutions.", icon: Sprout },
               { title: "Education Support Programs", text: "We invest in education through sponsorship and mentorship initiatives that keep vulnerable students in school.", icon: BookOpen },
               { title: "Community Health Initiatives", text: "We promote community well-being through programs that support healthy families, recognizing the link between health and financial stability.", icon: HeartHandshake },
               { title: "Sustainable Financial Solutions", text: "Our holistic approach ensures members are not just accessing credit, but building independence and long-term resilience.", icon: Users },
@@ -338,7 +331,7 @@ export default function AboutUs() {
             {[
               { 
                 title: "Local Expertise", 
-                desc: "Deeply rooted in the Mt. Kenya region with unmatched understanding of local economic realities.",
+                desc: "Deeply rooted in the regional community with unmatched understanding of local economic realities.",
                 icon: Target,
                 color: "bg-[#074504]"
               },
@@ -350,7 +343,7 @@ export default function AboutUs() {
               },
               { 
                 title: "Transparency", 
-                desc: "Every transaction, rate, and policy is clear and honest. No hidden fees, just straightforward banking.",
+                desc: "Every transaction, rate, and policy is clear and honest. No hidden fees, just straightforward financial services.",
                 icon: ShieldCheck,
                 color: "bg-[#C0991B]"
               },
@@ -436,42 +429,69 @@ export default function AboutUs() {
               Neema HEEP’s <span className="text-[#C0991B]">Journey</span>
             </h2>
             <p className="text-gray-600 max-w-3xl mx-auto text-base sm:text-lg font-medium leading-relaxed">
-              From a grassroots microfinance vision in Mount Kenya in 2010 to a multi-county financial engine empowering thousands of small businesses, households, and youth.
+              From a grassroots microfinance vision to a multi-county financial engine empowering thousands of small businesses, households, and youth.
             </p>
           </div>
 
-          {/* Timeline Milestones (2010 to 2026) */}
+          {/* Network & Presence Callout Cards */}
+          <div className="grid md:grid-cols-2 gap-6 mb-16">
+            <div className="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.04)] flex flex-col justify-between">
+              <div>
+                <span className="text-[10px] font-black tracking-widest text-[#074504] bg-[#599200]/10 border border-[#599200]/20 px-3.5 py-1.5 rounded-full uppercase inline-block mb-4">
+                  Branch Network
+                </span>
+                <h3 className="text-xl font-extrabold text-[#074504] mb-3">Our Branch Network</h3>
+                <p className="text-gray-600 font-medium text-base leading-relaxed">
+                  Our branch network covers: <strong className="text-[#074504]">Meru, Chuka, Siakago, Kiritiri, Embu, Murang'a and Thika</strong>.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.04)] flex flex-col justify-between">
+              <div>
+                <span className="text-[10px] font-black tracking-widest text-[#074504] bg-[#C0991B]/15 border border-[#C0991B]/30 px-3.5 py-1.5 rounded-full uppercase inline-block mb-4">
+                  County Presence
+                </span>
+                <h3 className="text-xl font-extrabold text-[#074504] mb-3">County Presence</h3>
+                <p className="text-gray-600 font-medium text-base leading-relaxed">
+                  We are present in the following counties: <strong className="text-[#074504]">Embu, Meru, Tharaka Nithi, Kirinyaga, Murang'a, Kiambu and Nyeri</strong>.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Timeline Milestones (Progress flow without year markers) */}
           <div className="relative border-l-2 border-[#074504]/20 ml-4 sm:ml-8 lg:ml-12 pl-6 sm:pl-10 space-y-12">
             {[
               {
-                year: "2010",
+                stage: "Progress Phase 1",
                 title: "Inception & Vision",
-                desc: "Founded in the Mt. Kenya region to solve credit access barriers for micro-entrepreneurs, women's solidarity groups, and smallholder farmers."
+                desc: "Founded to solve credit access barriers for micro-entrepreneurs, women's solidarity groups, and smallholder farmers."
               },
               {
-                year: "2015",
+                stage: "Progress Phase 2",
                 title: "Regional Branch Footprint",
-                desc: "Expanded community outreach offices across Nyeri, Embu, Meru, and Laikipia, establishing trusted relationships with local trader groups and businesses."
+                desc: "Expanded community outreach offices, establishing trusted relationships with local trader groups and businesses."
               },
               {
-                year: "2018",
+                stage: "Progress Phase 3",
                 title: "Launch of Tailored Micro-Loan Engine",
-                desc: "Introduced specialized products including Nawiri (business capital), Imara (asset financing), Dharura (emergency funds), and Busara (growth lending)."
+                desc: "Introduced specialized products including Nawiri, Imara, Dharura, and Busara."
               },
               {
-                year: "2021",
+                stage: "Progress Phase 4",
                 title: "Digital Integration & Group Empowerment",
                 desc: "Adopted mobile repayment channels, digital eligibility tools, and member portals to reduce turnaround times to under 24 hours."
               },
               {
-                year: "2024",
+                stage: "Progress Phase 5",
                 title: "Strategic Partnerships & Youth Mentorship",
-                desc: "Partnered with educational initiatives, agricultural collectives, and USAID-supported youth mentorship programs across Kenya."
+                desc: "Partnered with educational initiatives, agricultural collectives, and youth mentorship programs across Kenya."
               },
               {
-                year: "2026",
+                stage: "Progress Phase 6",
                 title: "Present Day & Sustainable Impact",
-                desc: "Empowered over 10,000 active beneficiaries with a sustained 98% portfolio repayment rate, driving economic growth and community transformation."
+                desc: "Empowered thousands of active clients with a sustained 98% portfolio repayment rate, driving economic growth and community transformation."
               }
             ].map((milestone, idx) => (
               <motion.div 
@@ -487,7 +507,7 @@ export default function AboutUs() {
                 
                 <div className="bg-white p-6 sm:p-8 rounded-3xl border border-gray-100 hover:border-[#074504]/30 hover:shadow-lg transition-all">
                   <div className="inline-block bg-[#074504] text-[#C0991B] text-xs font-black px-3.5 py-1 rounded-full uppercase tracking-wider mb-3">
-                    {milestone.year}
+                    {milestone.stage}
                   </div>
                   <h4 className="text-xl font-extrabold text-[#074504] mb-2">{milestone.title}</h4>
                   <p className="text-gray-600 font-medium text-sm sm:text-base leading-relaxed">{milestone.desc}</p>
@@ -555,7 +575,7 @@ export default function AboutUs() {
                 Ready to take the next step with <span className="text-[#C0991B]">NEEMA HEEP?</span>
               </h3>
               <p className="text-white/80 font-medium text-base md:text-lg max-w-2xl">
-                Get instant credit clearance and talk directly with our regional financial experts in Embu and Mt. Kenya.
+                Get instant credit clearance and talk directly with our regional financial experts.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 shrink-0 w-full sm:w-auto">
@@ -576,8 +596,7 @@ export default function AboutUs() {
       </div>
 </section>
 
-      {/* 7. A DECADE OF IMPACT */}
-      <Timeline />
+      {/* 7. BEYOND FINANCE - Holistic Approach */}
 
       {/* ENHANCED STRATEGIC IMPACT & TOOLS SECTION */}
       <section className="w-full py-24 px-6 lg:px-12 bg-gradient-to-b from-white via-[#F4F7F6] to-gray-50 relative overflow-hidden border-t border-b border-gray-200/60">
@@ -608,7 +627,7 @@ export default function AboutUs() {
                 link: "/pre-qualification"
               },
               {
-                title: "Bank-Ready Checklists",
+                title: "Funding-Ready Checklists",
                 desc: "Verify requirement compliance for SME loans, asset financing, and emergency credit.",
                 icon: CheckCircle2,
                 badge: "Instant PDF",

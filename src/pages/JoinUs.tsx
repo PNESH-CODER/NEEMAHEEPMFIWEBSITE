@@ -268,16 +268,16 @@ export default function JoinUs() {
                 <h3 className="text-xl font-black text-[#074504] uppercase mb-4">Individual</h3>
                 <ul className="space-y-3 mb-8">
                   <li className="flex items-center gap-3 text-xs font-bold text-gray-500">
-                    <CheckCircle2 className="w-4 h-4 text-[#599200]" /> Costs are discussed at the point of contact
+                    <CheckCircle2 className="w-4 h-4 text-[#599200] shrink-0" /> Transparent & affordable registration fee structures communicated upon consultation
                   </li>
                   <li className="flex items-center gap-3 text-xs font-bold text-gray-500">
-                    <CheckCircle2 className="w-4 h-4 text-[#599200]" /> Valid Kenyan ID
+                    <CheckCircle2 className="w-4 h-4 text-[#599200] shrink-0" /> Valid Kenyan National ID / Passport
                   </li>
                   <li className="flex items-center gap-3 text-xs font-bold text-gray-500">
-                    <CheckCircle2 className="w-4 h-4 text-[#599200]" /> Passport Photo
+                    <CheckCircle2 className="w-4 h-4 text-[#599200] shrink-0" /> Passport Photo & Active Contact Details
                   </li>
                   <li className="flex items-center gap-3 text-xs font-bold text-gray-500">
-                    <CheckCircle2 className="w-4 h-4 text-[#599200]" /> Active M-Pesa Number
+                    <CheckCircle2 className="w-4 h-4 text-[#599200] shrink-0" /> Active M-Pesa Phone Number
                   </li>
                 </ul>
                 <button 
@@ -295,16 +295,16 @@ export default function JoinUs() {
                 <h3 className="text-xl font-black text-[#074504] uppercase mb-4">Group / Chamas</h3>
                 <ul className="space-y-3 mb-8">
                   <li className="flex items-center gap-3 text-xs font-bold text-gray-500">
-                    <CheckCircle2 className="w-4 h-4 text-[#C0991B]" /> Costs are discussed at the point of contact
+                    <CheckCircle2 className="w-4 h-4 text-[#C0991B] shrink-0" /> Transparent & affordable registration fee structures communicated upon consultation
                   </li>
                   <li className="flex items-center gap-3 text-xs font-bold text-gray-500">
-                    <CheckCircle2 className="w-4 h-4 text-[#C0991B]" /> Group Representative ID
+                    <CheckCircle2 className="w-4 h-4 text-[#C0991B] shrink-0" /> Group Representative National ID
                   </li>
                   <li className="flex items-center gap-3 text-xs font-bold text-gray-500">
-                    <CheckCircle2 className="w-4 h-4 text-[#C0991B]" /> Member Details List
+                    <CheckCircle2 className="w-4 h-4 text-[#C0991B] shrink-0" /> Chama / Group Member Roster & Details
                   </li>
                   <li className="flex items-center gap-3 text-xs font-bold text-gray-500">
-                    <CheckCircle2 className="w-4 h-4 text-[#C0991B]" /> Active M-Pesa Number
+                    <CheckCircle2 className="w-4 h-4 text-[#C0991B] shrink-0" /> Active M-Pesa Number for Official Account
                   </li>
                 </ul>
                 <button 
@@ -321,7 +321,7 @@ export default function JoinUs() {
                 <div>
                   <p className="text-[10px] font-black text-[#C0991B] uppercase tracking-[0.2em] mb-2">Amount Payable for Registration</p>
                   <p className="text-xl md:text-2xl font-black leading-tight mb-2 text-white">
-                    Costs are discussed at the point of contact
+                    Transparent & affordable registration fee structures communicated upon consultation
                   </p>
                   <p className="text-sm text-white/90 font-medium leading-relaxed">
                     Please speak with our customer care representative or branch officers for specific details on registration structures.

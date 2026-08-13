@@ -497,7 +497,7 @@ export default function EligibilityQuiz() {
 
                   <h2 className="text-3xl font-extrabold text-gray-900 mb-2">
                     {results.category === 'HIGH' ? `You Qualify for up to KES ${Number(data.amount).toLocaleString()}!` : 
-                    (results.category === 'MEDIUM' ? 'You Show Strong Potential' : 'Let\'s Get You Bank-Ready')}
+                    (results.category === 'MEDIUM' ? 'You Show Strong Potential' : 'Let\'s Get You Funding-Ready')}
                   </h2>
 
                   <p className="text-gray-600 font-medium mb-8 max-w-sm">
