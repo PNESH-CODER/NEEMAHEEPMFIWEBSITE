@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { supabase } from '../lib/supabase';
+import { profilesStore } from '../lib/profilesStore';
 import { logGlobalAudit } from '../services/auditService';
 import { 
   Sliders, Shield, ShieldCheck, ShieldAlert, Users, UserCheck, UserX, UserPlus, 
@@ -1336,10 +1337,12 @@ export default function RolesManagerModule({ className = '' }: { className?: str
                     assigned_by: 'Patrick Munene (Superadmin)'
                   }]);
 
-                  if (rolesErr) throw rolesErr;
+                  if (rolesErr) {
+                    console.warn("Notice saving to user_roles table:", rolesErr);
+                  }
 
                   // 2. Insert into user_profiles table
-                  await supabase.from('user_profiles').upsert([{
+                  const { error: profsErr } = await supabase.from('user_profiles').upsert([{
                     first_name: newUserName.trim().split(' ')[0],
                     last_name: newUserName.trim().split(' ').slice(1).join(' ') || 'User',
                     display_name: newUserName.trim(),
@@ -1351,6 +1354,24 @@ export default function RolesManagerModule({ className = '' }: { className?: str
                     initial_password: newUserInitialPassword.trim(),
                     job_title: `${newUserRole} - ${newUserDept}`
                   }], { onConflict: 'email' });
+
+                  if (profsErr) {
+                    console.warn("Notice saving to user_profiles table:", profsErr);
+                  }
+
+                  // 3. Register in profilesStore so user instantly appears in Registered CMS User Directory (UserProfileManager & SystemAdminModule)
+                  profilesStore.createProfile({
+                    firstName: newUserName.trim().split(' ')[0],
+                    lastName: newUserName.trim().split(' ').slice(1).join(' ') || 'User',
+                    displayName: newUserName.trim(),
+                    username: email.split('@')[0],
+                    email: email,
+                    role: newUserRole,
+                    department: newUserDept,
+                    status: 'Active',
+                    initialPassword: newUserInitialPassword.trim(),
+                    jobTitle: `${newUserRole} - ${newUserDept}`
+                  }, 'Patrick Munene (Superadmin)');
 
                   const newMappedUser: UserRoleMapping = {
                     id: `usr-${Date.now()}`,

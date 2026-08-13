@@ -1,3 +1,5 @@
+import { supabase } from './supabase';
+
 export interface ExtendedUserProfile {
   id: string;
   firstName: string;
@@ -125,6 +127,75 @@ class ProfilesStore {
 
   constructor() {
     this.loadFromStorage();
+    this.fetchSupabaseProfiles();
+  }
+
+  public async fetchSupabaseProfiles(): Promise<void> {
+    try {
+      const { data, error } = await supabase.from('user_profiles').select('*').order('created_at', { ascending: false });
+      if (!error && data && data.length > 0) {
+        const fetchedProfiles: ExtendedUserProfile[] = data.map((u: any) => ({
+          id: u.id || `usr-${u.email}`,
+          firstName: u.first_name || u.display_name?.split(' ')[0] || 'User',
+          middleName: u.middle_name || '',
+          lastName: u.last_name || u.display_name?.split(' ').slice(1).join(' ') || '',
+          displayName: u.display_name || `${u.first_name || ''} ${u.last_name || ''}`.trim() || u.email,
+          username: u.username || u.email.split('@')[0],
+          email: u.email,
+          phone: u.phone || '+254 700 000 000',
+          whatsApp: u.whatsapp || u.phone || '+254 700 000 000',
+          gender: u.gender || 'Prefer not to say',
+          jobTitle: u.job_title || `${u.role || 'CMS User'} - ${u.department || 'Editorial'}`,
+          department: u.department || 'CMS Editorial',
+          employeeId: u.employee_id || `NH-EMP-${u.email.split('@')[0].toUpperCase()}`,
+          departmentExtension: 'Ext. 200',
+          canCreateArticles: true,
+          physicalAddress: 'Neema HEEP HQ',
+          role: u.role || 'Author',
+          status: u.status || 'Active',
+          verificationStatus: u.verification_status || 'Verified',
+          profilePhoto: u.profile_photo || '/developer_teaching_coding.jpg',
+          coverPhoto: u.cover_photo || 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=80',
+          bio: u.bio || 'Registered CMS user at Neema HEEP.',
+          shortBio: u.short_bio || `${u.job_title || u.role} at Neema HEEP.`,
+          levelOfEducation: 'Bachelor Degree',
+          yearsOfExperience: '3+ Years',
+          workExperience: Array.isArray(u.work_experience) ? u.work_experience : [`${u.role || 'CMS User'} - Neema HEEP`],
+          preferredLanguage: 'English (UK)',
+          timezone: 'Africa/Nairobi (UTC+3)',
+          expertise: Array.isArray(u.expertise) ? u.expertise : ['CMS Publishing', 'Microfinance'],
+          certifications: Array.isArray(u.certifications) ? u.certifications : ['Certified CMS User'],
+          education: Array.isArray(u.education) ? u.education : ['University Graduate'],
+          memberships: Array.isArray(u.memberships) ? u.memberships : ['Neema HEEP Team'],
+          publicHeadline: u.job_title || `${u.role} at Neema HEEP`,
+          publicBio: u.bio || 'Registered CMS User',
+          publicPagePublished: true,
+          showPublicContact: true,
+          initialPassword: u.initial_password || '',
+          createdAt: u.created_at ? new Date(u.created_at).toLocaleString() : new Date().toLocaleString(),
+          createdBy: 'System/Supabase',
+          stats: u.stats || {
+            articlesPublished: 0,
+            draftArticles: 0,
+            mediaUploaded: 0,
+            commentsModerated: 0,
+            communityImpactScore: 50,
+            readingCount: 0,
+            guidedLoansCount: 0,
+            lastLogin: 'Active',
+            memberSince: '2026'
+          },
+          achievements: ['Registered User']
+        }));
+
+        const existingEmails = new Set(fetchedProfiles.map(p => p.email.toLowerCase()));
+        const localOnly = this.profiles.filter(p => !existingEmails.has(p.email.toLowerCase()));
+        this.profiles = [...fetchedProfiles, ...localOnly];
+        this.saveToStorage();
+      }
+    } catch (err) {
+      console.warn("Notice loading profiles from Supabase:", err);
+    }
   }
 
   private loadFromStorage(): void {
@@ -240,6 +311,23 @@ class ProfilesStore {
 
     this.profiles = [newProfile, ...this.profiles];
     this.saveToStorage();
+
+    // Async sync to Supabase user_profiles table
+    supabase.from('user_profiles').upsert([{
+      first_name: newProfile.firstName,
+      last_name: newProfile.lastName,
+      display_name: newProfile.displayName,
+      username: newProfile.username,
+      email: newProfile.email,
+      role: newProfile.role,
+      department: newProfile.department,
+      status: newProfile.status,
+      initial_password: newProfile.initialPassword,
+      job_title: newProfile.jobTitle
+    }], { onConflict: 'email' }).then(({ error }) => {
+      if (error) console.warn("Supabase user_profiles upsert notice:", error);
+    });
+
     return newProfile;
   }
 
