@@ -1,11 +1,30 @@
 import React from 'react';
-import { CheckSquare, FileText, Download } from 'lucide-react';
+import { CheckSquare } from 'lucide-react';
 
 export default function ChecklistsPage() {
   const checklists = [
-    { title: 'Individual Micro-Loan Checklist', items: ['National ID Copy', 'KRA PIN Certificate', '6 Months M-PESA/Bank Statement', '2 Passport Photos'] },
-    { title: 'Group Loan (Chama) Requirements', items: ['Group Constitution', 'Registration Certificate', 'List of Active Members', 'Minutes approving loan request'] },
-    { title: 'Agribusiness & Asset Finance', items: ['Land Ownership / Lease Agreement', 'Farm photos & harvest logs', 'Guarantor National IDs', 'Business registration'] },
+    { 
+      title: 'Individual/ SME loan', 
+      items: [
+        'ID copy', 
+        'KRA PIN certificate', 
+        '6 months mpesa or bank statements'
+      ] 
+    },
+    { 
+      title: 'Group Loan (Chama) Requirements', 
+      items: [
+        'Members ID numbers', 
+        'Members KRA PIN certificates'
+      ] 
+    },
+    { 
+      title: 'Agribusiness/ Dairy loans', 
+      items: [
+        'National ID', 
+        'KRA PIN Certificate'
+      ] 
+    },
   ];
 
   return (
@@ -14,7 +33,6 @@ export default function ChecklistsPage() {
         <h1 className="text-2xl font-black flex items-center gap-2">
           <CheckSquare className="w-6 h-6 text-[#C0991B]" /> Loan Application Checklists
         </h1>
-        <p className="text-xs text-[#C0991B] font-bold">Ensure you have all necessary documentation before visiting our branch or submitting online.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

@@ -36,6 +36,7 @@ export interface ExtendedUserProfile {
   publicBio?: string;
   publicPagePublished?: boolean;
   showPublicContact?: boolean;
+  initialPassword?: string;
   // Super Admin Management Metadata
   createdAt?: string;
   createdBy?: string;
@@ -63,17 +64,17 @@ export const INITIAL_PROFILES_SEED: ExtendedUserProfile[] = [
   {
     id: 'usr-1',
     firstName: 'Patrick',
-    middleName: 'Munene',
-    lastName: 'Kinyua',
+    middleName: '',
+    lastName: 'Munene',
     displayName: 'Patrick Munene',
-    username: 'pmunene',
+    username: 'ptrckmunene',
     email: 'ptrckmunene@gmail.com',
     phone: '+254 712 345 678',
     whatsApp: '+254 712 345 678',
     gender: 'Male',
     dateOfBirth: '1992-05-14',
-    jobTitle: 'Managing Director & Founder',
-    department: 'Executive Leadership',
+    jobTitle: 'Super Admin & Senior Web developer',
+    department: 'Web Development',
     employeeId: 'NH-EMP-2022-001',
     departmentExtension: 'Ext. 101 (Executive)',
     canCreateArticles: true,

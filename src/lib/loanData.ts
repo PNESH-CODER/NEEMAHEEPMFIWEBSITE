@@ -13,7 +13,22 @@ export const PRODUCT_LINKS = [
   { id: 'green-energy', label: 'Green energy loan' }
 ];
 
-export const LOAN_PRODUCTS: Record<string, { id: string, name: string, tagline: string, description: string, targetMarket: string, features: string[], image?: string, driveFallback?: string }> = {
+export const LOAN_PRODUCTS: Record<string, { 
+  id: string, 
+  name: string, 
+  tagline: string, 
+  description: string, 
+  targetMarket: string, 
+  features: string[], 
+  subHeading?: string,
+  whoCanApply?: string[],
+  howItWorks?: { step: number, title: string, desc: string }[],
+  whyNawiri?: { tagline: string, description: string },
+  eligibility?: string[],
+  requiredDocuments?: string[],
+  image?: string, 
+  driveFallback?: string 
+}> = {
   'boresha': {
     id: 'boresha',
     name: 'Boresha loan',
@@ -45,17 +60,54 @@ export const LOAN_PRODUCTS: Record<string, { id: string, name: string, tagline: 
     tagline: 'Reliable working capital to stabilize and scale your day-to-day operations.',
     description: 'Engineered with the micro-entrepreneur in mind, the Imara Loan serves as an essential financial lifeline for sustainable business operations. Grounded in our decade of microfinance expertise, this credit facility injects vital working capital directly into micro, small, and medium enterprises (MSMEs). By easing cash flow bottlenecks, the Imara loan empowers you to restock inventory, pay suppliers, and maintain steady operational momentum without straining your personal finances.',
     targetMarket: 'Specifically tailored for small micro-business owners and sole proprietors who require consistent short-term capital for daily business running and operational liquidity.',
-    features: ['Tailored for working capital and inventory', 'Flexible, sales-aligned repayment schedules', 'Competitive interest structures for MSMEs', 'Builds individual creditworthiness'],
+    features: [
+      'Own a business that has been in operation for at least 6 months',
+      'Requires 6 months bank statements',
+      'Flexible, sales-aligned repayment schedules',
+      'Competitive interest structures for MSMEs'
+    ],
+    eligibility: [
+      'Valid Kenyan National ID',
+      'Own a business that has been in operation for at least 6 months',
+      'Age 18-70 years'
+    ],
+    requiredDocuments: [
+      'National ID / Passport',
+      '6 months bank statements'
+    ],
     image: '/imara_loan.jpg',
     driveFallback: 'https://lh3.googleusercontent.com/d/1h0NJI1e4y10YMmaENJ6954diwn05eK-S'
   },
   'nawiri': {
     id: 'nawiri',
-    name: 'Nawiri loan',
-    tagline: 'Catalyze your business expansion and elevate your commercial livelihood.',
-    description: 'Derived from the Swahili word for "prosper," the Nawiri Loan is a strategic growth accelerator for active businesses ready to take the next leap. Demonstrating our commitment to economic empowerment, this specialized commercial loan provides the necessary financial leverage to spur measurable growth. Whether expanding into new markets, acquiring bulk inventory, or upgrading commercial premises, the Nawiri loan transforms ambitious business plans into tangible realities.',
-    targetMarket: 'Designed for on-going, revenue-generating businesses that require substantial capital injections to spur strategic growth, scale operations, and sustainably improve livelihoods.',
-    features: ['Higher limits tailored for strategic expansion', 'Supportive terms for capital improvements', 'Expert loan advisory included', 'Empowers sustainable livelihood shifts'],
+    name: 'Nawiri Loan',
+    subHeading: 'Grow Your Business with the Support of Your Group',
+    tagline: 'Grow Your Business with the Support of Your Group',
+    description: 'The Nawiri Loan is a simple and easy-to-access business loan offered through groups. Members of the group guarantee each other, making the group guarantee the main security for the loan. It is designed for small business owners who need affordable financing to grow their businesses, increase stock, improve operations or meet other business needs.',
+    targetMarket: 'Designed for small business owners who need affordable financing to grow their businesses, increase stock, improve operations, or meet other business needs.',
+    features: [
+      'Simple & easy-to-access group business loan',
+      'Group guarantee serves as the main security',
+      'Affordable financing to scale stock and operations',
+      'Supports collective financial growth for your group'
+    ],
+    whoCanApply: [
+      'Be a member of a group.',
+      'Have a valid National ID.',
+      'Own a business that has been in operation for at least 6 months.',
+      'Be willing to participate in the group guarantee arrangement.'
+    ],
+    howItWorks: [
+      { step: 1, title: 'Join a group', desc: 'You must belong to a group.' },
+      { step: 2, title: 'Apply for a loan', desc: 'Apply for the amount you need for your business.' },
+      { step: 3, title: 'Group guarantee', desc: "Group members guarantee each other's loans." },
+      { step: 4, title: 'Receive your loan', desc: 'Once approved, the loan is disbursed to help you grow your business.' },
+      { step: 5, title: 'Repay as agreed', desc: 'Make your repayments on time and build a good borrowing record.' }
+    ],
+    whyNawiri: {
+      tagline: 'Simple. Accessible. Group-supported.',
+      description: 'With Nawiri, you can access financing to help your business grow while building a stronger financial future for yourself and your group.'
+    },
     image: '/nawiri_loan.jpg',
     driveFallback: 'https://lh3.googleusercontent.com/d/1l0DD7hzzX23TzNLV6BpvByxaaJl3UIBc'
   },

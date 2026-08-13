@@ -268,7 +268,7 @@ export default function JoinUs() {
                 <h3 className="text-xl font-black text-[#074504] uppercase mb-4">Individual</h3>
                 <ul className="space-y-3 mb-8">
                   <li className="flex items-center gap-3 text-xs font-bold text-gray-500">
-                    <CheckCircle2 className="w-4 h-4 text-[#599200]" /> Non-refundable Fee: KES 2,000
+                    <CheckCircle2 className="w-4 h-4 text-[#599200]" /> Costs are discussed at the point of contact
                   </li>
                   <li className="flex items-center gap-3 text-xs font-bold text-gray-500">
                     <CheckCircle2 className="w-4 h-4 text-[#599200]" /> Valid Kenyan ID
@@ -295,7 +295,7 @@ export default function JoinUs() {
                 <h3 className="text-xl font-black text-[#074504] uppercase mb-4">Group / Chamas</h3>
                 <ul className="space-y-3 mb-8">
                   <li className="flex items-center gap-3 text-xs font-bold text-gray-500">
-                    <CheckCircle2 className="w-4 h-4 text-[#C0991B]" /> Non-refundable Fee: KES 600 per member
+                    <CheckCircle2 className="w-4 h-4 text-[#C0991B]" /> Costs are discussed at the point of contact
                   </li>
                   <li className="flex items-center gap-3 text-xs font-bold text-gray-500">
                     <CheckCircle2 className="w-4 h-4 text-[#C0991B]" /> Group Representative ID
@@ -320,12 +320,11 @@ export default function JoinUs() {
               <div className="bg-[#074504] rounded-[2rem] p-8 border border-[#599200] flex gap-6 items-start text-white shadow-xl">
                 <div>
                   <p className="text-[10px] font-black text-[#C0991B] uppercase tracking-[0.2em] mb-2">Amount Payable for Registration</p>
-                  <p className="text-2xl md:text-3xl font-black leading-tight mb-2">
-                    KES 2,000 <span className="text-xs font-medium opacity-70">(Individual)</span><br/>
-                    KES 600 <span className="text-xs font-medium opacity-70">per member (Group/Chama)</span>
+                  <p className="text-xl md:text-2xl font-black leading-tight mb-2 text-white">
+                    Costs are discussed at the point of contact
                   </p>
                   <p className="text-sm text-white/90 font-medium leading-relaxed">
-                    Ensure your M-Pesa has sufficient balance to cover the registration fee plus corresponding transaction charges.
+                    Please speak with our customer care representative or branch officers for specific details on registration structures.
                   </p>
                 </div>
               </div>

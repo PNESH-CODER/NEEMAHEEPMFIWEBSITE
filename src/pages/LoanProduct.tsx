@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
 import { LOAN_PRODUCTS } from '../lib/loanData';
 import { LoanType } from '../lib/loanEngine';
-import { CheckCircle2, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
+import { CheckCircle2, ArrowRight, ChevronDown, ChevronUp, Users, UserCheck, Check, Sparkles, HelpCircle, ShieldCheck } from 'lucide-react';
 import { trackHighInterestTimeOnPage } from '../services/trackingService';
 
 export default function LoanProduct() {
@@ -41,7 +41,7 @@ export default function LoanProduct() {
   return (
     <main className="flex-grow flex flex-col items-center w-full bg-white">
       {/* Hero Banner */}
-      <section className="w-full bg-[#074504] text-white py-20 lg:py-32 px-6 lg:px-12 relative overflow-hidden flex justify-center">
+      <section className="w-full bg-[#074504] text-white py-16 lg:py-24 px-6 lg:px-12 relative overflow-hidden flex justify-center">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#599200] rounded-full blur-[150px] opacity-20 pointer-events-none" />
         <div className="max-w-7xl mx-auto w-full relative z-10 grid md:grid-cols-2 gap-12 items-center">
           <div>
@@ -69,15 +69,15 @@ export default function LoanProduct() {
             <div className="inline-flex items-center gap-3 justify-center mb-4">
               <span className="w-8 h-1 bg-[#599200] rounded-full"></span>
               <span className="text-[#C0991B] font-black tracking-[0.2em] text-xs uppercase block">
-              Loan Product
-            </span>
+                Loan Product
+              </span>
               <span className="w-8 h-1 bg-[#599200] rounded-full"></span>
             </div>
-            <h1 className="text-4xl lg:text-7xl font-extrabold mb-8 leading-[1.1] tracking-tight uppercase">
+            <h1 className="text-4xl lg:text-6xl font-extrabold mb-4 leading-[1.1] tracking-tight uppercase">
               {product.name}
             </h1>
-            <p className="text-lg lg:text-xl text-white/80 max-w-lg mb-12 font-medium leading-relaxed">
-              {product.tagline}. Optimized for local realities, processed with global efficiency.
+            <p className="text-lg lg:text-xl text-[#C0991B] max-w-lg mb-8 font-bold leading-relaxed">
+              {product.subHeading || product.tagline}
             </p>
             <Link to="/pre-qualification" className="inline-flex items-center gap-2 bg-[#599200] hover:bg-[#28A428] text-white font-bold py-4 px-8 rounded-full transition-transform hover:scale-105 duration-300 shadow-[0_10px_20px_rgba(50,205,50,0.3)]">
               Check your loan eligibility
@@ -87,14 +87,14 @@ export default function LoanProduct() {
 
           <div className="bg-white rounded-3xl p-8 text-gray-900 shadow-xl relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-2 bg-[#599200]" />
-            <h3 className="text-2xl font-bold mb-4 text-[#074504]">Why choose {product.name}?</h3>
-            <p className="text-gray-600 leading-relaxed mb-6 font-medium">
+            <h3 className="text-2xl font-bold mb-4 text-[#074504]">About {product.name}</h3>
+            <p className="text-gray-700 leading-relaxed mb-6 font-medium text-sm">
               {product.description}
             </p>
 
             {product.targetMarket && (
               <div className="bg-[#074504]/5 rounded-2xl p-5 mb-8 border border-[#074504]/10">
-                <p className="font-bold text-[#074504] mb-2 text-sm uppercase tracking-wider">Target Market</p>
+                <p className="font-bold text-[#074504] mb-2 text-xs uppercase tracking-wider">Target Market</p>
                 <p className="text-sm text-gray-700 font-medium leading-relaxed">{product.targetMarket}</p>
               </div>
             )}
@@ -120,15 +120,23 @@ export default function LoanProduct() {
                 <div className="bg-[#F4F7F6] rounded-2xl p-4 mb-4 text-sm text-gray-600 border border-gray-200 animate-in fade-in zoom-in-95 duration-200">
                   <p className="font-bold text-gray-800 mb-2 uppercase text-[10px] tracking-wider">Eligibility</p>
                   <ul className="space-y-1 mb-4 text-xs font-medium">
-                    <li>• Valid Kenyan National ID</li>
-                    <li>• Proof of income or business</li>
-                    <li>• Age 18-70 years</li>
+                    {(product.eligibility || [
+                      'Valid Kenyan National ID',
+                      'Proof of income or business',
+                      'Age 18-70 years'
+                    ]).map((item, idx) => (
+                      <li key={idx}>• {item}</li>
+                    ))}
                   </ul>
                   <p className="font-bold text-gray-800 mb-2 uppercase text-[10px] tracking-wider">Required Documents</p>
                   <ul className="space-y-1 text-xs font-medium">
-                    <li>• National ID / Passport</li>
-                    <li>• 3 months bank statements</li>
-                    <li>• Utility bill (proof of residence)</li>
+                    {(product.requiredDocuments || [
+                      'National ID / Passport',
+                      '3 months bank statements',
+                      'Utility bill (proof of residence)'
+                    ]).map((doc, idx) => (
+                      <li key={idx}>• {doc}</li>
+                    ))}
                   </ul>
                 </div>
               )}
@@ -143,6 +151,100 @@ export default function LoanProduct() {
           </div>
         </div>
       </section>
+
+      {/* Structured Product Sections for Nawiri and Rich Products */}
+      {(product.whoCanApply || product.howItWorks || product.whyNawiri) && (
+        <section className="w-full py-16 px-6 lg:px-12 bg-[#f8faf8] border-y border-gray-200/80">
+          <div className="max-w-5xl mx-auto space-y-16">
+            
+            {/* Header & Overview */}
+            <div className="text-center space-y-3">
+              <div className="inline-flex items-center gap-2 bg-[#074504]/10 text-[#074504] px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider">
+                <Sparkles className="w-4 h-4 text-[#C0991B]" /> {product.name} Overview
+              </div>
+              <h2 className="text-3xl lg:text-4xl font-extrabold text-[#074504]">
+                {product.subHeading || product.tagline}
+              </h2>
+            </div>
+
+            {/* Who Can Apply? */}
+            {product.whoCanApply && (
+              <div className="bg-white rounded-3xl p-8 lg:p-10 border border-gray-200/80 shadow-xs space-y-6">
+                <div className="flex items-center gap-3 border-b pb-4">
+                  <div className="w-10 h-10 rounded-2xl bg-[#074504] text-white flex items-center justify-center shrink-0">
+                    <UserCheck className="w-5 h-5 text-[#C0991B]" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-extrabold text-[#074504]">Who Can Apply?</h3>
+                    <p className="text-xs text-gray-500 font-medium">Simple qualification requirements to get started</p>
+                  </div>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {product.whoCanApply.map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-3 bg-[#f8faf8] p-4 rounded-2xl border border-gray-100">
+                      <div className="w-6 h-6 rounded-full bg-[#074504] text-white flex items-center justify-center shrink-0 mt-0.5">
+                        <Check className="w-3.5 h-3.5 text-[#C0991B]" />
+                      </div>
+                      <span className="text-sm text-gray-800 font-medium leading-snug">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* How Does It Work? */}
+            {product.howItWorks && (
+              <div className="space-y-8">
+                <div className="text-center space-y-1">
+                  <h3 className="text-2xl font-extrabold text-[#074504]">How Does the {product.name} Work?</h3>
+                  <p className="text-xs text-gray-500 font-medium">Follow these 5 simple steps to access growth capital</p>
+                </div>
+
+                <div className="grid md:grid-cols-5 gap-4">
+                  {product.howItWorks.map((stepItem) => (
+                    <div key={stepItem.step} className="bg-white p-5 rounded-2xl border border-gray-200/80 shadow-xs space-y-3 relative flex flex-col justify-between hover:border-[#074504]/40 transition-colors">
+                      <div className="space-y-2">
+                        <div className="w-8 h-8 rounded-xl bg-[#074504] text-[#C0991B] font-black text-sm flex items-center justify-center shadow-xs">
+                          {stepItem.step}
+                        </div>
+                        <h4 className="font-extrabold text-sm text-[#074504] leading-tight">{stepItem.title}</h4>
+                        <p className="text-xs text-gray-600 font-medium leading-relaxed">{stepItem.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Why Nawiri? */}
+            {product.whyNawiri && (
+              <div className="bg-[#074504] text-white rounded-3xl p-8 lg:p-10 shadow-xl relative overflow-hidden space-y-4">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#599200]/20 rounded-full blur-[80px] pointer-events-none" />
+                <div className="relative z-10 space-y-2">
+                  <span className="text-xs font-black uppercase text-[#C0991B] tracking-widest block">Why Choose Nawiri?</span>
+                  <h3 className="text-2xl lg:text-3xl font-extrabold italic text-white">
+                    "{product.whyNawiri.tagline}"
+                  </h3>
+                  <p className="text-sm lg:text-base text-white/90 font-medium leading-relaxed max-w-2xl">
+                    {product.whyNawiri.description}
+                  </p>
+                </div>
+
+                <div className="pt-4 relative z-10">
+                  <Link 
+                    to="/registration" 
+                    className="inline-flex items-center gap-2 bg-[#C0991B] hover:bg-[#A38217] text-[#074504] font-black uppercase text-xs tracking-widest py-3.5 px-8 rounded-full transition-all hover:scale-105 shadow-md"
+                  >
+                    Apply For Nawiri Loan Now <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            )}
+
+          </div>
+        </section>
+      )}
 
       {/* CTA Section */}
       <section className="w-full py-20 bg-[#F4F7F6]">

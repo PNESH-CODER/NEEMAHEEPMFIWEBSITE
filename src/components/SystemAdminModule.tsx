@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { profilesStore, ExtendedUserProfile } from '../lib/profilesStore';
+import { fetchAuditLogsFromDB, logGlobalAudit, AuditLogEntry } from '../services/auditService';
 
 // ================= TYPES & INTERFACES =================
 export interface ActiveSession {
@@ -103,7 +104,7 @@ const INITIAL_SESSIONS: ActiveSession[] = [
     id: 'sess-1',
     userId: 'usr-1',
     username: 'admin_neema1',
-    role: 'Site Administrator',
+    role: 'Web Master',
     device: 'MacBook Pro 16"',
     browser: 'Chrome 126.0',
     os: 'macOS Sonoma',
@@ -119,7 +120,7 @@ const INITIAL_SESSIONS: ActiveSession[] = [
     id: 'sess-2',
     userId: 'usr-1',
     username: 'admin_neema1',
-    role: 'Site Administrator',
+    role: 'Web Master',
     device: 'iPhone 15 Pro',
     browser: 'Mobile Safari 17.4',
     os: 'iOS 17',
@@ -507,12 +508,31 @@ export default function SystemAdminModule({ className = '' }: { className?: stri
     onConfirm: () => {}
   });
 
-  // Subscribe to profilesStore live updates
+  // Subscribe to profilesStore live updates and DB audit logs
   useEffect(() => {
     const unsubscribe = profilesStore.subscribe((updatedProfiles) => {
       setProfiles(updatedProfiles);
     });
-    return unsubscribe;
+
+    const loadAuditLogs = async () => {
+      const logs = await fetchAuditLogsFromDB();
+      if (logs && logs.length > 0) {
+        setAuditLogs(logs as any);
+      }
+    };
+
+    loadAuditLogs();
+
+    const handleAuditUpdate = () => {
+      loadAuditLogs();
+    };
+
+    window.addEventListener('neema_audit_log_updated', handleAuditUpdate);
+
+    return () => {
+      unsubscribe();
+      window.removeEventListener('neema_audit_log_updated', handleAuditUpdate);
+    };
   }, []);
 
   // Security Policy Controls
@@ -546,20 +566,7 @@ export default function SystemAdminModule({ className = '' }: { className?: stri
   };
 
   const logAuditAction = (event: string, details: string, category: SystemAuditLog['category'] = 'System', status: SystemAuditLog['status'] = 'Success') => {
-    const newLog: SystemAuditLog = {
-      id: `audit-${Date.now()}`,
-      timestamp: new Date().toLocaleString(),
-      event,
-      actor: 'admin_neema1',
-      actorRole: 'Site Administrator',
-      category,
-      status,
-      ipAddress: '102.218.45.12',
-      location: 'Nairobi, KE',
-      details,
-      riskScore: status === 'Blocked' ? 80 : 10,
-    };
-    setAuditLogs(prev => [newLog, ...prev]);
+    logGlobalAudit(event, details, category, status, 'Patrick Munene', 'Superadmin');
   };
 
   // Handlers
@@ -959,11 +966,10 @@ export default function SystemAdminModule({ className = '' }: { className?: stri
               >
                 <option value="All">All Roles</option>
                 <option value="Super Admin">Super Admin</option>
-                <option value="Site Administrator">Site Administrator</option>
+                <option value="Web Master">Web Master</option>
                 <option value="Editor">Editor</option>
                 <option value="Author">Author</option>
                 <option value="Loan Officer">Loan Officer</option>
-                <option value="Webmaster">Webmaster</option>
                 <option value="Auditor">Auditor</option>
               </select>
 

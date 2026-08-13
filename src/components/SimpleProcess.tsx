@@ -13,7 +13,7 @@ export default function SimpleProcess({ className = '' }: { className?: string }
     { 
       num: '2', 
       title: 'Apply', 
-      desc: 'Submit your ID and MPESA statement online or at our nearest branch.',
+      desc: 'Submit your ID and MPESA statement online or at our nearest branch. Reach us through 0705 759 365.',
       badge: '📍 Easy and digital'
     },
     { 
@@ -27,7 +27,7 @@ export default function SimpleProcess({ className = '' }: { className?: string }
   return (
     <div className={`bg-white rounded-[2rem] border border-gray-100 p-6 lg:p-8 ${className}`}>
        <h3 className="text-xl font-bold text-[#074504] mb-1">Cash in Hand, Fast</h3>
-       <p className="text-sm font-medium text-gray-500 mb-6">No paperwork · No queues · No hidden fees</p>
+       <p className="text-sm font-medium text-gray-500 mb-6">No queues · No hidden fees</p>
        
        <div className="space-y-5">
          {steps.map((step, i) => (

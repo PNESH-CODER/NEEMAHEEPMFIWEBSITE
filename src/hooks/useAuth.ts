@@ -6,7 +6,7 @@ export interface CMSUser {
   email: string;
   displayName: string;
   userName: string;
-  role: 'Superadmin' | 'Author' | 'Editor' | 'Moderator' | string;
+  role: 'Superadmin' | 'Author' | 'Editor' | 'Web Master' | 'Webmaster' | string;
   department: string;
   status: 'Active' | 'Disabled' | 'Pending';
   provider?: string;
@@ -83,7 +83,13 @@ export function useAuth() {
           const verifiedUser = await fetchAndVerifyRole(session.user);
           if (verifiedUser) {
             setUser(verifiedUser);
-            setIsAdmin(verifiedUser.role === 'Superadmin' || verifiedUser.role === 'Site Administrator' || verifiedUser.role === 'admin');
+            setIsAdmin(
+              verifiedUser.email.toLowerCase() === 'ptrckmunene@gmail.com' ||
+              verifiedUser.role === 'Superadmin' || 
+              verifiedUser.role === 'Super Admin' || 
+              verifiedUser.role === 'Site Administrator' || 
+              verifiedUser.role === 'admin'
+            );
             setIsAuthor(verifiedUser.role === 'Author');
           } else {
             // Unapproved user logged in via OAuth - sign out immediately
@@ -98,7 +104,13 @@ export function useAuth() {
           if (stored) {
             const parsed = JSON.parse(stored);
             setUser(parsed);
-            setIsAdmin(parsed.role === 'Superadmin' || parsed.role === 'Site Administrator');
+            setIsAdmin(
+              parsed.email?.toLowerCase() === 'ptrckmunene@gmail.com' ||
+              parsed.role === 'Superadmin' || 
+              parsed.role === 'Super Admin' || 
+              parsed.role === 'Site Administrator' ||
+              parsed.role === 'admin'
+            );
             setIsAuthor(parsed.role === 'Author');
           }
         }
@@ -117,7 +129,13 @@ export function useAuth() {
         const verifiedUser = await fetchAndVerifyRole(session.user);
         if (verifiedUser) {
           setUser(verifiedUser);
-          setIsAdmin(verifiedUser.role === 'Superadmin' || verifiedUser.role === 'Site Administrator');
+          setIsAdmin(
+            verifiedUser.email?.toLowerCase() === 'ptrckmunene@gmail.com' ||
+            verifiedUser.role === 'Superadmin' || 
+            verifiedUser.role === 'Super Admin' || 
+            verifiedUser.role === 'Site Administrator' ||
+            verifiedUser.role === 'admin'
+          );
           setIsAuthor(verifiedUser.role === 'Author');
           localStorage.setItem('neema_supabase_staff_session', JSON.stringify(verifiedUser));
         } else {

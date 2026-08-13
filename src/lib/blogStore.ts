@@ -184,81 +184,29 @@ export interface BlogAuthor {
   socials?: any;
 }
 
-let storedPosts: BlogPostItem[] = BLOG_POSTS.map((post, i) => ({
-  ...post,
-  id: `post_${i}`,
-  status: 'Published',
-  likes: 18 + i * 3,
-  views: 120 + i * 45,
-  readTime: '4 min read',
-  tags: ['Microfinance', 'MountKenya', post.category],
-  authorRole: 'Contributor & Financial Expert',
-}));
+// Reset initial data to empty array - only database rows will be displayed
+let storedPosts: BlogPostItem[] = [];
 
 const mockAuthors: BlogAuthor[] = [
   {
     id: 'auth_pm',
     name: 'Patrick Munene',
-    role: 'Managing Director & Founder',
+    role: 'Superadmin & Managing Director',
+    email: 'ptrckmunene@gmail.com',
     avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=70&w=200&auto=format&fit=crop',
     bio: 'Pioneer in Kenyan microfinance and rural economic development, leading Neema Heep expansion since 2010.',
-  },
-  {
-    id: 'auth_jm',
-    name: 'Dr. Jane Muturi',
-    role: 'Head of Community Health & Welfare',
-    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=70&w=200&auto=format&fit=crop',
-    bio: 'Public health strategist overseeing WASH and medical micro-credit programs in Mount Kenya counties.',
-  },
-  {
-    id: 'auth_so',
-    name: 'Samuel Ochieng',
-    role: 'Senior Credit Risk Manager',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=70&w=200&auto=format&fit=crop',
-    bio: 'Expert in agricultural group-guaranteed lending and M-PESA automated risk analysis.',
-  },
+  }
 ];
 
-const mockComments: BlogComment[] = [
-  {
-    id: 'c1',
-    postSlug: 'ngo-to-mfi-journey',
-    name: 'Mary Wambui',
-    email: 'mary@example.com',
-    comment: 'Inspiring journey! The impact on our local women groups in Nyeri has been immense.',
-    authorName: 'Mary Wambui',
-    authorEmail: 'mary@example.com',
-    content: 'Inspiring journey! The impact on our local women groups in Nyeri has been immense.',
-    postTitle: 'From NGO to Microfinance',
-    date: 'February 21, 2026',
-    status: 'Approved',
-  },
-];
+const mockComments: BlogComment[] = [];
 
 let blacklistedEmails: string[] = [];
 let mockUsers = [
-  { id: 'u1', name: 'Patrick Munene', email: 'admin@neemaheep.com', role: 'Super Admin' },
-  { id: 'u2', name: 'Editorial Staff', email: 'editor@neemaheep.com', role: 'Editor' }
+  { id: 'u1', name: 'Patrick Munene', email: 'ptrckmunene@gmail.com', role: 'Superadmin' }
 ];
 
-let storedCategoriesList: BlogCategory[] = [
-  { id: 'cat_0', name: 'Financial Literacy', slug: 'financial-literacy', description: 'Financial literacy guides and microfinance tips', color: '#074504' },
-  { id: 'cat_1', name: 'Product Guide', slug: 'product-guide', description: 'Overview of Neema HEEP loan products and services', color: '#C0991B' },
-  { id: 'cat_2', name: 'Empowerment', slug: 'empowerment', description: 'Women and youth empowerment initiatives', color: '#053203' },
-  { id: 'cat_3', name: 'Community Health', slug: 'community-health', description: 'WASH and community healthcare programs', color: '#16a34a' },
-  { id: 'cat_4', name: 'Microfinance', slug: 'microfinance', description: 'Financial inclusion and rural development', color: '#074504' },
-  { id: 'cat_5', name: 'News', slug: 'news', description: 'Official press releases and announcements', color: '#d97706' },
-  { id: 'cat_6', name: 'Careers', slug: 'careers', description: 'Job openings and career growth at Neema HEEP', color: '#2563eb' }
-];
-
-let storedTagsList: BlogTag[] = [
-  { id: 'tag_0', name: 'MountKenya', slug: 'mountkenya' },
-  { id: 'tag_1', name: 'Empowerment', slug: 'empowerment' },
-  { id: 'tag_2', name: 'SME', slug: 'sme' },
-  { id: 'tag_3', name: 'WASH', slug: 'wash' },
-  { id: 'tag_4', name: 'Youth', slug: 'youth' },
-  { id: 'tag_5', name: 'FinancialLiteracy', slug: 'financialliteracy' }
-];
+let storedCategoriesList: BlogCategory[] = [];
+let storedTagsList: BlogTag[] = [];
 
 let storedMedia: any[] = [];
 let storedBeneficiaries: any[] = [];

@@ -2093,7 +2093,7 @@ export default function UserProfileManager() {
                       <option value="Author">Author</option>
                       <option value="Editor">Editor</option>
                       <option value="Loan Officer">Loan Officer</option>
-                      <option value="Site Administrator">Site Administrator</option>
+                      <option value="Web Master">Web Master</option>
                       <option value="Super Admin">Super Admin</option>
                     </select>
                   </div>

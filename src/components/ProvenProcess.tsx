@@ -13,7 +13,7 @@ export default function ProvenProcess() {
     {
       icon: CheckCircle2,
       title: "2. Apply",
-      description: "Submit your ID and MPESA statement online or at our nearest branch (Easy and digital)",
+      description: "Submit your ID and MPESA statement online or at our nearest branch. Reach us through 0705 759 365 (Easy and digital)",
       color: "text-[#F4A300]",
       bg: "bg-[#F4A300]/10"
     },

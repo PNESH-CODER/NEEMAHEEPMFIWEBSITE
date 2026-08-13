@@ -56,10 +56,30 @@ export default function AdminDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   // User Role & Super Admin check
-  const userRole = user?.role || 'Super Admin';
-  const isSuperAdmin = userRole === 'Super Admin' || userRole === 'admin' || userRole === 'superadmin' || !user?.role;
-  const isModeratorOrAdmin = isSuperAdmin || userRole === 'Moderator' || userRole === 'Editor';
-  const canUserCreateArticles = isSuperAdmin || userRole === 'Editor' || (user as any)?.canCreateArticles !== false;
+  const userRole = user?.role || 'Superadmin';
+  const isSuperAdmin = 
+    user?.email?.toLowerCase() === 'ptrckmunene@gmail.com' ||
+    userRole === 'Superadmin' || 
+    userRole === 'Super Admin' || 
+    userRole === 'admin' || 
+    userRole === 'superadmin' || 
+    !user?.role;
+  const isWebMaster = 
+    !isSuperAdmin && (
+      userRole === 'Web Master' || 
+      userRole === 'Webmaster' || 
+      userRole === 'webmaster' || 
+      userRole === 'Site Administrator'
+    );
+  const isEditor = userRole === 'Editor';
+  const isAuthor = userRole === 'Author';
+  const canUserCreateArticles = isSuperAdmin || isEditor || (user as any)?.canCreateArticles !== false;
+
+  useEffect(() => {
+    if (isWebMaster && !['beneficiaries', 'vacancies', 'comments', 'messages', 'authors', 'password_manager'].includes(activeNav)) {
+      setActiveNav('beneficiaries');
+    }
+  }, [isWebMaster, activeNav]);
 
   // Handle Logout
   const handleLogout = async () => {
@@ -1039,7 +1059,13 @@ export default function AdminDashboard() {
             </div>
             <div className="space-y-1 mt-1">
               <button
-                onClick={() => setActiveNav('dashboard')}
+                onClick={() => {
+                  if (isWebMaster) {
+                    showToast('Access Restricted: Web Master role is limited to Webmaster sub-modules (Beneficiaries, Vacancies, Comments, Inquiries) plus Profiles and Passwords.');
+                  } else {
+                    setActiveNav('dashboard');
+                  }
+                }}
                 className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                   activeNav === 'dashboard' ? 'bg-white/10 text-white shadow-md border-l-4 border-[#C0991B]' : 'text-white/80 hover:bg-white/10 hover:text-white'
                 }`}
@@ -1049,7 +1075,13 @@ export default function AdminDashboard() {
               </button>
 
               <button
-                onClick={() => setActiveNav('analytics')}
+                onClick={() => {
+                  if (isWebMaster) {
+                    showToast('Access Restricted: Web Master role is limited to Webmaster sub-modules (Beneficiaries, Vacancies, Comments, Inquiries) plus Profiles and Passwords.');
+                  } else {
+                    setActiveNav('analytics');
+                  }
+                }}
                 className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                   activeNav === 'analytics' ? 'bg-white/10 text-white shadow-md border-l-4 border-[#C0991B]' : 'text-white/80 hover:bg-white/10 hover:text-white'
                 }`}
@@ -1059,7 +1091,13 @@ export default function AdminDashboard() {
               </button>
 
               <button
-                onClick={() => setActiveNav('posts')}
+                onClick={() => {
+                  if (isWebMaster) {
+                    showToast('Access Restricted: Web Master role is limited to Webmaster sub-modules (Beneficiaries, Vacancies, Comments, Inquiries) plus Profiles and Passwords.');
+                  } else {
+                    setActiveNav('posts');
+                  }
+                }}
                 className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                   activeNav === 'posts' ? 'bg-white/10 text-white shadow-md border-l-4 border-[#C0991B]' : 'text-white/80 hover:bg-white/10 hover:text-white'
                 }`}
@@ -1069,7 +1107,13 @@ export default function AdminDashboard() {
               </button>
 
               <button
-                onClick={() => setActiveNav('media')}
+                onClick={() => {
+                  if (isWebMaster) {
+                    showToast('Access Restricted: Web Master role is limited to Webmaster sub-modules (Beneficiaries, Vacancies, Comments, Inquiries) plus Profiles and Passwords.');
+                  } else {
+                    setActiveNav('media');
+                  }
+                }}
                 className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                   activeNav === 'media' ? 'bg-white/10 text-white shadow-md border-l-4 border-[#C0991B]' : 'text-white/80 hover:bg-white/10 hover:text-white'
                 }`}
@@ -1079,7 +1123,13 @@ export default function AdminDashboard() {
               </button>
 
               <button
-                onClick={() => setActiveNav('categories_tags')}
+                onClick={() => {
+                  if (isWebMaster) {
+                    showToast('Access Restricted: Web Master role is limited to Webmaster sub-modules (Beneficiaries, Vacancies, Comments, Inquiries) plus Profiles and Passwords.');
+                  } else {
+                    setActiveNav('categories_tags');
+                  }
+                }}
                 className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                   activeNav === 'categories_tags' ? 'bg-white/10 text-white shadow-md border-l-4 border-[#C0991B]' : 'text-white/80 hover:bg-white/10 hover:text-white'
                 }`}
@@ -1152,11 +1202,7 @@ export default function AdminDashboard() {
 
               <button
                 onClick={() => {
-                  if (isModeratorOrAdmin) {
-                    setActiveNav('comments');
-                  } else {
-                    showToast('Access Restricted: Moderator, Editor or Super Admin privilege required for Comments Manager.');
-                  }
+                  setActiveNav('comments');
                 }}
                 className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                   activeNav === 'comments' ? 'bg-white/10 text-white shadow-md border-l-4 border-[#C0991B]' : 'text-white/80 hover:bg-white/10 hover:text-white'
@@ -1253,7 +1299,13 @@ export default function AdminDashboard() {
               </button>
 
               <button
-                onClick={() => setActiveNav('social_media')}
+                onClick={() => {
+                  if (isWebMaster) {
+                    showToast('Access Restricted: Web Master role is limited to Webmaster sub-modules (Beneficiaries, Vacancies, Comments, Inquiries) plus Profiles and Passwords.');
+                  } else {
+                    setActiveNav('social_media');
+                  }
+                }}
                 className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                   activeNav === 'social_media' ? 'bg-white/10 text-white shadow-md border-l-4 border-[#C0991B]' : 'text-white/80 hover:bg-white/10 hover:text-white'
                 }`}
@@ -1263,7 +1315,13 @@ export default function AdminDashboard() {
               </button>
 
               <button
-                onClick={() => setActiveNav('tracking_manager')}
+                onClick={() => {
+                  if (isWebMaster) {
+                    showToast('Access Restricted: Web Master role is limited to Webmaster sub-modules (Beneficiaries, Vacancies, Comments, Inquiries) plus Profiles and Passwords.');
+                  } else {
+                    setActiveNav('tracking_manager');
+                  }
+                }}
                 className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                   activeNav === 'tracking_manager' ? 'bg-white/10 text-white shadow-md border-l-4 border-[#C0991B]' : 'text-white/80 hover:bg-white/10 hover:text-white'
                 }`}
