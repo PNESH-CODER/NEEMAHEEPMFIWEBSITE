@@ -457,7 +457,7 @@ export default function Programs() {
                     to={program.associatedLoan}
                     className="flex items-center justify-between text-xs font-bold text-[#C0991B] hover:text-[#074504] transition-colors w-full pt-1"
                   >
-                    <span>Associated Product: {program.associatedLoanName}</span>
+                    <span>{program.associatedLoanName}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
