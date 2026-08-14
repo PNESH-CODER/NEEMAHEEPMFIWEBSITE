@@ -281,7 +281,6 @@ export default function LoanProductsIndex() {
                       className="w-full flex items-center justify-between gap-2 py-2.5 px-4 mb-3 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 text-[#074504] font-black text-xs uppercase tracking-tight transition-all group/prog"
                     >
                       <span className="flex items-center gap-2 truncate">
-                        <Sparkles className="w-4 h-4 text-[#C0991B] shrink-0" />
                         <span className="truncate">{loan.associatedProgram.name}</span>
                       </span>
                       <ArrowRight className="w-3.5 h-3.5 text-[#599200] group-hover/prog:translate-x-1 transition-transform shrink-0" />

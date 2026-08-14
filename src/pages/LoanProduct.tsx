@@ -103,7 +103,7 @@ export default function LoanProduct() {
               <div className="bg-gradient-to-r from-emerald-50 to-amber-50 rounded-2xl p-5 mb-8 border border-emerald-200/80 shadow-xs relative overflow-hidden group">
                 <div className="flex items-start justify-between gap-3 mb-2">
                   <div className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-[#074504] bg-white/80 px-2.5 py-1 rounded-full border border-emerald-300">
-                    <Sparkles className="w-3.5 h-3.5 text-[#C0991B]" /> Associated Flagship Programme
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#C0991B]" /> Associated Flagship Programme
                   </div>
                 </div>
                 <h4 className="font-extrabold text-[#074504] text-base mb-1">{product.associatedProgram.name}</h4>

@@ -343,23 +343,45 @@ export default function ContactUs() {
           </div>
 
           {/* Bottom Banner */}
-          <div className="mt-16 bg-[#074504] rounded-[3rem] p-12 lg:p-16 text-center relative overflow-hidden">
-             <div className="relative z-10">
-               <h3 className="text-3xl lg:text-4xl font-extrabold text-white mb-4">Can't visit in person?</h3>
-               <p className="text-white/80 max-w-lg mx-auto mb-8 font-medium">
-                 Call us or WhatsApp: our loan officers handle the process directly or via M-PESA.
+          <div className="mt-16 bg-[#074504] rounded-[3rem] p-10 lg:p-16 text-center relative overflow-hidden border-2 border-[#C0991B]/30 shadow-2xl">
+             {/* Background decorative glows in brand green & gold */}
+             <div className="absolute top-0 right-0 w-80 h-80 bg-[#599200] rounded-full blur-[100px] opacity-25 pointer-events-none" />
+             <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#C0991B] rounded-full blur-[100px] opacity-20 pointer-events-none" />
+
+             <div className="relative z-10 max-w-3xl mx-auto">
+               <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full border border-[#C0991B]/40 mb-6">
+                 <Zap className="w-3.5 h-3.5 text-[#C0991B]" />
+                 <span className="text-[11px] font-black uppercase tracking-[0.2em] text-[#C0991B]">Remote Services & M-PESA Support</span>
+               </div>
+
+               <h3 className="text-3xl lg:text-5xl font-black text-white mb-6 uppercase tracking-tight leading-tight">
+                 CAN'T VISIT <span className="text-[#C0991B]">IN PERSON?</span>
+               </h3>
+
+               <p className="text-white/90 max-w-xl mx-auto mb-10 font-medium text-base leading-relaxed">
+                 You don't need to travel to our physical branches! Our loan officers can manage your inquiry, application, and loan processing directly over the phone or via M-PESA.
                </p>
-               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                 <button className="bg-[#25D366] hover:bg-[#20bd5a] text-white px-8 py-4 rounded-xl font-bold transition-colors w-full sm:w-auto text-sm shadow-[0_4px_14px_rgba(37,211,102,0.3)] gap-2 flex items-center justify-center">
-                   <WhatsAppIcon className="w-5 h-5" /> WhatsApp Us Now
-                 </button>
-                 <button className="border-2 border-white/20 hover:border-white text-white px-8 py-4 rounded-full font-bold transition-colors w-full sm:w-auto text-sm flex items-center justify-center gap-2">
-                   <Phone className="w-4 h-4" /> Call Us
-                 </button>
+
+               <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
+                 <a 
+                   href="https://wa.me/254705759365" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   className="bg-[#25D366] hover:bg-[#20bd5a] text-white px-8 py-4 rounded-full font-black text-xs uppercase tracking-widest transition-all w-full sm:w-auto shadow-[0_6px_20px_rgba(37,211,102,0.4)] hover:scale-105 flex items-center justify-center gap-2.5"
+                 >
+                   <WhatsAppIcon className="w-5 h-5" /> 
+                   <span>WhatsApp Us Now</span>
+                 </a>
+
+                 <a 
+                   href="tel:+254705759365" 
+                   className="bg-[#C0991B] hover:bg-[#a38217] text-[#074504] px-8 py-4 rounded-full font-black text-xs uppercase tracking-widest transition-all w-full sm:w-auto shadow-lg hover:scale-105 flex items-center justify-center gap-2.5"
+                 >
+                   <Phone className="w-4 h-4 text-[#074504]" /> 
+                   <span>Call Officer Direct</span>
+                 </a>
                </div>
              </div>
-             <div className="absolute top-0 right-0 w-64 h-64 bg-[#599200] rounded-full blur-[100px] opacity-10 pointer-events-none" />
-             <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#599200] rounded-full blur-[100px] opacity-10 pointer-events-none" />
           </div>
         </div>
       </section>
