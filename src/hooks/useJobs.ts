@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { jobService } from '../services/jobService';
+import { blogStore } from '../lib/blogStore';
 
 export interface Vacancy {
   id: string;
@@ -184,8 +186,46 @@ export function useJobs() {
     return INITIAL_APPLICATIONS;
   });
 
+  // Synchronize with Supabase database on mount and listen to realtime updates
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadFromSupabase() {
+      try {
+        const dbJobs = await jobService.getJobs();
+        if (isMounted && dbJobs.length > 0) {
+          const todayStr = new Date().toISOString().split('T')[0];
+          const autoArchived = dbJobs.map(v => {
+            if (v.deadline && v.deadline < todayStr && v.status === 'Published') {
+              return { ...v, status: 'Archived' as const };
+            }
+            return v;
+          });
+          setVacancies(autoArchived);
+          localStorage.setItem('neema_vacancies_data', JSON.stringify(autoArchived));
+          blogStore.saveVacancies(autoArchived);
+        }
+      } catch (err) {
+        console.warn('[useJobs] Error syncing with Supabase:', err);
+      }
+    }
+
+    loadFromSupabase();
+
+    // Subscribe to Supabase Realtime table changes
+    const unsubscribeRealtime = jobService.subscribeToJobs(() => {
+      loadFromSupabase();
+    });
+
+    return () => {
+      isMounted = false;
+      if (unsubscribeRealtime) unsubscribeRealtime();
+    };
+  }, []);
+
   useEffect(() => {
     localStorage.setItem('neema_vacancies_data', JSON.stringify(vacancies));
+    blogStore.saveVacancies(vacancies);
   }, [vacancies]);
 
   useEffect(() => {
@@ -223,14 +263,17 @@ export function useJobs() {
 
     window.addEventListener('storage', handleStorageChange);
     window.addEventListener('neema_vacancies_updated', handleStorageChange);
+    window.addEventListener('neema_cms_vacancies_updated', handleStorageChange);
     return () => {
       window.removeEventListener('storage', handleStorageChange);
       window.removeEventListener('neema_vacancies_updated', handleStorageChange);
+      window.removeEventListener('neema_cms_vacancies_updated', handleStorageChange);
     };
   }, []);
 
   const notifyVacanciesUpdated = () => {
-    window.dispatchEvent(new Event('neema_vacancies_updated'));
+    window.dispatchEvent(new CustomEvent('neema_vacancies_updated'));
+    window.dispatchEvent(new CustomEvent('neema_cms_vacancies_updated'));
   };
 
   // Actions
@@ -243,18 +286,40 @@ export function useJobs() {
       createdAt: new Date().toISOString().split('T')[0],
       updatedAt: new Date().toISOString().split('T')[0]
     };
-    setVacancies(prev => [created, ...prev]);
+    setVacancies(prev => {
+      const updated = [created, ...prev];
+      localStorage.setItem('neema_vacancies_data', JSON.stringify(updated));
+      blogStore.saveVacancies(updated);
+      return updated;
+    });
+    // Sync to Supabase
+    jobService.saveJob(created).catch(e => console.warn(e));
     setTimeout(notifyVacanciesUpdated, 50);
     return created;
   };
 
   const updateVacancy = (id: string, updates: Partial<Vacancy>) => {
-    setVacancies(prev => prev.map(v => v.id === id ? { ...v, ...updates, updatedAt: new Date().toISOString().split('T')[0] } : v));
+    setVacancies(prev => {
+      const updated = prev.map(v => v.id === id ? { ...v, ...updates, updatedAt: new Date().toISOString().split('T')[0] } : v);
+      localStorage.setItem('neema_vacancies_data', JSON.stringify(updated));
+      blogStore.saveVacancies(updated);
+      const target = updated.find(v => v.id === id);
+      if (target) {
+        jobService.saveJob(target).catch(e => console.warn(e));
+      }
+      return updated;
+    });
     setTimeout(notifyVacanciesUpdated, 50);
   };
 
   const deleteVacancy = (id: string) => {
-    setVacancies(prev => prev.filter(v => v.id !== id));
+    setVacancies(prev => {
+      const updated = prev.filter(v => v.id !== id);
+      localStorage.setItem('neema_vacancies_data', JSON.stringify(updated));
+      blogStore.saveVacancies(updated);
+      return updated;
+    });
+    jobService.deleteJob(id).catch(e => console.warn(e));
     setTimeout(notifyVacanciesUpdated, 50);
   };
 

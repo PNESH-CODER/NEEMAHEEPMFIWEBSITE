@@ -169,7 +169,7 @@ export default function Home() {
           <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
-                { num: 10000, suffix: "+", label: "SMEs FUNDED", icon: Building2, color: "#C0991B" },
+                { num: 1000, suffix: "+", label: "SMEs FUNDED", icon: Building2, color: "#C0991B" },
                 { num: 56, suffix: "%", label: "RURAL OUTREACH", icon: TrendingUp, color: "#C0991B" },
                 { num: 6, suffix: "hrs", label: "AVERAGE RESPONSE", iconImage: "/average_response_gold.png", icon: Zap, color: "#C0991B" },
                 { num: 7, suffix: "", label: "COUNTIES SERVED", icon: MapPin, color: "#C0991B" }
@@ -295,8 +295,8 @@ export default function Home() {
             {/* Animated Impact Metrics Below Start Your Journey Today */}
             <div className="pt-10 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
               {[
-                { label: "Active Members", val: 45000, suffix: "+", color: "#C0991B" },
-                { label: "Disbursed Capital", val: 1.2, suffix: "B+", prefix: "KES ", isDecimal: true, color: "#599200" },
+                { label: "SMEs Funded", val: 1000, suffix: "+", color: "#C0991B" },
+                { label: "Years of Impact", val: 15, suffix: "+", color: "#599200" },
                 { label: "Counties Served", val: 7, suffix: "", color: "#C0991B" },
                 { label: "Satisfaction Rate", val: 98.4, suffix: "%", isDecimal: true, color: "#599200" }
               ].map((m, idx) => (
@@ -311,7 +311,7 @@ export default function Home() {
                 >
                   <div className="absolute top-0 right-0 w-20 h-20 bg-[#C0991B]/10 rounded-full blur-xl group-hover:scale-150 transition-transform" />
                   <p className="text-2xl lg:text-3xl font-black text-white mb-1 tracking-tight">
-                    {m.prefix || ""}
+                    {('prefix' in m ? (m as { prefix?: string }).prefix : "")}
                     {m.isDecimal ? (
                       <CountUp end={m.val} decimals={1} duration={2.5} />
                     ) : (

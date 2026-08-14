@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { ArrowUpRight, MapPin, Briefcase, Linkedin, Github, Instagram, Heart, Sun, TrendingUp, Clock, FileText, CheckCircle2, ChevronDown, ChevronUp, Facebook, Youtube } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ArrowUpRight, MapPin, Briefcase, Linkedin, Github, Instagram, Heart, Sun, TrendingUp, Clock, FileText, CheckCircle2, ChevronDown, ChevronUp, Facebook, Youtube, Search, Bookmark, BookmarkCheck } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import SmartLeadForm from '../components/SmartLeadForm';
@@ -27,13 +27,57 @@ const FAQS = [
 
 export default function Careers() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedDepartment, setSelectedDepartment] = useState('All');
+  const [viewMode, setViewMode] = useState<'all' | 'saved'>('all');
+  const [savedJobIds, setSavedJobIds] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem('neema_candidate_saved_jobs');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
   const { vacancies } = useJobs();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    try {
+      localStorage.setItem('neema_candidate_saved_jobs', JSON.stringify(savedJobIds));
+    } catch (e) {
+      console.error(e);
+    }
+  }, [savedJobIds]);
+
+  const toggleSaveJob = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setSavedJobIds(prev => 
+      prev.includes(id) ? prev.filter(jobId => jobId !== id) : [...prev, id]
+    );
+  };
+
   const todayStr = new Date().toISOString().split('T')[0];
   const activeVacancies = vacancies.filter(v => {
-    if (v.status === 'Archived' || v.status === 'Closed' || v.status === 'Draft') return false;
+    if (v.status !== 'Published' && (v.status as string) !== 'Open') return false;
     if (v.deadline && v.deadline < todayStr) return false;
+    return true;
+  });
+
+  const departments = ['All', ...Array.from(new Set(activeVacancies.map(v => v.department).filter(Boolean)))];
+
+  const filteredVacancies = activeVacancies.filter(job => {
+    if (viewMode === 'saved' && !savedJobIds.includes(job.id)) return false;
+    if (selectedDepartment !== 'All' && job.department !== selectedDepartment) return false;
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      const matchTitle = job.title.toLowerCase().includes(q);
+      const matchDept = job.department?.toLowerCase().includes(q);
+      const matchLoc = job.location?.toLowerCase().includes(q);
+      const matchRef = job.refNumber?.toLowerCase().includes(q);
+      const matchSummary = job.summary?.toLowerCase().includes(q);
+      if (!matchTitle && !matchDept && !matchLoc && !matchRef && !matchSummary) return false;
+    }
     return true;
   });
 
@@ -186,7 +230,7 @@ export default function Careers() {
 
       {/* Open Positions (Direct Job Portal) */}
       <section className="max-w-7xl mx-auto px-6 lg:px-12 py-24">
-        <div className="flex flex-col md:flex-row items-baseline justify-between mb-12 gap-6">
+        <div className="flex flex-col md:flex-row items-baseline justify-between mb-8 gap-6">
           <div>
             <div className="inline-flex items-center gap-3 justify-start mb-4">
               <span className="w-8 h-1 bg-[#599200] rounded-full"></span>
@@ -197,71 +241,160 @@ export default function Careers() {
               CURRENTLY <span className="text-[#C0991B]">OPEN POSITIONS</span>
             </h2>
           </div>
+
+          {/* View Toggle Tabs: Listed Posts vs Saved Posts */}
+          <div className="flex items-center bg-gray-100 p-1.5 rounded-2xl border border-gray-200">
+            <button
+              onClick={() => setViewMode('all')}
+              className={`px-5 py-2.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer ${
+                viewMode === 'all'
+                  ? 'bg-[#074504] text-[#C0991B] shadow-md'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              <Briefcase className="w-4 h-4" />
+              <span>All Listed Jobs ({activeVacancies.length})</span>
+            </button>
+            <button
+              onClick={() => setViewMode('saved')}
+              className={`px-5 py-2.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer ${
+                viewMode === 'saved'
+                  ? 'bg-[#074504] text-[#C0991B] shadow-md'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              <Bookmark className="w-4 h-4" />
+              <span>Saved Jobs ({savedJobIds.length})</span>
+            </button>
+          </div>
         </div>
 
-        {activeVacancies.length === 0 ? (
+        {/* Filter and Search Bar */}
+        {activeVacancies.length > 0 && (
+          <div className="bg-white p-4 md:p-6 rounded-3xl border border-gray-200 shadow-sm mb-10 flex flex-col md:flex-row gap-4 items-center">
+            <div className="relative flex-1 w-full">
+              <Search className="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search jobs by title, department, location, or ref number..."
+                className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl text-sm font-medium focus:outline-none focus:border-[#074504] focus:bg-white transition-all"
+              />
+            </div>
+            
+            {departments.length > 1 && (
+              <div className="w-full md:w-64">
+                <select
+                  value={selectedDepartment}
+                  onChange={(e) => setSelectedDepartment(e.target.value)}
+                  className="w-full py-3 px-4 bg-gray-50 border border-gray-200 rounded-2xl text-sm font-bold text-gray-700 focus:outline-none focus:border-[#074504] focus:bg-white transition-all cursor-pointer"
+                >
+                  {departments.map(dept => (
+                    <option key={dept} value={dept}>Department: {dept}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+          </div>
+        )}
+
+        {filteredVacancies.length === 0 ? (
           <div className="bg-white border border-gray-200 rounded-[2.5rem] p-10 md:p-16 text-center max-w-3xl mx-auto shadow-sm">
             <div className="w-16 h-16 mx-auto rounded-full bg-[#074504]/10 text-[#074504] flex items-center justify-center mb-6">
-              <Briefcase className="w-8 h-8 text-[#074504]" />
+              {viewMode === 'saved' ? <Bookmark className="w-8 h-8 text-[#074504]" /> : <Briefcase className="w-8 h-8 text-[#074504]" />}
             </div>
-            <h3 className="text-2xl font-black text-[#074504] mb-3 uppercase tracking-tight">No Vacancies Currently Posted</h3>
+            <h3 className="text-2xl font-black text-[#074504] mb-3 uppercase tracking-tight">
+              {viewMode === 'saved' 
+                ? 'No Saved Job Posts Yet' 
+                : (searchQuery || selectedDepartment !== 'All') 
+                  ? 'No Matching Jobs Found' 
+                  : 'No Vacancies Currently Posted'}
+            </h3>
             <p className="text-gray-600 font-medium leading-relaxed max-w-xl mx-auto mb-8 text-sm md:text-base">
-              There are currently no active job openings or vacancies available at NEEMA HEEP. We invite you to register with our Talent Network below to be automatically notified as soon as new positions open up!
+              {viewMode === 'saved'
+                ? 'You haven\'t saved or bookmarked any job listings yet. Click the bookmark icon on any active position to save it for later review.'
+                : (searchQuery || selectedDepartment !== 'All')
+                  ? 'Try broadening your search keywords or choosing a different department filter.'
+                  : 'There are currently no active job openings or vacancies available at NEEMA HEEP. We invite you to register with our Talent Network below to be automatically notified as soon as new positions open up!'}
             </p>
-            <a href="#talent-network" className="inline-flex items-center gap-2 bg-[#074504] hover:bg-[#599200] text-white font-bold py-3.5 px-8 rounded-xl transition-all shadow-md text-xs uppercase tracking-widest">
-              Join Talent Network Below
-            </a>
+            {viewMode === 'saved' ? (
+              <button onClick={() => setViewMode('all')} className="inline-flex items-center gap-2 bg-[#074504] hover:bg-[#599200] text-white font-bold py-3.5 px-8 rounded-xl transition-all shadow-md text-xs uppercase tracking-widest cursor-pointer">
+                View All Listed Jobs
+              </button>
+            ) : (
+              <a href="#talent-network" className="inline-flex items-center gap-2 bg-[#074504] hover:bg-[#599200] text-white font-bold py-3.5 px-8 rounded-xl transition-all shadow-md text-xs uppercase tracking-widest">
+                Join Talent Network Below
+              </a>
+            )}
           </div>
         ) : (
           <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-            {activeVacancies.map((job) => (
-              <div key={job.id} className="bg-white border border-gray-100 p-8 lg:p-10 rounded-[2.5rem] hover:shadow-[0_15px_40px_rgb(0,0,0,0.08)] transition-all duration-300 group flex flex-col justify-between border-t-4 border-t-[#074504]">
-                <div>
-                  <div className="flex items-start justify-between gap-4 mb-3">
-                    <div>
-                      <span className="px-3 py-1 bg-amber-50 text-[#826507] text-[10px] font-mono font-black rounded-full border border-[#C0991B]/30 uppercase block w-fit mb-2">
-                        {job.refNumber}
-                      </span>
-                      <h3 className="text-2xl font-bold text-gray-900 group-hover:text-[#074504] transition-colors">{job.title}</h3>
+            {filteredVacancies.map((job) => {
+              const isSaved = savedJobIds.includes(job.id);
+              return (
+                <div key={job.id} className="bg-white border border-gray-100 p-8 lg:p-10 rounded-[2.5rem] hover:shadow-[0_15px_40px_rgb(0,0,0,0.08)] transition-all duration-300 group flex flex-col justify-between border-t-4 border-t-[#074504] relative">
+                  <div>
+                    <div className="flex items-start justify-between gap-4 mb-3">
+                      <div>
+                        <span className="px-3 py-1 bg-amber-50 text-[#826507] text-[10px] font-mono font-black rounded-full border border-[#C0991B]/30 uppercase block w-fit mb-2">
+                          {job.refNumber}
+                        </span>
+                        <h3 className="text-2xl font-bold text-gray-900 group-hover:text-[#074504] transition-colors">{job.title}</h3>
+                      </div>
+                      
+                      <div className="flex items-center gap-2 shrink-0">
+                        {job.isUrgent && (
+                          <span className="px-2.5 py-1 bg-red-100 text-red-800 text-[10px] font-black rounded-full uppercase">
+                            Urgent Slot
+                          </span>
+                        )}
+                        <button
+                          onClick={(e) => toggleSaveJob(job.id, e)}
+                          title={isSaved ? "Remove from saved jobs" : "Save job post"}
+                          className={`p-2.5 rounded-full transition-all border cursor-pointer ${
+                            isSaved 
+                              ? 'bg-amber-100 border-[#C0991B] text-[#074504]' 
+                              : 'bg-gray-50 border-gray-200 text-gray-400 hover:text-[#074504] hover:bg-gray-100'
+                          }`}
+                        >
+                          {isSaved ? <BookmarkCheck className="w-5 h-5 fill-[#C0991B]" /> : <Bookmark className="w-5 h-5" />}
+                        </button>
+                      </div>
                     </div>
-                    {job.isUrgent && (
-                      <span className="px-2.5 py-1 bg-red-100 text-red-800 text-[10px] font-black rounded-full uppercase shrink-0">
-                        Urgent Slot
-                      </span>
-                    )}
+                    <p className="text-xs font-bold text-[#C0991B] uppercase tracking-wider mb-4">
+                      {job.employmentType} ({job.workArrangement}) • {job.department}
+                    </p>
+                    <p className="text-gray-600 mb-8 leading-relaxed text-sm font-medium">
+                      {job.summary}
+                    </p>
                   </div>
-                  <p className="text-xs font-bold text-[#C0991B] uppercase tracking-wider mb-4">
-                    {job.employmentType} ({job.workArrangement}) • {job.department}
-                  </p>
-                  <p className="text-gray-600 mb-8 leading-relaxed text-sm font-medium">
-                    {job.summary}
-                  </p>
-                </div>
 
-                <div className="space-y-4 pt-4 border-t border-gray-100 mt-auto">
-                  <div className="grid grid-cols-2 gap-3 text-xs font-bold text-gray-700">
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-[#C0991B]" />
-                      <span>{job.location}</span>
+                  <div className="space-y-4 pt-4 border-t border-gray-100 mt-auto">
+                    <div className="grid grid-cols-2 gap-3 text-xs font-bold text-gray-700">
+                      <div className="flex items-center gap-2">
+                        <MapPin className="w-4 h-4 text-[#C0991B]" />
+                        <span>{job.location}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-4 h-4 text-[#C0991B]" />
+                        <span>Deadline: {job.deadline}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-[#C0991B]" />
-                      <span>Deadline: {job.deadline}</span>
-                    </div>
-                  </div>
 
-                  <div className="flex items-center gap-3 pt-2">
-                    <button 
-                      onClick={() => navigate(`/job-application?vacancyId=${job.id}`)} 
-                      className="flex-1 bg-[#074504] hover:bg-[#053203] text-[#C0991B] px-6 py-3.5 rounded-xl font-black text-xs uppercase tracking-wider transition-all shadow-md text-center cursor-pointer flex items-center justify-center gap-2"
-                    >
-                      <span>Apply Online</span>
-                      <ArrowUpRight className="w-4 h-4 text-[#C0991B]" />
-                    </button>
+                    <div className="flex items-center gap-3 pt-2">
+                      <button 
+                        onClick={() => navigate(`/job-application?vacancyId=${job.id}`)} 
+                        className="flex-1 bg-[#074504] hover:bg-[#053203] text-[#C0991B] px-6 py-3.5 rounded-xl font-black text-xs uppercase tracking-wider transition-all shadow-md text-center cursor-pointer flex items-center justify-center gap-2"
+                      >
+                        <span>Apply Online</span>
+                        <ArrowUpRight className="w-4 h-4 text-[#C0991B]" />
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </section>

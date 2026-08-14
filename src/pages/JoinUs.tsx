@@ -317,18 +317,6 @@ export default function JoinUs() {
             </div>
 
             <div className="flex flex-col gap-4">
-              <div className="bg-[#074504] rounded-[2rem] p-8 border border-[#599200] flex gap-6 items-start text-white shadow-xl">
-                <div>
-                  <p className="text-[10px] font-black text-[#C0991B] uppercase tracking-[0.2em] mb-2">Amount Payable for Registration</p>
-                  <p className="text-xl md:text-2xl font-black leading-tight mb-2 text-white">
-                    Transparent & affordable registration fee structures communicated upon consultation
-                  </p>
-                  <p className="text-sm text-white/90 font-medium leading-relaxed">
-                    Please speak with our customer care representative or branch officers for specific details on registration structures.
-                  </p>
-                </div>
-              </div>
-
               <div className="bg-amber-50 rounded-[2rem] p-8 border border-amber-100 flex gap-6 items-start">
                 <AlertTriangle className="w-6 h-6 text-amber-600 shrink-0" />
                 <div>

@@ -321,6 +321,16 @@ export const blogStore = {
   },
 
   getVacancies() {
+    if ((!storedVacancies || storedVacancies.length === 0) && typeof window !== 'undefined') {
+      const saved = localStorage.getItem('neema_vacancies_data');
+      if (saved) {
+        try {
+          storedVacancies = JSON.parse(saved);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }
     return storedVacancies;
   },
 
@@ -379,6 +389,15 @@ export const blogStore = {
 
   saveVacancies(v: any[]) {
     storedVacancies = v;
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem('neema_vacancies_data', JSON.stringify(v));
+      } catch (e) {
+        console.error(e);
+      }
+      window.dispatchEvent(new CustomEvent('neema_cms_vacancies_updated'));
+      window.dispatchEvent(new CustomEvent('neema_vacancies_updated'));
+    }
   },
 
   addComment(comment: any) {
