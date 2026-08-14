@@ -93,9 +93,27 @@ export default function LoanProduct() {
             </p>
 
             {product.targetMarket && (
-              <div className="bg-[#074504]/5 rounded-2xl p-5 mb-8 border border-[#074504]/10">
+              <div className="bg-[#074504]/5 rounded-2xl p-5 mb-6 border border-[#074504]/10">
                 <p className="font-bold text-[#074504] mb-2 text-xs uppercase tracking-wider">Target Market</p>
                 <p className="text-sm text-gray-700 font-medium leading-relaxed">{product.targetMarket}</p>
+              </div>
+            )}
+
+            {product.associatedProgram && (
+              <div className="bg-gradient-to-r from-emerald-50 to-amber-50 rounded-2xl p-5 mb-8 border border-emerald-200/80 shadow-xs relative overflow-hidden group">
+                <div className="flex items-start justify-between gap-3 mb-2">
+                  <div className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-[#074504] bg-white/80 px-2.5 py-1 rounded-full border border-emerald-300">
+                    <Sparkles className="w-3.5 h-3.5 text-[#C0991B]" /> Associated Flagship Programme
+                  </div>
+                </div>
+                <h4 className="font-extrabold text-[#074504] text-base mb-1">{product.associatedProgram.name}</h4>
+                <p className="text-xs text-gray-600 font-medium mb-4 italic">"{product.associatedProgram.subtitle}"</p>
+                <Link 
+                  to={product.associatedProgram.programPath}
+                  className="inline-flex items-center gap-2 bg-[#074504] hover:bg-[#599200] text-white text-xs font-bold py-2.5 px-4 rounded-full transition-all shadow-sm"
+                >
+                  {product.associatedProgram.ctaText || 'Explore Programme Page'} <ArrowRight className="w-3.5 h-3.5 text-[#C0991B]" />
+                </Link>
               </div>
             )}
             

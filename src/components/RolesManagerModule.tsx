@@ -985,7 +985,7 @@ export default function RolesManagerModule({ className = '' }: { className?: str
                 >
                   {userMappings.map(u => (
                     <option key={u.id} value={u.email}>
-                      {u.name} — {u.email} ({u.role} | {u.department})
+                      {u.name} - {u.email} ({u.role} | {u.department})
                     </option>
                   ))}
                 </select>

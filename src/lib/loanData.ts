@@ -27,7 +27,14 @@ export const LOAN_PRODUCTS: Record<string, {
   eligibility?: string[],
   requiredDocuments?: string[],
   image?: string, 
-  driveFallback?: string 
+  driveFallback?: string,
+  associatedProgram?: {
+    id: string,
+    name: string,
+    subtitle: string,
+    programPath: string,
+    ctaText?: string
+  }
 }> = {
   'nawiri': {
     id: 'nawiri',
@@ -60,7 +67,14 @@ export const LOAN_PRODUCTS: Record<string, {
       description: 'With Nawiri, you can access financing to help your business grow while building a stronger financial future for yourself and your group.'
     },
     image: '/nawiri_loan.jpg',
-    driveFallback: 'https://lh3.googleusercontent.com/d/1l0DD7hzzX23TzNLV6BpvByxaaJl3UIBc'
+    driveFallback: 'https://lh3.googleusercontent.com/d/1l0DD7hzzX23TzNLV6BpvByxaaJl3UIBc',
+    associatedProgram: {
+      id: 'economic-empowerment',
+      name: 'Economic Empowerment Programme',
+      subtitle: 'Resilient communities through sustainable business development.',
+      programPath: '/programs/economic-empowerment',
+      ctaText: 'View Economic Empowerment Programme'
+    }
   },
   'dairy': {
     id: 'dairy',
@@ -70,7 +84,14 @@ export const LOAN_PRODUCTS: Record<string, {
     targetMarket: 'Designed explicitly for dairy farmers and agricultural clients focused on purchasing good-breed cows and investing in farm upgrades like biogas installations.',
     features: ['Finances high-yield dairy cattle breeds', 'Covers biogas and infrastructure installations', 'Repayment mapped to milk production cycles', 'Promotes zero-waste agricultural ecosystems'],
     image: '/dairy_loan.jpg',
-    driveFallback: 'https://lh3.googleusercontent.com/d/197C_Hz2xbWteS6Ur8cZL9PIeKc_nhvlr'
+    driveFallback: 'https://lh3.googleusercontent.com/d/197C_Hz2xbWteS6Ur8cZL9PIeKc_nhvlr',
+    associatedProgram: {
+      id: 'ngdpp',
+      name: 'Neema Green Dairy Partnership Programme (NGDPP)',
+      subtitle: 'Growing Dairy. Building Resilience. Financing the Future.',
+      programPath: '/programs#ngdpp',
+      ctaText: 'View NGDPP Programme Details'
+    }
   },
   'imara': {
     id: 'imara',
@@ -104,7 +125,14 @@ export const LOAN_PRODUCTS: Record<string, {
     targetMarket: 'Targeted at households and community groups dedicated to enhancing their wellbeing through the installation of critical water and sanitation products (e.g., Tanks, Water generators, Pipes, Dispensers).',
     features: ['Finances water tanks, pipes, and dispensers', 'Focuses on preventative health and hygiene', 'Subsidized rates for social impact projects', 'Improves community living standards'],
     image: '/wash_loan.jpg',
-    driveFallback: 'https://lh3.googleusercontent.com/d/1PlyHJ5ApAjpzNqf452b4VD4xlropAica'
+    driveFallback: 'https://lh3.googleusercontent.com/d/1PlyHJ5ApAjpzNqf452b4VD4xlropAica',
+    associatedProgram: {
+      id: 'wash-programme',
+      name: 'Neema WASH Finance Programme',
+      subtitle: 'Financing Water, Improving Health, Transforming Lives.',
+      programPath: '/programs#wash-programme',
+      ctaText: 'View WASH Programme Details'
+    }
   },
   'busara': {
     id: 'busara',
@@ -114,7 +142,14 @@ export const LOAN_PRODUCTS: Record<string, {
     targetMarket: 'Targeted directly at business owners, entrepreneurs, and farmers who aspire to provide their loved ones with premium education without disrupting commercial cash flows.',
     features: ['Direct disbursement to educational institutions', 'Aligns with school term calendars', 'Affordable interest rates for families', 'Covers both tuition and educational materials'],
     image: '/busara_loan.jpg',
-    driveFallback: 'https://lh3.googleusercontent.com/d/1d1nNEDP3oeojIipqadSUDWYq4vDUtSFU'
+    driveFallback: 'https://lh3.googleusercontent.com/d/1d1nNEDP3oeojIipqadSUDWYq4vDUtSFU',
+    associatedProgram: {
+      id: 'arise-and-shine',
+      name: 'Neema Arise & Shine Education Programme',
+      subtitle: 'Financing Bright Futures. Empowering Communities. Educating Tomorrow.',
+      programPath: '/programs#arise-and-shine',
+      ctaText: 'View Education Programme Details'
+    }
   },
   'boresha': {
     id: 'boresha',
@@ -189,6 +224,13 @@ export const LOAN_PRODUCTS: Record<string, {
     targetMarket: 'Ideal for both residential and commercial clients looking to shift to sustainable energy sources like solar and biogas, reducing long-term overheads and supporting eco-friendly living.',
     features: ['Finances high-quality solar energy systems', 'Covers biogas installation and hardware', 'Reduced interest rates for green projects', 'Equipment serves as security'],
     image: '/green_energy_loan.jpg',
-    driveFallback: 'https://lh3.googleusercontent.com/d/11BWldynRV0U4ojl5XyrydBnXRHJTBPnd'
+    driveFallback: 'https://lh3.googleusercontent.com/d/11BWldynRV0U4ojl5XyrydBnXRHJTBPnd',
+    associatedProgram: {
+      id: 'green-energy-programme',
+      name: 'Neema Green Energy Programme',
+      subtitle: 'Powering Progress, Reducing Costs, Building a Greener Future.',
+      programPath: '/programs#green-energy-programme',
+      ctaText: 'View Green Energy Programme Details'
+    }
   }
 };

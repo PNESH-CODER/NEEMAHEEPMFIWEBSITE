@@ -1,5 +1,21 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, HeartPulse, TrendingUp, CheckCircle2, Users, GraduationCap, Target, Globe } from 'lucide-react';
+import { 
+  ArrowRight, 
+  BookOpen, 
+  HeartPulse, 
+  TrendingUp, 
+  CheckCircle2, 
+  Users, 
+  GraduationCap, 
+  Target, 
+  Sprout, 
+  Droplets, 
+  Sun, 
+  Handshake, 
+  Sparkles, 
+  ShieldCheck, 
+  Coins 
+} from 'lucide-react';
 import { motion } from 'motion/react';
 
 export default function Programs() {
@@ -30,7 +46,112 @@ export default function Programs() {
     }
   ];
 
-  const programs = [
+  const flagshipPrograms = [
+    {
+      id: "ngdpp",
+      title: "Neema Green Dairy Partnership Programme (NGDPP)",
+      subtitle: "Growing Dairy. Building Resilience. Financing the Future.",
+      icon: <Sprout className="w-10 h-10 text-[#074504]" />,
+      badge: "Agribusiness & Dairy",
+      loanId: "dairy",
+      loanName: "Climate Smart Dairy Loan",
+      loanLink: "/loans/dairy",
+      description: "The Neema Green Dairy Partnership Programme connects dairy farmers, cooperatives, value-chain partners and impact-focused financiers to build productive, sustainable and climate-resilient dairy enterprises.",
+      loanContext: "Through the Climate Smart Dairy Loan, farmers access financing for improved cows, quality fodder, dairy equipment, farm improvements, solar energy, biogas and other green investments.",
+      impactTitle: "Creating Impact Across the Dairy Value Chain",
+      impactPoints: [
+        "Increase milk production and household incomes",
+        "Reduce production costs and environmental impact",
+        "Adopt renewable energy and better farm practices",
+        "Build resilience against climate change"
+      ],
+      coopImpact: "For cooperatives and processors, the programme supports stronger farmers, increased milk volumes and more reliable quality supply.",
+      partnerTitle: "Partner With Us",
+      partnerDesc: "We welcome dairy cooperatives, processors, development partners, investors and climate-finance institutions to join us in financing sustainable dairy enterprises and creating measurable economic and environmental impact.",
+      brandTagline: "Neema HEEP Ltd. Financing Sustainable Livelihoods.",
+      accentBg: "bg-emerald-50/80 border-emerald-200/80",
+      badgeBg: "bg-[#074504] text-white"
+    },
+    {
+      id: "wash-programme",
+      title: "Neema WASH Finance Programme",
+      subtitle: "Financing Water, Improving Health, Transforming Lives.",
+      icon: <Droplets className="w-10 h-10 text-[#074504]" />,
+      badge: "Water & Sanitation",
+      loanId: "wash",
+      loanName: "WASH Loan",
+      loanLink: "/loans/wash",
+      description: "The Neema WASH Finance Programme provides accessible financing to households, institutions, small businesses and communities to invest in safe water, sanitation and hygiene solutions.",
+      loanContext: "We finance practical WASH solutions such as water connections, storage tanks, sanitation facilities, rainwater harvesting, SINKING SHALLOW WELLS, water treatment, pumps and other approved water and sanitation improvements.",
+      impactTitle: "Creating Impact Where It Matters",
+      impactPoints: [
+        "Access safe and reliable water",
+        "Improve sanitation and hygiene",
+        "Reduce time spent searching for water",
+        "Improve household and business productivity",
+        "Build resilience to water-related challenges"
+      ],
+      coopImpact: "",
+      partnerTitle: "A Partnership for Greater Impact",
+      partnerDesc: "Neema HEEP works with WASH organizations, development partners, water utilities, financial institutions, investors and impact funders to expand access to sustainable WASH solutions. Together, we can finance better water, healthier communities and more resilient livelihoods.",
+      brandTagline: "Neema HEEP Ltd. Financing Sustainable Livelihoods.",
+      accentBg: "bg-cyan-50/80 border-cyan-200/80",
+      badgeBg: "bg-cyan-900 text-white"
+    },
+    {
+      id: "green-energy-programme",
+      title: "Neema Green Energy Programme",
+      subtitle: "Powering Progress, Reducing Costs, Building a Greener Future.",
+      icon: <Sun className="w-10 h-10 text-[#074504]" />,
+      badge: "Renewable & Clean Energy",
+      loanId: "green-energy",
+      loanName: "Green Energy Loan",
+      loanLink: "/loans/green-energy",
+      description: "The Neema Green Energy Programme enables households, farmers and small businesses to access financing for clean, affordable and reliable energy solutions.",
+      loanContext: "We support investments in solar power, biogas, energy-efficient equipment, clean cooking solutions and other renewable energy technologies that improve productivity while reducing dependence on conventional energy.",
+      impactTitle: "Creating Sustainable Impact",
+      impactPoints: [
+        "Reduce energy costs",
+        "Access reliable and clean energy",
+        "Improve household and business productivity",
+        "Adopt environmentally sustainable technologies",
+        "Build resilience to rising energy costs and climate change"
+      ],
+      coopImpact: "",
+      partnerTitle: "Partner With Us",
+      partnerDesc: "We welcome climate-finance institutions, development partners, renewable energy companies, impact investors and technology providers to help scale clean energy access and finance a greener, more inclusive economy. Together, we can finance clean energy, stronger livelihoods and a sustainable future.",
+      brandTagline: "Neema HEEP Ltd. Financing Sustainable Livelihoods.",
+      accentBg: "bg-amber-50/80 border-amber-200/80",
+      badgeBg: "bg-[#C0991B] text-[#074504]"
+    },
+    {
+      id: "arise-and-shine",
+      title: "Neema Arise & Shine Education Programme",
+      subtitle: "Financing Bright Futures. Empowering Communities. Educating Tomorrow.",
+      icon: <GraduationCap className="w-10 h-10 text-[#074504]" />,
+      badge: "Education & Mentorship",
+      loanId: "busara",
+      loanName: "Busara Education Loan",
+      loanLink: "/loans/busara",
+      description: "The Neema Arise & Shine Education Programme provides accessible school fee financing, secondary school sponsorships, and holiday-time mentorship for junior and senior secondary students from Grade 10 to 12.",
+      loanContext: "Through the Busara Education Loan and Arise & Shine Scholarship Fund, families and guardians access flexible tuition financing structured specifically around school term calendars.",
+      impactTitle: "Transforming Lives Through Quality Education",
+      impactPoints: [
+        "Keep vulnerable Grade 10 to 12 students consistently in school",
+        "Provide structured holiday mentorship and professional career guidance",
+        "Ease household cash flow pressure during school term openings",
+        "Build long-term community resilience through educated youth"
+      ],
+      coopImpact: "For secondary schools and institutions, the programme ensures reliable, on-time fee settlements and higher student retention.",
+      partnerTitle: "Partner With Us",
+      partnerDesc: "We welcome donors, corporate sponsors, educational institutions, alumni networks, and impact partners to join us in expanding secondary school sponsorships and mentorship access across the region.",
+      brandTagline: "Neema HEEP Ltd. Financing Sustainable Livelihoods.",
+      accentBg: "bg-purple-50/80 border-purple-200/80",
+      badgeBg: "bg-[#074504] text-[#C0991B]"
+    }
+  ];
+
+  const coreInitiatives = [
     {
       title: "Arise & Shine Education",
       icon: <BookOpen className="w-12 h-12" />,
@@ -38,7 +159,8 @@ export default function Programs() {
       description: "Empowering junior secondary students from grade 10 to 12 through comprehensive school scholarships, fee support, and holiday-time mentorship.",
       highlights: ["Sponsorship Since 2011", "Holiday Mentorship", "Grade 10 to 12 Focus"],
       to: "/programs/education-support",
-      color: "bg-emerald-50 text-[#074504] border-emerald-200",
+      associatedLoan: "/loans/busara",
+      associatedLoanName: "Busara Loan",
       iconColor: "text-[#C0991B]"
     },
     {
@@ -48,7 +170,8 @@ export default function Programs() {
       description: "Promoting well-being by financing maternal care, medical camps, and targeted WASH loans to ensure families stay healthy and productive.",
       highlights: ["Maternal Care Financing", "Healthcare Camps", "WASH Initiatives"],
       to: "/programs/community-health",
-      color: "bg-amber-50/70 text-[#826507] border-amber-200",
+      associatedLoan: "/loans/wash",
+      associatedLoanName: "WASH Loan",
       iconColor: "text-[#C0991B]"
     },
     {
@@ -58,7 +181,8 @@ export default function Programs() {
       description: "Fostering resilience through business mentorship, group lending, and market linkages for SMEs relying on sustainable financial solutions.",
       highlights: ["Business Mentorship", "Market Network Linkages", "Group Growth Capital"],
       to: "/programs/economic-empowerment",
-      color: "bg-emerald-50 text-[#074504] border-emerald-200",
+      associatedLoan: "/loans/nawiri",
+      associatedLoanName: "Nawiri Loan",
       iconColor: "text-[#C0991B]"
     }
   ];
@@ -80,7 +204,7 @@ export default function Programs() {
             className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-1.5 rounded-full mb-8"
           >
             <Target className="w-4 h-4 text-[#C0991B]" />
-            <span className="text-xs font-bold uppercase tracking-widest text-[#C0991B]">Driven by Purpose</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-[#C0991B]">Driven by Purpose & Sustainable Impact</span>
           </motion.div>
           
           <motion.h1 
@@ -90,7 +214,7 @@ export default function Programs() {
             className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-8 tracking-tighter uppercase leading-[0.95]"
           >
             Our <span className="text-[#C0991B]">Programs</span> & <br/>
-            Real-World <span className="text-[#599200]">Impact</span>.
+            Product <span className="text-[#599200]">Partnerships</span>.
           </motion.h1>
           
           <motion.p 
@@ -99,12 +223,12 @@ export default function Programs() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto font-medium leading-relaxed"
           >
-            Neema HEEP goes beyond credit. We measure success by the strength of our communities, the health of our families, and the resilience of the businesses we foster.
+            Neema HEEP connects social impact programmes directly with tailored microfinance products. We build resilient livelihoods across agriculture, clean energy, WASH, and education.
           </motion.p>
         </div>
       </section>
 
-      {/* Impact Stats Grid (From Impact Page) */}
+      {/* Impact Stats Grid */}
       <section className="max-w-7xl mx-auto px-6 lg:px-12 -mt-16 relative z-20">
         <div className="grid md:grid-cols-3 gap-6">
           {stats.map((stat, idx) => (
@@ -135,71 +259,215 @@ export default function Programs() {
         </div>
       </section>
 
-      {/* Programs Grid */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-12 py-32">
+      {/* Featured Strategic Programmes (Detailed User-Requested Programs) */}
+      <section className="max-w-7xl mx-auto px-6 lg:px-12 pt-28 pb-16">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 text-[#599200] font-black uppercase text-xs tracking-widest mb-4">
+            <Sparkles className="w-4 h-4 text-[#C0991B]" /> FLAGSHIP PARTNERSHIP PROGRAMMES
+          </div>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-[#074504] uppercase tracking-tight">
+            Integrated <span className="text-[#C0991B]">Programme Frameworks</span>
+          </h2>
+          <p className="text-gray-600 max-w-2xl mx-auto font-medium text-sm mt-3">
+            Each programme directly powers tailored credit solutions for sustainable livelihoods. Click any product link to view loan terms or navigate seamlessly.
+          </p>
+        </div>
+
+        <div className="space-y-16">
+          {flagshipPrograms.map((prog, idx) => (
+            <motion.div
+              key={prog.id}
+              id={prog.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: idx * 0.1 }}
+              className={`bg-white rounded-[3rem] p-8 md:p-12 border ${prog.accentBg} shadow-xl relative overflow-hidden scroll-mt-28`}
+            >
+              <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 pb-8 border-b border-gray-200/80 mb-8">
+                <div className="flex items-center gap-5">
+                  <div className="w-16 h-16 rounded-2xl bg-white border border-gray-200 flex items-center justify-center shadow-sm shrink-0">
+                    {prog.icon}
+                  </div>
+                  <div>
+                    <span className={`inline-block px-3.5 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.2em] mb-2 ${prog.badgeBg}`}>
+                      {prog.badge}
+                    </span>
+                    <h3 className="text-2xl md:text-3xl font-extrabold text-[#074504] uppercase tracking-tight">
+                      {prog.title}
+                    </h3>
+                    <p className="text-sm font-bold text-[#C0991B] italic mt-0.5">
+                      "{prog.subtitle}"
+                    </p>
+                  </div>
+                </div>
+
+                <div className="shrink-0 w-full lg:w-auto flex flex-col sm:flex-row gap-3">
+                  <Link 
+                    to={prog.loanLink} 
+                    className="inline-flex items-center justify-center gap-2 bg-[#074504] hover:bg-[#599200] text-white px-6 py-3.5 rounded-full font-extrabold uppercase text-xs tracking-widest transition-all shadow-md hover:scale-105"
+                  >
+                    <span>View {prog.loanName}</span>
+                    <ArrowRight className="w-4 h-4 text-[#C0991B]" />
+                  </Link>
+                  <Link 
+                    to="/loans" 
+                    className="inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-[#074504] border border-gray-300 px-5 py-3.5 rounded-full font-bold uppercase text-xs tracking-wider transition-all"
+                  >
+                    <span>All Products Page</span>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="grid lg:grid-cols-12 gap-8">
+                {/* Main Overview */}
+                <div className="lg:col-span-7 space-y-6">
+                  <div>
+                    <h4 className="text-xs font-black uppercase tracking-[0.2em] text-[#074504] mb-2 flex items-center gap-2">
+                      <Target className="w-4 h-4 text-[#C0991B]" /> Programme Overview
+                    </h4>
+                    <p className="text-gray-700 font-medium leading-relaxed text-base">
+                      {prog.description}
+                    </p>
+                  </div>
+
+                  {/* Connected Loan Product Highlight Box */}
+                  <div className="bg-emerald-900 text-white p-6 rounded-2xl shadow-md border border-emerald-800 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#C0991B] flex items-center gap-1.5">
+                        <Coins className="w-3.5 h-3.5" /> Direct Loan Integration
+                      </span>
+                      <Link 
+                        to={prog.loanLink}
+                        className="text-xs text-[#C0991B] font-bold underline hover:text-white transition-colors"
+                      >
+                        Open {prog.loanName} Page &rarr;
+                      </Link>
+                    </div>
+                    <p className="text-sm font-medium leading-relaxed text-white/90">
+                      {prog.loanContext}
+                    </p>
+                  </div>
+
+                  {/* Partnerships */}
+                  <div>
+                    <h4 className="text-xs font-black uppercase tracking-[0.2em] text-[#074504] mb-2 flex items-center gap-2">
+                      <Handshake className="w-4 h-4 text-[#599200]" /> {prog.partnerTitle}
+                    </h4>
+                    <p className="text-gray-600 font-medium leading-relaxed text-sm">
+                      {prog.partnerDesc}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Impact Points Column */}
+                <div className="lg:col-span-5 bg-white p-6 md:p-8 rounded-2xl border border-gray-200/80 shadow-xs flex flex-col justify-between">
+                  <div className="space-y-4">
+                    <h4 className="text-sm font-black text-[#074504] uppercase tracking-tight flex items-center gap-2 border-b pb-3">
+                      <ShieldCheck className="w-4 h-4 text-[#C0991B]" /> {prog.impactTitle}
+                    </h4>
+                    <ul className="space-y-3">
+                      {prog.impactPoints.map((point, pIdx) => (
+                        <li key={pIdx} className="flex items-start gap-3 text-xs md:text-sm font-bold text-gray-800">
+                          <CheckCircle2 className="w-4 h-4 text-[#599200] shrink-0 mt-0.5" />
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {prog.coopImpact && (
+                      <div className="pt-3 border-t border-gray-100 text-xs font-medium text-gray-600 leading-relaxed italic">
+                        {prog.coopImpact}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="pt-6 border-t border-gray-100 mt-6 flex items-center justify-between">
+                    <span className="text-[10px] font-black text-[#074504] uppercase tracking-widest">
+                      {prog.brandTagline}
+                    </span>
+                    <Link 
+                      to="/request-partnership" 
+                      className="text-xs font-bold text-[#C0991B] hover:text-[#074504] uppercase tracking-wider underline flex items-center gap-1"
+                    >
+                      Partner With Us
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Programs Grid (Core Support Initiatives) */}
+      <section className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
         <div className="text-center mb-16">
            <div className="inline-flex items-center gap-2 text-[#599200] font-black uppercase text-xs tracking-widest mb-4">
-              <span className="w-6 h-0.5 bg-[#C0991B]"></span> OUR CORE INITIATIVES <span className="w-6 h-0.5 bg-[#C0991B]"></span>
+              <span className="w-6 h-0.5 bg-[#C0991B]"></span> COMMUNITY INITIATIVES <span className="w-6 h-0.5 bg-[#C0991B]"></span>
            </div>
-           <h2 className="text-3xl md:text-5xl font-extrabold text-[#074504] uppercase tracking-tight">Structured <span className="text-[#C0991B]">Support</span></h2>
+           <h2 className="text-3xl md:text-5xl font-extrabold text-[#074504] uppercase tracking-tight">Broad Social <span className="text-[#C0991B]">Upliftment</span></h2>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {programs.map((program, idx) => (
+          {coreInitiatives.map((program, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
-              whileHover={{ y: -10 }}
+              whileHover={{ y: -6 }}
               className="h-full"
             >
-              <Link 
-                to={program.to} 
+              <div 
                 className="group h-full bg-white border border-gray-100 p-10 rounded-[2.5rem] flex flex-col items-start hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] hover:border-[#C0991B]/20 transition-all duration-500"
               >
-                <motion.div 
-                  initial={{ scale: 0.8 }}
-                  whileInView={{ scale: 1 }}
-                  className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center mb-8 group-hover:bg-[#C0991B]/10 transition-colors duration-500"
-                >
+                <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center mb-8 group-hover:bg-[#C0991B]/10 transition-colors duration-500">
                   <div className={`${program.iconColor} group-hover:scale-110 transition-transform duration-500`}>
                     {program.icon}
                   </div>
-                </motion.div>
+                </div>
                 
                 <h3 className="text-3xl font-extrabold text-[#074504] mb-2 uppercase tracking-tight">{program.title}</h3>
                 <p className="text-[#C0991B] font-bold text-sm mb-4 tracking-wide uppercase">{program.tagline}</p>
-                <p className="text-gray-600 mb-8 leading-relaxed font-semibold">
+                <p className="text-gray-600 mb-8 leading-relaxed font-semibold text-sm">
                   {program.description}
                 </p>
                 
-                <div className="space-y-3 mb-10 w-full flex-grow">
+                <div className="space-y-3 mb-8 w-full flex-grow">
                   {program.highlights.map((item, i) => (
-                    <motion.div 
-                      key={i} 
-                      className="flex items-center gap-3 text-sm font-bold text-[#074504]/80"
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ delay: (idx * 0.1) + (i * 0.05) }}
-                    >
+                    <div key={i} className="flex items-center gap-3 text-sm font-bold text-[#074504]/80">
                       <CheckCircle2 className="w-4 h-4 text-[#599200]" />
                       <span>{item}</span>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
 
-                <div className="flex items-center gap-2 text-[#074504] font-black uppercase text-[10px] tracking-widest group-hover:gap-4 transition-all mt-auto pt-6 border-t border-gray-100 w-full">
-                  Explore Initiative <ArrowRight className="w-4 h-4 text-[#C0991B]" />
+                <div className="space-y-2 w-full pt-6 border-t border-gray-100 mt-auto">
+                  <Link 
+                    to={program.to}
+                    className="flex items-center justify-between text-[#074504] font-black uppercase text-[10px] tracking-widest hover:text-[#599200] transition-colors w-full"
+                  >
+                    <span>Read Full Initiative</span>
+                    <ArrowRight className="w-4 h-4 text-[#C0991B]" />
+                  </Link>
+
+                  <Link 
+                    to={program.associatedLoan}
+                    className="flex items-center justify-between text-xs font-bold text-[#C0991B] hover:text-[#074504] transition-colors w-full pt-1"
+                  >
+                    <span>Associated Product: {program.associatedLoanName}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
                 </div>
-              </Link>
+              </div>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* Sponsorship Application Block on Programs.tsx */}
+      {/* Sponsorship Application Block */}
       <section className="max-w-7xl mx-auto px-6 lg:px-12 pb-24">
          <div className="bg-gradient-to-r from-[#074504] to-[#599200] rounded-[3.5rem] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="absolute top-[-50%] right-[-10%] w-[350px] h-[350px] bg-[#C0991B]/20 rounded-full blur-[100px] pointer-events-none" />
@@ -221,9 +489,9 @@ export default function Programs() {
          </div>
       </section>
 
-      {/* Vision Section (From Impact Page) */}
+      {/* Vision Section */}
       <section className="max-w-7xl mx-auto px-6 lg:px-12 mb-32">
-        <div className="bg-white border border-gray-100 rounded-[4rem] p-8 md:p-16 flex flex-col lg:flex-row items-center gap-16 overflow-hidden relative border border-emerald-900/10 shadow-sm">
+        <div className="bg-white rounded-[4rem] p-8 md:p-16 flex flex-col lg:flex-row items-center gap-16 overflow-hidden relative border border-emerald-900/10 shadow-sm">
           
           <div className="lg:w-1/2 relative z-10">
             <div className="inline-flex items-center gap-2 text-[#599200] font-black uppercase text-xs tracking-widest mb-6">
@@ -268,7 +536,7 @@ export default function Programs() {
         </div>
       </section>
 
-      {/* Merged Call to Action */}
+      {/* Call to Action */}
       <section className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-6 lg:px-12 mb-12">
         <div className="max-w-7xl mx-auto">
           <div className="bg-[#074504] rounded-[3.5rem] p-10 md:p-20 text-white relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-12">
@@ -301,5 +569,3 @@ export default function Programs() {
     </main>
   );
 }
-
-

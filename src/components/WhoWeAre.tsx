@@ -21,7 +21,7 @@ export default function WhoWeAre() {
           transition={{ duration: 0.6 }}
           className="w-full"
         >
-          {/* Eyebrow Header: — WHO WE ARE — */}
+          {/* Eyebrow Header: WHO WE ARE */}
           <div className="inline-flex items-center gap-2.5 mb-6">
             <span className="w-6 h-[3px] bg-[#599200] rounded-full" />
             <span className="text-[#C0991B] font-black tracking-[0.2em] text-xs uppercase block">WHO WE ARE</span>
