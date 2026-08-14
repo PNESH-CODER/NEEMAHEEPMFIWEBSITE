@@ -34,7 +34,7 @@ import SimpleProcess from '../components/SimpleProcess';
 const CATEGORIES = [
   { id: 'all', title: "All" },
   { id: 'business', title: "Business and Growth", loans: ['nawiri', 'imara'] },
-  { id: 'personal', title: "Personal and Assets", loans: ['logbook', 'busara', 'mali', 'dairy', 'housing', 'wash', 'ipf', 'green-energy'] },
+  { id: 'personal', title: "Personal and Assets", loans: ['green-energy', 'dairy', 'wash', 'logbook', 'busara', 'mali', 'housing', 'ipf'] },
   { id: 'emergency', title: "Quick and Emergency", loans: ['dharura', 'boresha'] }
 ];
 

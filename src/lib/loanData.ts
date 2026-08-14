@@ -1,16 +1,16 @@
 export const PRODUCT_LINKS = [
   { id: 'nawiri', label: 'Nawiri loan' },
+  { id: 'green-energy', label: 'Green energy loan' },
   { id: 'dairy', label: 'Climate Smart Dairy Loan' },
-  { id: 'imara', label: 'Imara loan' },
   { id: 'wash', label: 'WASH loan' },
+  { id: 'imara', label: 'Imara loan' },
   { id: 'busara', label: 'Busara loan' },
   { id: 'boresha', label: 'Boresha loan' },
   { id: 'logbook', label: 'Log book loan' },
   { id: 'mali', label: 'Mali loan' },
   { id: 'dharura', label: 'Dharura loan' },
   { id: 'housing', label: 'Housing loan' },
-  { id: 'ipf', label: 'IPF loan' },
-  { id: 'green-energy', label: 'Green energy loan' }
+  { id: 'ipf', label: 'IPF loan' }
 ];
 
 export const LOAN_PRODUCTS: Record<string, { 
@@ -76,6 +76,23 @@ export const LOAN_PRODUCTS: Record<string, {
       ctaText: 'View Economic Empowerment Programme'
     }
   },
+  'green-energy': {
+    id: 'green-energy',
+    name: 'Green energy loan',
+    tagline: 'Empower your home or business with sustainable solar and biogas solutions.',
+    description: 'The NEEMA HEEP Green energy loan is part of our commitment to environmental sustainability and cost reduction for our clients. This specialized facility allows you to acquire solar energy systems and biogas units without the heavy upfront cost. By switching to renewable energy, you not only reduce your monthly energy bills but also contribute to a cleaner environment. We partner with certified suppliers to ensure you get high-quality equipment with professional installation.',
+    targetMarket: 'Ideal for both residential and commercial clients looking to shift to sustainable energy sources like solar and biogas, reducing long-term overheads and supporting eco-friendly living.',
+    features: ['Finances high-quality solar energy systems', 'Covers biogas installation and hardware', 'Reduced interest rates for green projects', 'Equipment serves as security'],
+    image: '/green_energy_loan.jpg',
+    driveFallback: 'https://lh3.googleusercontent.com/d/11BWldynRV0U4ojl5XyrydBnXRHJTBPnd',
+    associatedProgram: {
+      id: 'green-energy-programme',
+      name: 'Neema Green Energy Programme',
+      subtitle: 'Powering Progress, Reducing Costs, Building a Greener Future.',
+      programPath: '/programs#green-energy-programme',
+      ctaText: 'View Green Energy Programme Details'
+    }
+  },
   'dairy': {
     id: 'dairy',
     name: 'Climate Smart Dairy Loan',
@@ -91,6 +108,23 @@ export const LOAN_PRODUCTS: Record<string, {
       subtitle: 'Growing Dairy. Building Resilience. Financing the Future.',
       programPath: '/programs#ngdpp',
       ctaText: 'View NGDPP Programme Details'
+    }
+  },
+  'wash': {
+    id: 'wash',
+    name: 'WASH loan',
+    tagline: 'Enhance community health with premium Water, Sanitation, and Hygiene financing.',
+    description: 'Physical health and financial health are intrinsically linked. The WASH (Water, Sanitation, and Hygiene) Loan demonstrates NEEMA HEEP\'s deep commitment to holistic community wellness. This loan ring-fences capital specifically for the acquisition of critical sanitation infrastructure, such as high-capacity water tanks, filtration systems, and piping. By improving household sanitation, we reduce medical vulnerabilities and enhance overall quality of life.',
+    targetMarket: 'Targeted at households and community groups dedicated to enhancing their wellbeing through the installation of critical water and sanitation products (e.g., Tanks, Water generators, Pipes, Dispensers).',
+    features: ['Finances water tanks, pipes, and dispensers', 'Focuses on preventative health and hygiene', 'Subsidized rates for social impact projects', 'Improves community living standards'],
+    image: '/wash_loan.jpg',
+    driveFallback: 'https://lh3.googleusercontent.com/d/1PlyHJ5ApAjpzNqf452b4VD4xlropAica',
+    associatedProgram: {
+      id: 'wash-programme',
+      name: 'Neema WASH Finance Programme',
+      subtitle: 'Financing Water, Improving Health, Transforming Lives.',
+      programPath: '/programs#wash-programme',
+      ctaText: 'View WASH Programme Details'
     }
   },
   'imara': {
@@ -116,23 +150,6 @@ export const LOAN_PRODUCTS: Record<string, {
     ],
     image: '/imara_loan.jpg',
     driveFallback: 'https://lh3.googleusercontent.com/d/1h0NJI1e4y10YMmaENJ6954diwn05eK-S'
-  },
-  'wash': {
-    id: 'wash',
-    name: 'WASH loan',
-    tagline: 'Enhance community health with premium Water, Sanitation, and Hygiene financing.',
-    description: 'Physical health and financial health are intrinsically linked. The WASH (Water, Sanitation, and Hygiene) Loan demonstrates NEEMA HEEP\'s deep commitment to holistic community wellness. This loan ring-fences capital specifically for the acquisition of critical sanitation infrastructure, such as high-capacity water tanks, filtration systems, and piping. By improving household sanitation, we reduce medical vulnerabilities and enhance overall quality of life.',
-    targetMarket: 'Targeted at households and community groups dedicated to enhancing their wellbeing through the installation of critical water and sanitation products (e.g., Tanks, Water generators, Pipes, Dispensers).',
-    features: ['Finances water tanks, pipes, and dispensers', 'Focuses on preventative health and hygiene', 'Subsidized rates for social impact projects', 'Improves community living standards'],
-    image: '/wash_loan.jpg',
-    driveFallback: 'https://lh3.googleusercontent.com/d/1PlyHJ5ApAjpzNqf452b4VD4xlropAica',
-    associatedProgram: {
-      id: 'wash-programme',
-      name: 'Neema WASH Finance Programme',
-      subtitle: 'Financing Water, Improving Health, Transforming Lives.',
-      programPath: '/programs#wash-programme',
-      ctaText: 'View WASH Programme Details'
-    }
   },
   'busara': {
     id: 'busara',
@@ -215,22 +232,5 @@ export const LOAN_PRODUCTS: Record<string, {
     features: ['Direct settlement to insurance providers', 'Preserves essential working capital', 'Predictable, structured installments', 'Ensures continuous asset protection'],
     image: '/ipf_loan.jpg',
     driveFallback: 'https://lh3.googleusercontent.com/d/1AqlIQI3uaBa6bQxnRfu8bYNhKRWEKLO_'
-  },
-  'green-energy': {
-    id: 'green-energy',
-    name: 'Green energy loan',
-    tagline: 'Empower your home or business with sustainable solar and biogas solutions.',
-    description: 'The NEEMA HEEP Green energy loan is part of our commitment to environmental sustainability and cost reduction for our clients. This specialized facility allows you to acquire solar energy systems and biogas units without the heavy upfront cost. By switching to renewable energy, you not only reduce your monthly energy bills but also contribute to a cleaner environment. We partner with certified suppliers to ensure you get high-quality equipment with professional installation.',
-    targetMarket: 'Ideal for both residential and commercial clients looking to shift to sustainable energy sources like solar and biogas, reducing long-term overheads and supporting eco-friendly living.',
-    features: ['Finances high-quality solar energy systems', 'Covers biogas installation and hardware', 'Reduced interest rates for green projects', 'Equipment serves as security'],
-    image: '/green_energy_loan.jpg',
-    driveFallback: 'https://lh3.googleusercontent.com/d/11BWldynRV0U4ojl5XyrydBnXRHJTBPnd',
-    associatedProgram: {
-      id: 'green-energy-programme',
-      name: 'Neema Green Energy Programme',
-      subtitle: 'Powering Progress, Reducing Costs, Building a Greener Future.',
-      programPath: '/programs#green-energy-programme',
-      ctaText: 'View Green Energy Programme Details'
-    }
   }
 };

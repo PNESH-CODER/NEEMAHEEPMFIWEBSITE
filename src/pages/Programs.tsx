@@ -314,7 +314,7 @@ export default function Programs() {
                     to="/loans" 
                     className="inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-[#074504] border border-gray-300 px-5 py-3.5 rounded-full font-bold uppercase text-xs tracking-wider transition-all"
                   >
-                    <span>All Products Page</span>
+                    <span>View All Products</span>
                   </Link>
                 </div>
               </div>
@@ -382,15 +382,16 @@ export default function Programs() {
                     )}
                   </div>
 
-                  <div className="pt-6 border-t border-gray-100 mt-6 flex items-center justify-between">
+                  <div className="pt-6 border-t border-gray-100 mt-6 flex flex-col gap-4">
                     <span className="text-[10px] font-black text-[#074504] uppercase tracking-widest">
                       {prog.brandTagline}
                     </span>
                     <Link 
                       to="/request-partnership" 
-                      className="text-xs font-bold text-[#C0991B] hover:text-[#074504] uppercase tracking-wider underline flex items-center gap-1"
+                      className="w-full inline-flex items-center justify-center gap-2 bg-[#074504] hover:bg-[#599200] text-white py-3 px-5 rounded-full font-extrabold text-xs uppercase tracking-widest transition-all shadow-md hover:scale-[1.02]"
                     >
-                      Partner With Us
+                      <span>Partner With Us</span>
+                      <Handshake className="w-4 h-4 text-[#C0991B]" />
                     </Link>
                   </div>
                 </div>
@@ -449,7 +450,7 @@ export default function Programs() {
                     to={program.to}
                     className="flex items-center justify-between text-[#074504] font-black uppercase text-[10px] tracking-widest hover:text-[#599200] transition-colors w-full"
                   >
-                    <span>Read Full Initiative</span>
+                    <span>Read More</span>
                     <ArrowRight className="w-4 h-4 text-[#C0991B]" />
                   </Link>
 
