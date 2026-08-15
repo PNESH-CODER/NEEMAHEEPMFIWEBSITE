@@ -132,7 +132,7 @@ function AppContent() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
-      {!hideFloatingButtons && <PageNavigation />}
+      {!isAdmin && <PageNavigation />}
       {!isAdmin && <Footer />}
       {!hideFloatingButtons && <FloatingCTA />}
       {!hideFloatingButtons && <StickyWhatsApp />}

@@ -69,7 +69,7 @@ export default function Programs() {
       partnerTitle: "Partner With Us",
       partnerDesc: "We welcome dairy cooperatives, processors, development partners, investors and climate-finance institutions to join us in financing sustainable dairy enterprises and creating measurable economic and environmental impact.",
       brandTagline: "Neema HEEP Ltd. Financing Sustainable Livelihoods.",
-      accentBg: "bg-emerald-50/80 border-emerald-200/80",
+      accentBg: "bg-[#074504]/5 border-[#074504]/20",
       badgeBg: "bg-[#074504] text-white"
     },
     {
@@ -95,8 +95,8 @@ export default function Programs() {
       partnerTitle: "A Partnership for Greater Impact",
       partnerDesc: "Neema HEEP works with WASH organizations, development partners, water utilities, financial institutions, investors and impact funders to expand access to sustainable WASH solutions. Together, we can finance better water, healthier communities and more resilient livelihoods.",
       brandTagline: "Neema HEEP Ltd. Financing Sustainable Livelihoods.",
-      accentBg: "bg-cyan-50/80 border-cyan-200/80",
-      badgeBg: "bg-cyan-900 text-white"
+      accentBg: "bg-[#074504]/5 border-[#074504]/20",
+      badgeBg: "bg-[#074504] text-white"
     },
     {
       id: "green-energy-programme",
@@ -121,7 +121,7 @@ export default function Programs() {
       partnerTitle: "Partner With Us",
       partnerDesc: "We welcome climate-finance institutions, development partners, renewable energy companies, impact investors and technology providers to help scale clean energy access and finance a greener, more inclusive economy. Together, we can finance clean energy, stronger livelihoods and a sustainable future.",
       brandTagline: "Neema HEEP Ltd. Financing Sustainable Livelihoods.",
-      accentBg: "bg-amber-50/80 border-amber-200/80",
+      accentBg: "bg-[#074504]/5 border-[#074504]/20",
       badgeBg: "bg-[#C0991B] text-[#074504]"
     },
     {
@@ -146,7 +146,7 @@ export default function Programs() {
       partnerTitle: "Partner With Us",
       partnerDesc: "We welcome donors, corporate sponsors, educational institutions, alumni networks, and impact partners to join us in expanding secondary school sponsorships and mentorship access across the region.",
       brandTagline: "Neema HEEP Ltd. Financing Sustainable Livelihoods.",
-      accentBg: "bg-purple-50/80 border-purple-200/80",
+      accentBg: "bg-[#074504]/5 border-[#074504]/20",
       badgeBg: "bg-[#074504] text-[#C0991B]"
     }
   ];
@@ -193,7 +193,7 @@ export default function Programs() {
       <section className="bg-[#074504] text-white py-24 lg:py-32 px-6 lg:px-12 text-center relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-10">
           <div className="absolute top-[-10%] left-[-5%] w-[400px] h-[400px] bg-[#C0991B] rounded-full blur-[120px]" />
-          <div className="absolute bottom-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#599200] rounded-full blur-[150px]" />
+          <div className="absolute bottom-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#074504] rounded-full blur-[150px]" />
         </div>
         
         <div className="max-w-4xl mx-auto relative z-10">
@@ -214,7 +214,7 @@ export default function Programs() {
             className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-8 tracking-tighter uppercase leading-[0.95]"
           >
             Our <span className="text-[#C0991B]">Programs</span> & <br/>
-            Product <span className="text-[#599200]">Partnerships</span>.
+            Product <span className="text-[#C0991B]">Partnerships</span>.
           </motion.h1>
           
           <motion.p 
@@ -262,7 +262,7 @@ export default function Programs() {
       {/* Programs Grid (Core Support Initiatives) */}
       <section className="max-w-7xl mx-auto px-6 lg:px-12 pt-28 pb-12">
         <div className="text-center mb-16">
-           <div className="inline-flex items-center gap-2 text-[#599200] font-black uppercase text-xs tracking-widest mb-4">
+           <div className="inline-flex items-center gap-2 text-[#074504] font-black uppercase text-xs tracking-widest mb-4">
               <span className="w-6 h-0.5 bg-[#C0991B]"></span> COMMUNITY INITIATIVES <span className="w-6 h-0.5 bg-[#C0991B]"></span>
            </div>
            <h2 className="text-3xl md:text-5xl font-extrabold text-[#074504] uppercase tracking-tight">Broad Social <span className="text-[#C0991B]">Upliftment</span></h2>
@@ -297,7 +297,7 @@ export default function Programs() {
                 <div className="space-y-3 mb-8 w-full flex-grow">
                   {program.highlights.map((item, i) => (
                     <div key={i} className="flex items-center gap-3 text-sm font-bold text-[#074504]/80">
-                      <CheckCircle2 className="w-4 h-4 text-[#599200]" />
+                      <CheckCircle2 className="w-4 h-4 text-[#C0991B]" />
                       <span>{item}</span>
                     </div>
                   ))}
@@ -306,7 +306,7 @@ export default function Programs() {
                 <div className="space-y-2 w-full pt-6 border-t border-gray-100 mt-auto">
                   <Link 
                     to={program.to}
-                    className="flex items-center justify-between text-[#074504] font-black uppercase text-[10px] tracking-widest hover:text-[#599200] transition-colors w-full"
+                    className="flex items-center justify-between text-[#074504] font-black uppercase text-[10px] tracking-widest hover:text-[#C0991B] transition-colors w-full"
                   >
                     <span>Read More</span>
                     <ArrowRight className="w-4 h-4 text-[#C0991B]" />
@@ -329,7 +329,7 @@ export default function Programs() {
       {/* Featured Strategic Programmes (Detailed User-Requested Programs) */}
       <section className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 text-[#599200] font-black uppercase text-xs tracking-widest mb-4">
+          <div className="inline-flex items-center gap-2 text-[#074504] font-black uppercase text-xs tracking-widest mb-4">
             <Award className="w-4 h-4 text-[#C0991B]" /> FLAGSHIP PARTNERSHIP PROGRAMMES
           </div>
           <h2 className="text-3xl md:text-5xl font-extrabold text-[#074504] uppercase tracking-tight">
@@ -372,7 +372,7 @@ export default function Programs() {
                 <div className="shrink-0 w-full lg:w-auto flex flex-col sm:flex-row gap-3">
                   <Link 
                     to={prog.loanLink} 
-                    className="inline-flex items-center justify-center gap-2 bg-[#074504] hover:bg-[#599200] text-white px-6 py-3.5 rounded-full font-extrabold uppercase text-xs tracking-widest transition-all shadow-md hover:scale-105"
+                    className="inline-flex items-center justify-center gap-2 bg-[#074504] hover:bg-[#052903] text-white px-6 py-3.5 rounded-full font-extrabold uppercase text-xs tracking-widest transition-all shadow-md hover:scale-105"
                   >
                     <span>View {prog.loanName}</span>
                     <ArrowRight className="w-4 h-4 text-[#C0991B]" />
@@ -399,7 +399,7 @@ export default function Programs() {
                   </div>
 
                   {/* Connected Loan Product Highlight Box */}
-                  <div className="bg-emerald-900 text-white p-6 rounded-2xl shadow-md border border-emerald-800 space-y-3">
+                  <div className="bg-[#074504] text-white p-6 rounded-2xl shadow-md border border-[#074504] space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#C0991B] flex items-center gap-1.5">
                         <Coins className="w-3.5 h-3.5" /> Direct Loan Integration
@@ -419,7 +419,7 @@ export default function Programs() {
                   {/* Partnerships */}
                   <div>
                     <h4 className="text-xs font-black uppercase tracking-[0.2em] text-[#074504] mb-2 flex items-center gap-2">
-                      <Handshake className="w-4 h-4 text-[#599200]" /> {prog.partnerTitle}
+                      <Handshake className="w-4 h-4 text-[#C0991B]" /> {prog.partnerTitle}
                     </h4>
                     <p className="text-gray-600 font-medium leading-relaxed text-sm">
                       {prog.partnerDesc}
@@ -436,7 +436,7 @@ export default function Programs() {
                     <ul className="space-y-3">
                       {prog.impactPoints.map((point, pIdx) => (
                         <li key={pIdx} className="flex items-start gap-3 text-xs md:text-sm font-bold text-gray-800">
-                          <CheckCircle2 className="w-4 h-4 text-[#599200] shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-4 h-4 text-[#C0991B] shrink-0 mt-0.5" />
                           <span>{point}</span>
                         </li>
                       ))}
@@ -455,7 +455,7 @@ export default function Programs() {
                     </span>
                     <Link 
                       to="/request-partnership" 
-                      className="w-full inline-flex items-center justify-center gap-2 bg-[#074504] hover:bg-[#599200] text-white py-3 px-5 rounded-full font-extrabold text-xs uppercase tracking-widest transition-all shadow-md hover:scale-[1.02]"
+                      className="w-full inline-flex items-center justify-center gap-2 bg-[#074504] hover:bg-[#052903] text-white py-3 px-5 rounded-full font-extrabold text-xs uppercase tracking-widest transition-all shadow-md hover:scale-[1.02]"
                     >
                       <span>Partner With Us</span>
                       <Handshake className="w-4 h-4 text-[#C0991B]" />
@@ -470,7 +470,7 @@ export default function Programs() {
 
       {/* Sponsorship Application Block */}
       <section className="max-w-7xl mx-auto px-6 lg:px-12 pb-24">
-         <div className="bg-gradient-to-r from-[#074504] to-[#599200] rounded-[3.5rem] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8">
+         <div className="bg-[#074504] rounded-[3.5rem] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8 border border-[#074504]">
             <div className="absolute top-[-50%] right-[-10%] w-[350px] h-[350px] bg-[#C0991B]/20 rounded-full blur-[100px] pointer-events-none" />
             <div className="relative z-10 lg:max-w-3xl">
                <span className="bg-[#C0991B] text-[#074504] px-3.5 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.2em] inline-block mb-4">Scholarship Intake Open</span>
@@ -492,11 +492,11 @@ export default function Programs() {
 
       {/* Vision Section */}
       <section className="max-w-7xl mx-auto px-6 lg:px-12 mb-32">
-        <div className="bg-white rounded-[4rem] p-8 md:p-16 flex flex-col lg:flex-row items-center gap-16 overflow-hidden relative border border-emerald-900/10 shadow-sm">
+        <div className="bg-white rounded-[4rem] p-8 md:p-16 flex flex-col lg:flex-row items-center gap-16 overflow-hidden relative border border-[#074504]/10 shadow-sm">
           
           <div className="lg:w-1/2 relative z-10">
-            <div className="inline-flex items-center gap-2 text-[#599200] font-black uppercase text-xs tracking-widest mb-6">
-              <Target className="w-4 h-4" /> The Vision
+            <div className="inline-flex items-center gap-2 text-[#074504] font-black uppercase text-xs tracking-widest mb-6">
+              <Target className="w-4 h-4 text-[#C0991B]" /> The Vision
             </div>
             <h2 className="text-4xl md:text-5xl font-extrabold text-[#074504] mb-8 leading-[1.1] uppercase tracking-tight">
               Sustainable <br/>
@@ -515,7 +515,7 @@ export default function Programs() {
           <div className="lg:w-1/2 grid grid-cols-2 gap-4 w-full relative z-10">
             <div className="space-y-4">
               <div className="bg-[#f8faf8] p-8 rounded-[2.5rem] border border-gray-100">
-                <h4 className="text-3xl font-black text-[#599200] mb-1">98%</h4>
+                <h4 className="text-3xl font-black text-[#074504] mb-1">98%</h4>
                 <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Repayment Success</p>
               </div>
               <div className="bg-[#074504] text-white p-8 rounded-[2.5rem] shadow-xl">
@@ -528,7 +528,7 @@ export default function Programs() {
                 <h4 className="text-3xl font-black text-[#C0991B] mb-1">60%</h4>
                 <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Women Borrowers</p>
               </div>
-              <div className="bg-[#599200] text-white p-8 rounded-[2.5rem] shadow-xl">
+              <div className="bg-[#074504] text-white p-8 rounded-[2.5rem] shadow-xl border border-[#074504]/20">
                 <h4 className="text-3xl font-black text-white mb-1">100%</h4>
                 <p className="text-[10px] font-bold text-white/50 uppercase tracking-widest">Local Execution</p>
               </div>
@@ -542,7 +542,7 @@ export default function Programs() {
         <div className="max-w-7xl mx-auto">
           <div className="bg-[#074504] rounded-[3.5rem] p-10 md:p-20 text-white relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-12">
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#C0991B] rounded-full blur-[100px] opacity-10 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#599200] rounded-full blur-[100px] opacity-10 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#074504] rounded-full blur-[100px] opacity-20 pointer-events-none" />
             
             <div className="flex-1 text-center md:text-left">
               <div className="inline-flex items-center gap-2 bg-[#C0991B] text-[#074504] px-4 py-1.5 rounded-full mb-6 font-black text-[10px] uppercase tracking-[0.2em] shadow-lg">

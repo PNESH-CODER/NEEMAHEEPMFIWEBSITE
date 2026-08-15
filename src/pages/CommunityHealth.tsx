@@ -36,7 +36,7 @@ export default function CommunityHealth() {
       <section className="bg-[#074504] text-white py-24 lg:py-32 px-6 lg:px-12 text-center relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-10">
           <div className="absolute top-[-10%] left-[-5%] w-[400px] h-[400px] bg-[#C0991B] rounded-full blur-[120px]" />
-          <div className="absolute bottom-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#599200] rounded-full blur-[150px]" />
+          <div className="absolute bottom-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#074504] rounded-full blur-[150px]" />
         </div>
         
         <div className="max-w-4xl mx-auto relative z-10">
@@ -57,7 +57,7 @@ export default function CommunityHealth() {
             className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-8 tracking-tighter uppercase leading-[0.95]"
           >
             Healthy <span className="text-[#C0991B]">People</span>. <br/>
-            Prosperous <span className="text-[#599200]">Wealth</span>.
+            Prosperous <span className="text-[#C0991B]">Wealth</span>.
           </motion.h1>
           
           <motion.p 
@@ -106,27 +106,27 @@ export default function CommunityHealth() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="md:col-span-2 bg-[#C0991B] p-10 rounded-[2.5rem] flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden group shadow-xl"
+            className="md:col-span-2 bg-[#074504] text-white border border-[#074504] p-10 rounded-[2.5rem] flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden group shadow-xl"
           >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#C0991B]/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
             <div className="relative z-10">
-              <h3 className="text-3xl font-black text-[#074504] mb-4 uppercase leading-tight tracking-tighter">
+              <h3 className="text-3xl font-black text-white mb-4 uppercase leading-tight tracking-tighter">
                 Want to expand your <br/> healthcare outreach?
               </h3>
-              <p className="text-[#074504]/80 font-bold text-lg mb-0">
+              <p className="text-white/80 font-bold text-lg mb-0">
                 Partner with us for medical camps or supply sponsorships.
               </p>
             </div>
             <div className="relative z-10 w-full md:w-auto flex flex-col sm:flex-row gap-4">
               <Link 
                 to="/request-partnership" 
-                className="inline-flex items-center gap-3 bg-[#074504] hover:bg-[#053303] text-white px-8 py-4 rounded-full font-black uppercase text-xs tracking-widest shadow-lg hover:scale-105 transition-all justify-center min-w-[200px]"
+                className="inline-flex items-center gap-3 bg-[#C0991B] hover:bg-[#a38217] text-[#074504] px-8 py-4 rounded-full font-black uppercase text-xs tracking-widest shadow-lg hover:scale-105 transition-all justify-center min-w-[200px]"
               >
                 Become a Health Partner <ArrowRight className="w-4 h-4" />
               </Link>
               <Link 
                 to="/request-callback" 
-                className="inline-flex items-center gap-3 bg-[#C0991B] hover:bg-[#a38217] text-[#074504] px-8 py-4 rounded-full font-bold uppercase text-xs tracking-widest shadow-md transition-all justify-center min-w-[200px]"
+                className="inline-flex items-center gap-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white px-8 py-4 rounded-full font-bold uppercase text-xs tracking-widest shadow-md transition-all justify-center min-w-[200px]"
               >
                 Request a Call Back
               </Link>
@@ -150,7 +150,7 @@ export default function CommunityHealth() {
                   <p className="text-white/60 text-xs font-bold uppercase tracking-widest mt-1">Medical Camps</p>
                </div>
                <div>
-                  <h4 className="text-4xl font-black text-[#599200]">2k+</h4>
+                  <h4 className="text-4xl font-black text-[#C0991B]">2k+</h4>
                   <p className="text-white/60 text-xs font-bold uppercase tracking-widest mt-1">Free Consultations</p>
                </div>
                <div>
@@ -184,7 +184,7 @@ export default function CommunityHealth() {
           We understand health business models. Join us to access specialized capital aimed at upscaling your facility and serving more people.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-          <Link to="/request-callback" className="w-full sm:w-auto bg-[#599200] hover:bg-[#4a7a00] text-white font-black uppercase text-xs tracking-widest py-5 px-12 rounded-full transition-all shadow-xl hover:scale-105">
+          <Link to="/request-callback" className="w-full sm:w-auto bg-[#074504] hover:bg-[#052903] text-white font-black uppercase text-xs tracking-widest py-5 px-12 rounded-full transition-all shadow-xl hover:scale-105">
             Request a Call Back
           </Link>
           <Link to="/registration" className="w-full sm:w-auto border-2 border-[#074504] text-[#074504] font-black uppercase text-xs tracking-widest py-5 px-12 rounded-full hover:bg-[#074504] hover:text-white transition-all">

@@ -34,7 +34,7 @@ export default function EducationSupport() {
       <section className="bg-[#074504] text-white py-24 lg:py-32 px-6 lg:px-12 text-center relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-10">
           <div className="absolute top-[-10%] left-[-5%] w-[400px] h-[400px] bg-[#C0991B] rounded-full blur-[120px]" />
-          <div className="absolute bottom-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#599200] rounded-full blur-[150px]" />
+          <div className="absolute bottom-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#074504] rounded-full blur-[150px]" />
         </div>
         
         <div className="max-w-5xl mx-auto relative z-10">
@@ -76,7 +76,7 @@ export default function EducationSupport() {
 
       {/* Program Origin Section - Enhanced for Neema DNA */}
       <section className="max-w-7xl mx-auto px-6 py-24 relative overflow-hidden">
-        <div className="absolute top-1/2 left-0 w-64 h-64 bg-[#599200]/5 rounded-full blur-3xl -translate-x-1/2"></div>
+        <div className="absolute top-1/2 left-0 w-64 h-64 bg-[#074504]/5 rounded-full blur-3xl -translate-x-1/2"></div>
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
@@ -84,7 +84,7 @@ export default function EducationSupport() {
             viewport={{ once: true }}
             className="relative"
           >
-             <div className="inline-flex items-center gap-2 text-[#599200] font-black uppercase text-xs tracking-[0.3em] mb-6">
+             <div className="inline-flex items-center gap-2 text-[#074504] font-black uppercase text-xs tracking-[0.3em] mb-6">
                 <span className="w-10 h-0.5 bg-[#C0991B]"></span> OUR DNA & ROOTS
              </div>
              <h2 className="text-4xl md:text-6xl font-black text-[#074504] mb-8 uppercase tracking-tighter leading-[1.1]">
@@ -104,13 +104,13 @@ export default function EducationSupport() {
              
              <div className="mt-10 flex flex-wrap gap-4">
                 <div className="flex items-center gap-2 px-4 py-2 bg-[#F4F7F6] rounded-xl text-[#074504] font-bold text-sm">
-                  <CheckCircle2 className="w-4 h-4 text-[#599200]" /> Merit Based
+                  <CheckCircle2 className="w-4 h-4 text-[#C0991B]" /> Merit Based
                 </div>
                 <div className="flex items-center gap-2 px-4 py-2 bg-[#F4F7F6] rounded-xl text-[#074504] font-bold text-sm">
-                  <CheckCircle2 className="w-4 h-4 text-[#599200]" /> Social Need
+                  <CheckCircle2 className="w-4 h-4 text-[#C0991B]" /> Social Need
                 </div>
                 <div className="flex items-center gap-2 px-4 py-2 bg-[#F4F7F6] rounded-xl text-[#074504] font-bold text-sm">
-                  <CheckCircle2 className="w-4 h-4 text-[#599200]" /> Holistic Care
+                  <CheckCircle2 className="w-4 h-4 text-[#C0991B]" /> Holistic Care
                 </div>
              </div>
           </motion.div>

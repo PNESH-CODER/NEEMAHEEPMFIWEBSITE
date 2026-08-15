@@ -30,7 +30,7 @@ export default function EconomicEmpowerment() {
       <section className="bg-[#074504] text-white py-24 lg:py-32 px-6 lg:px-12 text-center relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-10">
           <div className="absolute top-[-10%] right-[-5%] w-[400px] h-[400px] bg-[#C0991B] rounded-full blur-[120px]" />
-          <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-[#599200] rounded-full blur-[150px]" />
+          <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-[#074504] rounded-full blur-[150px]" />
         </div>
         
         <div className="max-w-4xl mx-auto relative z-10">
@@ -51,7 +51,7 @@ export default function EconomicEmpowerment() {
             className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-8 tracking-tighter uppercase leading-[0.95]"
           >
             Building <span className="text-[#C0991B]">Sustainable</span> <br/>
-            Wealth <span className="text-[#599200]">Together</span>.
+            Wealth <span className="text-[#C0991B]">Together</span>.
           </motion.h1>
           
           <motion.p 
@@ -78,7 +78,7 @@ export default function EconomicEmpowerment() {
               whileHover={{ y: -12 }}
               className="bg-white border border-gray-100 p-10 rounded-[2.5rem] flex flex-col items-start hover:shadow-2xl transition-all duration-500 group relative overflow-hidden"
             >
-              <div className="absolute top-0 right-0 w-24 h-24 bg-[#599200]/5 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
+              <div className="absolute top-0 right-0 w-24 h-24 bg-[#074504]/5 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
               <div className="w-16 h-16 rounded-2xl bg-[#074504]/10 border border-[#074504]/20 flex items-center justify-center mb-8 text-[#074504] group-hover:bg-[#074504] group-hover:text-[#C0991B] transition-all duration-300 shadow-xs">
                 {pillar.icon}
               </div>
@@ -93,7 +93,7 @@ export default function EconomicEmpowerment() {
                     className="flex items-center gap-3 text-sm font-bold text-[#074504]/70"
                     whileHover={{ x: 5 }}
                   >
-                    <CheckCircle2 className="w-4 h-4 text-[#599200]" />
+                    <CheckCircle2 className="w-4 h-4 text-[#C0991B]" />
                     <span>{item}</span>
                   </motion.div>
                 ))}
@@ -115,7 +115,7 @@ export default function EconomicEmpowerment() {
            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center relative z-10">
               {[
                 { icon: BarChart3, color: '#C0991B', value: '1000+', label: 'Active Enterprises' },
-                { icon: Globe, color: '#599200', value: '7', label: 'Counties Reached' },
+                { icon: Globe, color: '#C0991B', value: '7', label: 'Counties Reached' },
                 { icon: TrendingUp, color: '#C0991B', value: '98%', label: 'Loan Success Rate' }
               ].map((stat, i) => (
                 <motion.div
@@ -124,7 +124,7 @@ export default function EconomicEmpowerment() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1 }}
                 >
-                  <stat.icon className={`w-8 h-8 text-[${stat.color}] mx-auto mb-4`} />
+                  <stat.icon className="w-8 h-8 text-[#C0991B] mx-auto mb-4" />
                   <h4 className="text-5xl font-black mb-2 tracking-tighter">{stat.value}</h4>
                   <p className="text-white/60 font-bold uppercase text-[10px] tracking-widest">{stat.label}</p>
                 </motion.div>
@@ -135,7 +135,7 @@ export default function EconomicEmpowerment() {
 
       {/* CTA Section */}
       <section className="max-w-4xl mx-auto px-6 mt-32 text-center">
-        <div className="inline-flex items-center gap-2 text-[#599200] font-black uppercase text-xs tracking-widest mb-6">
+        <div className="inline-flex items-center gap-2 text-[#074504] font-black uppercase text-xs tracking-widest mb-6">
            Ready to Start?
         </div>
         <h2 className="text-3xl md:text-5xl font-extrabold text-[#074504] mb-8 uppercase tracking-tight leading-tight">
@@ -145,7 +145,7 @@ export default function EconomicEmpowerment() {
           Take the first step towards sustainable structural growth. Reach out for a specialized consultation or join our network today.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-          <Link to="/contact" className="w-full sm:w-auto bg-[#599200] hover:bg-[#4a7a00] text-white font-black uppercase text-xs tracking-widest py-5 px-10 rounded-full transition-all shadow-xl hover:scale-105">
+          <Link to="/contact" className="w-full sm:w-auto bg-[#074504] hover:bg-[#052903] text-white font-black uppercase text-xs tracking-widest py-5 px-10 rounded-full transition-all shadow-xl hover:scale-105">
             Request a Call Back
           </Link>
           <Link to="/registration" className="w-full sm:w-auto border-2 border-[#074504] text-[#074504] font-black uppercase text-xs tracking-widest py-5 px-10 rounded-full hover:bg-[#074504] hover:text-white transition-all">

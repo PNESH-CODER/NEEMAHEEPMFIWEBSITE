@@ -73,18 +73,6 @@ const INITIAL_LISTS: AnnualBeneficiaryList[] = [
     recordsCount: 8
   },
   {
-    id: 'list_2025',
-    year: '2025',
-    title: 'Arise & Shine Beneficiaries - Selected 2025',
-    description: 'High school scholarship beneficiaries selected in 2025 across Embu County.',
-    status: 'Published',
-    yearIdentifier: 'NH-BEN-2025',
-    dateCreated: '2025-01-12',
-    createdBy: 'Neema HEEP Education Board',
-    lastModified: '2025-01-18',
-    recordsCount: 7
-  },
-  {
     id: 'list_2024',
     year: '2024',
     title: 'Arise & Shine Beneficiaries - Selected 2024',
@@ -145,6 +133,30 @@ const INITIAL_LISTS: AnnualBeneficiaryList[] = [
     recordsCount: 3
   },
   {
+    id: 'list_2019',
+    year: '2019',
+    title: 'Arise & Shine Beneficiaries - Selected 2019',
+    description: 'High school scholarship beneficiaries selected in 2019.',
+    status: 'Published',
+    yearIdentifier: 'NH-BEN-2019',
+    dateCreated: '2019-01-12',
+    createdBy: 'Neema HEEP Education Board',
+    lastModified: '2019-01-18',
+    recordsCount: 4
+  },
+  {
+    id: 'list_2018',
+    year: '2018',
+    title: 'Arise & Shine Beneficiaries - Selected 2018',
+    description: 'High school scholarship beneficiaries selected in 2018.',
+    status: 'Published',
+    yearIdentifier: 'NH-BEN-2018',
+    dateCreated: '2018-01-14',
+    createdBy: 'Neema HEEP Education Board',
+    lastModified: '2018-01-20',
+    recordsCount: 4
+  },
+  {
     id: 'list_2017',
     year: '2017',
     title: 'Arise & Shine Beneficiaries - Selected 2017',
@@ -193,6 +205,30 @@ const INITIAL_LISTS: AnnualBeneficiaryList[] = [
     recordsCount: 3
   },
   {
+    id: 'list_2013',
+    year: '2013',
+    title: 'Arise & Shine Beneficiaries - Selected 2013',
+    description: 'High school scholarship beneficiaries selected in 2013.',
+    status: 'Published',
+    yearIdentifier: 'NH-BEN-2013',
+    dateCreated: '2013-01-10',
+    createdBy: 'Neema HEEP Education Board',
+    lastModified: '2013-01-16',
+    recordsCount: 3
+  },
+  {
+    id: 'list_2012',
+    year: '2012',
+    title: 'Arise & Shine Beneficiaries - Selected 2012',
+    description: 'High school scholarship beneficiaries selected in 2012.',
+    status: 'Published',
+    yearIdentifier: 'NH-BEN-2012',
+    dateCreated: '2012-01-12',
+    createdBy: 'Neema HEEP Education Board',
+    lastModified: '2012-01-18',
+    recordsCount: 3
+  },
+  {
     id: 'list_2011',
     year: '2011',
     title: 'Arise & Shine Beneficiaries - Selected 2011 (Founding Cohort)',
@@ -216,15 +252,6 @@ const INITIAL_RECORDS: BeneficiaryRecord[] = [
   { id: 'rec_2026_6', listId: 'list_2026', serialNumber: 6, fullName: 'KELVIN KIMANZI', maskedName: 'KELVIN K*****', school: 'KANGARU SCHOOL EMBU', year: '2026', dateAdded: '2026-01-10', status: 'Active' },
   { id: 'rec_2026_7', listId: 'list_2026', serialNumber: 7, fullName: 'DENNIS MUGENDI', maskedName: 'DENNIS M*****', school: 'NGUVIU BOYS HIGH SCHOOL', year: '2026', dateAdded: '2026-01-11', status: 'Active' },
   { id: 'rec_2026_8', listId: 'list_2026', serialNumber: 8, fullName: 'MERCY NJERI', maskedName: 'MERCY N*****', school: 'KYENI GIRLS HIGH SCHOOL', year: '2026', dateAdded: '2026-01-12', status: 'Active' },
-
-  // 2025 Cohort
-  { id: 'rec_2025_1', listId: 'list_2025', serialNumber: 1, fullName: 'FAITH MUTHOI KARIUKI', maskedName: 'FAITH M***** K*****', school: 'KANGARU GIRLS HIGH SCHOOL', year: '2025', dateAdded: '2025-01-12', status: 'Active' },
-  { id: 'rec_2025_2', listId: 'list_2025', serialNumber: 2, fullName: 'FRANCIS MURIMI WAWERU', maskedName: 'FRANCIS M***** W*****', school: 'KANGARU SCHOOL EMBU', year: '2025', dateAdded: '2025-01-12', status: 'Active' },
-  { id: 'rec_2025_3', listId: 'list_2025', serialNumber: 3, fullName: 'AGNES WANGARI MURIITHI', maskedName: 'AGNES W***** M*****', school: "ST. ANNE'S KIRIARI GIRLS HIGH SCHOOL", year: '2025', dateAdded: '2025-01-12', status: 'Active' },
-  { id: 'rec_2025_4', listId: 'list_2025', serialNumber: 4, fullName: 'BRIAN MUNENE NJERU', maskedName: 'BRIAN M***** N*****', school: 'MOI HIGH SCHOOL MBIRURI', year: '2025', dateAdded: '2025-01-13', status: 'Active' },
-  { id: 'rec_2025_5', listId: 'list_2025', serialNumber: 5, fullName: 'GRACE WAITHIRA MBOGO', maskedName: 'GRACE W***** M*****', school: 'KYENI GIRLS HIGH SCHOOL', year: '2025', dateAdded: '2025-01-14', status: 'Active' },
-  { id: 'rec_2025_6', listId: 'list_2025', serialNumber: 6, fullName: 'SHADRACK KIPCHUMBA', maskedName: 'SHADRACK K*****', school: 'NGUVIU BOYS HIGH SCHOOL', year: '2025', dateAdded: '2025-01-14', status: 'Active' },
-  { id: 'rec_2025_7', listId: 'list_2025', serialNumber: 7, fullName: 'CAROLINE MAKENA KIMANI', maskedName: 'CAROLINE M***** K*****', school: 'SIAKAGO GIRLS HIGH SCHOOL', year: '2025', dateAdded: '2025-01-15', status: 'Active' },
 
   // 2024 Cohort
   { id: 'rec_2024_1', listId: 'list_2024', serialNumber: 1, fullName: 'LORNA WAIRIMU', maskedName: 'LORNA W*****', school: 'KANGARU GIRLS HIGH SCHOOL', year: '2024', dateAdded: '2024-01-15', status: 'Active' },
@@ -259,6 +286,18 @@ const INITIAL_RECORDS: BeneficiaryRecord[] = [
   { id: 'rec_2020_2', listId: 'list_2020', serialNumber: 2, fullName: 'JOHN MUGENDI KARIUKI', maskedName: 'JOHN M***** K*****', school: 'KANGARU SCHOOL EMBU', year: '2020', dateAdded: '2020-01-12', status: 'Active' },
   { id: 'rec_2020_3', listId: 'list_2020', serialNumber: 3, fullName: 'BEATRICE MUTHOI', maskedName: 'BEATRICE M*****', school: 'NGUVIU GIRLS HIGH SCHOOL', year: '2020', dateAdded: '2020-01-13', status: 'Active' },
 
+  // 2019 Cohort
+  { id: 'rec_2019_1', listId: 'list_2019', serialNumber: 1, fullName: 'CALEB KIPRUTO NJERU', maskedName: 'CALEB K***** N*****', school: 'KANGARU SCHOOL EMBU', year: '2019', dateAdded: '2019-01-12', status: 'Active' },
+  { id: 'rec_2019_2', listId: 'list_2019', serialNumber: 2, fullName: 'ANN UNGARI MWANGI', maskedName: 'ANN U***** M*****', school: 'KANGARU GIRLS HIGH SCHOOL', year: '2019', dateAdded: '2019-01-12', status: 'Active' },
+  { id: 'rec_2019_3', listId: 'list_2019', serialNumber: 3, fullName: 'CHRISTOPHER NDWIGA NJUE', maskedName: 'CHRISTOPHER N***** N*****', school: 'NGUVIU BOYS HIGH SCHOOL', year: '2019', dateAdded: '2019-01-13', status: 'Active' },
+  { id: 'rec_2019_4', listId: 'list_2019', serialNumber: 4, fullName: 'JOY KAWIRA KINOTI', maskedName: 'JOY K***** K*****', school: "ST. ANNE'S KIRIARI GIRLS HIGH SCHOOL", year: '2019', dateAdded: '2019-01-14', status: 'Active' },
+
+  // 2018 Cohort
+  { id: 'rec_2018_1', listId: 'list_2018', serialNumber: 1, fullName: 'DANIEL WAMBUA MUTEGI', maskedName: 'DANIEL W***** M*****', school: 'MOI HIGH SCHOOL MBIRURI', year: '2018', dateAdded: '2018-01-14', status: 'Active' },
+  { id: 'rec_2018_2', listId: 'list_2018', serialNumber: 2, fullName: 'CAROLINE KARIMI GICHOBI', maskedName: 'CAROLINE K***** G*****', school: 'KYENI GIRLS HIGH SCHOOL', year: '2018', dateAdded: '2018-01-14', status: 'Active' },
+  { id: 'rec_2018_3', listId: 'list_2018', serialNumber: 3, fullName: 'PETER KIAGO NJERU', maskedName: 'PETER K***** N*****', school: 'KANGARU SCHOOL EMBU', year: '2018', dateAdded: '2018-01-15', status: 'Active' },
+  { id: 'rec_2018_4', listId: 'list_2018', serialNumber: 4, fullName: 'SARAH NYAWIRA MBOGO', maskedName: 'SARAH N***** M*****', school: 'SIAKAGO GIRLS HIGH SCHOOL', year: '2018', dateAdded: '2018-01-15', status: 'Active' },
+
   // 2017 Cohort
   { id: 'rec_2017_1', listId: 'list_2017', serialNumber: 1, fullName: 'KEVIN MURIUKI', maskedName: 'KEVIN M*****', school: 'KANGARU SCHOOL EMBU', year: '2017', dateAdded: '2017-01-15', status: 'Active' },
   { id: 'rec_2017_2', listId: 'list_2017', serialNumber: 2, fullName: 'RACHAEL WANGARI', maskedName: 'RACHAEL W*****', school: "ST. ANNE'S KIRIARI GIRLS HIGH SCHOOL", year: '2017', dateAdded: '2017-01-15', status: 'Active' },
@@ -279,6 +318,16 @@ const INITIAL_RECORDS: BeneficiaryRecord[] = [
   { id: 'rec_2014_1', listId: 'list_2014', serialNumber: 1, fullName: 'GEORGE MUKUNDI', maskedName: 'GEORGE M*****', school: 'KANGARU SCHOOL EMBU', year: '2014', dateAdded: '2014-01-12', status: 'Active' },
   { id: 'rec_2014_2', listId: 'list_2014', serialNumber: 2, fullName: 'MARY WANJIKU', maskedName: 'MARY W*****', school: 'KANGARU GIRLS HIGH SCHOOL', year: '2014', dateAdded: '2014-01-12', status: 'Active' },
   { id: 'rec_2014_3', listId: 'list_2014', serialNumber: 3, fullName: 'SIMON KARIUKI', maskedName: 'SIMON K*****', school: 'NGUVIU BOYS HIGH SCHOOL', year: '2014', dateAdded: '2014-01-13', status: 'Active' },
+
+  // 2013 Cohort
+  { id: 'rec_2013_1', listId: 'list_2013', serialNumber: 1, fullName: 'BONIFACE KINYUA MURIITHI', maskedName: 'BONIFACE K***** M*****', school: 'KANGARU SCHOOL EMBU', year: '2013', dateAdded: '2013-01-10', status: 'Active' },
+  { id: 'rec_2013_2', listId: 'list_2013', serialNumber: 2, fullName: 'BEATRICE WAMBUI KARIUKI', maskedName: 'BEATRICE W***** K*****', school: 'KANGARU GIRLS HIGH SCHOOL', year: '2013', dateAdded: '2013-01-10', status: 'Active' },
+  { id: 'rec_2013_3', listId: 'list_2013', serialNumber: 3, fullName: 'KENNEDY MUGENDI NYAGA', maskedName: 'KENNEDY M***** N*****', school: 'NGUVIU BOYS HIGH SCHOOL', year: '2013', dateAdded: '2013-01-11', status: 'Active' },
+
+  // 2012 Cohort
+  { id: 'rec_2012_1', listId: 'list_2012', serialNumber: 1, fullName: 'ANTHONY MUNENE NJERU', maskedName: 'ANTHONY M***** N*****', school: 'KANGARU SCHOOL EMBU', year: '2012', dateAdded: '2012-01-12', status: 'Active' },
+  { id: 'rec_2012_2', listId: 'list_2012', serialNumber: 2, fullName: 'ELIZABETH MUTHONI MBOGO', maskedName: 'ELIZABETH M***** M*****', school: "ST. ANNE'S KIRIARI GIRLS HIGH SCHOOL", year: '2012', dateAdded: '2012-01-12', status: 'Active' },
+  { id: 'rec_2012_3', listId: 'list_2012', serialNumber: 3, fullName: 'DAVID MUKUNDI KARIUKI', maskedName: 'DAVID M***** K*****', school: 'MOI HIGH SCHOOL MBIRURI', year: '2012', dateAdded: '2012-01-13', status: 'Active' },
 
   // 2011 Cohort (Inaugural)
   { id: 'rec_2011_1', listId: 'list_2011', serialNumber: 1, fullName: 'MOSES NJERU', maskedName: 'MOSES N*****', school: 'KANGARU SCHOOL EMBU', year: '2011', dateAdded: '2011-01-10', status: 'Active' },
@@ -308,8 +357,32 @@ class BeneficiariesStore {
         const storedLogs = localStorage.getItem('neema_beneficiary_logs');
         const storedNotifs = localStorage.getItem('neema_beneficiary_notifs');
 
-        if (storedL) this.lists = JSON.parse(storedL);
-        if (storedR) this.records = JSON.parse(storedR);
+        if (storedL) {
+          let parsedL: AnnualBeneficiaryList[] = JSON.parse(storedL);
+          // Filter out 2025 list if present
+          parsedL = parsedL.filter(l => l.year !== '2025');
+          // Merge missing initial lists
+          INITIAL_LISTS.forEach(initL => {
+            if (!parsedL.some(l => l.id === initL.id || l.year === initL.year)) {
+              parsedL.push(initL);
+            }
+          });
+          this.lists = parsedL;
+        }
+
+        if (storedR) {
+          let parsedR: BeneficiaryRecord[] = JSON.parse(storedR);
+          // Filter out 2025 records if present
+          parsedR = parsedR.filter(r => r.year !== '2025' && r.listId !== 'list_2025');
+          // Merge missing initial records
+          INITIAL_RECORDS.forEach(initR => {
+            if (initR.year !== '2025' && !parsedR.some(r => r.id === initR.id)) {
+              parsedR.push(initR);
+            }
+          });
+          this.records = parsedR;
+        }
+
         if (storedLogs) this.logs = JSON.parse(storedLogs);
         if (storedNotifs) this.notifications = JSON.parse(storedNotifs);
       } catch (e) {
