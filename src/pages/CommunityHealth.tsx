@@ -6,9 +6,9 @@ export default function CommunityHealth() {
   const initiatives = [
     {
       icon: <Stethoscope className="w-10 h-10" />,
-      title: "Medical Camps",
-      description: "We routinely organize free medical checkups and consultancy in marginalized zones across Mt. Kenya to ensure residents access essential screening.",
-      highlights: ["Free consultations", "Basic screenings", "Local drug access"]
+      title: "Community Health Outreaches",
+      description: "We routinely organize free health checkups, preventive screenings, and clinical consultations in marginalized zones across Mt. Kenya to ensure residents access essential care.",
+      highlights: ["Free Consultations", "Preventive Screenings", "Essential Drug Access"]
     },
     {
       icon: <Droplets className="w-10 h-10" />,
@@ -25,8 +25,8 @@ export default function CommunityHealth() {
     {
       icon: <HeartPulse className="w-10 h-10" />,
       title: "Mosquito Net Distribution",
-      description: "Preventing malaria through mass distribution of treated mosquito nets to vulnerable families during high-risk seasons.",
-      highlights: ["Mass distribution", "Family protection", "Health awareness"]
+      description: "Initiated in September 2013, our programme distributes long-lasting insecticide-treated mosquito nets (LLINs) to microfinance clients, expectant mothers, and under-5s to prevent malaria and safeguard household working capital.",
+      highlights: ["5,000+ Nets Distributed", "Expectant Mothers & Under-5s", "Malaria Bill Savings"]
     }
   ];
 
@@ -114,7 +114,7 @@ export default function CommunityHealth() {
                 Want to expand your <br/> healthcare outreach?
               </h3>
               <p className="text-white/80 font-bold text-lg mb-0">
-                Partner with us for medical camps or supply sponsorships.
+                Partner with us for health outreaches, net distribution, or supply sponsorships.
               </p>
             </div>
             <div className="relative z-10 w-full md:w-auto flex flex-col sm:flex-row gap-4">
@@ -147,7 +147,7 @@ export default function CommunityHealth() {
             <div className="grid grid-cols-2 gap-8">
                <div>
                   <h4 className="text-4xl font-black text-[#C0991B]">50+</h4>
-                  <p className="text-white/60 text-xs font-bold uppercase tracking-widest mt-1">Medical Camps</p>
+                  <p className="text-white/60 text-xs font-bold uppercase tracking-widest mt-1">Health Outreaches</p>
                </div>
                <div>
                   <h4 className="text-4xl font-black text-[#C0991B]">2k+</h4>

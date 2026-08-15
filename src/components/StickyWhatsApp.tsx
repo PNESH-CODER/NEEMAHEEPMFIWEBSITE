@@ -70,7 +70,7 @@ export default function StickyWhatsApp() {
     };
   }, [location.pathname, isAboutPage]);
 
-  if (isDashboardOrPortal || isHomePage || !waSettings.floatingButtonEnabled) return null;
+  if (isDashboardOrPortal || !waSettings.floatingButtonEnabled) return null;
 
   const getMessageContext = () => {
     if (waSettings.prefilledTextEnabled && waSettings.prefilledText.trim()) {
@@ -131,6 +131,10 @@ export default function StickyWhatsApp() {
     ? 'left-4 md:left-6' 
     : 'right-4 md:right-6';
 
+  const bottomClass = isHomePage 
+    ? 'bottom-20 sm:bottom-22' 
+    : 'bottom-5 md:bottom-6';
+
   return (
     <motion.a
       href={whatsappUrl}
@@ -151,7 +155,7 @@ export default function StickyWhatsApp() {
         times: [0, 0.25, 0.5, 0.75, 1]
       }}
       whileHover={{ scale: 1.08, translateY: -4 }}
-      className={`fixed bottom-34 md:bottom-36 ${positionClass} z-50 w-14 h-14 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-full border-2 border-white shadow-[0_0_25px_rgba(37,211,102,0.6)] hover:shadow-[0_0_35px_rgba(37,211,102,0.9)] flex items-center justify-center group transition-all duration-300`}
+      className={`fixed ${bottomClass} ${positionClass} z-50 w-14 h-14 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-full border-2 border-white shadow-[0_0_25px_rgba(37,211,102,0.6)] hover:shadow-[0_0_35px_rgba(37,211,102,0.9)] flex items-center justify-center group transition-all duration-300`}
       aria-label="Chat with us on WhatsApp"
     >
       <span className="absolute inset-0 rounded-full border border-white/60 animate-ping pointer-events-none opacity-40"></span>

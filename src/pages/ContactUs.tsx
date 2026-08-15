@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail, Clock, Send, MessageCircle, Building2, ChevronRight, FileText, Activity, ShieldCheck, Check, ArrowRight } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, MessageCircle, Building2, ChevronRight, FileText, Activity, ShieldCheck, Check, ArrowRight, BookOpen } from 'lucide-react';
 import WhatsAppIcon from '../components/WhatsAppIcon';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -176,6 +176,16 @@ export default function ContactUs() {
                   </div>
                   <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-gray-900 transition-colors" />
                 </Link>
+                <Link to="/blog" className="flex items-center gap-4 p-4 rounded-2xl border border-gray-100 hover:border-gray-300 hover:bg-gray-50 transition-all group">
+                  <div className="w-10 h-10 bg-[#f4f7f6] group-hover:bg-[#F0FDF4] rounded-xl flex items-center justify-center shrink-0 transition-colors">
+                    <BookOpen className="w-5 h-5 text-[#C0991B]" />
+                  </div>
+                  <div className="flex-grow">
+                    <p className="font-bold text-gray-900 leading-tight">Read Our Blog</p>
+                    <p className="text-xs text-gray-500 mt-0.5">Financial insights, tips & stories</p>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-gray-900 transition-colors" />
+                </Link>
               </div>
             </div>
 
@@ -236,29 +246,29 @@ export default function ContactUs() {
               
               <div className="relative z-10 space-y-4">
                 <span className="bg-[#C0991B] text-[#074504] px-3.5 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.2em] inline-block shadow-sm">
-                  ⚡ Fast-Track Membership
+                  ⚡ Insights & Stories
                 </span>
                 <h3 className="text-xl md:text-2xl font-black uppercase tracking-tight text-white leading-snug">
-                  Ready to Grow Your <span className="text-[#C0991B]">Business?</span>
+                  Explore Our <span className="text-[#C0991B]">Latest Blog</span>
                 </h3>
                 <p className="text-white/80 text-xs font-medium leading-relaxed">
-                  Join thousands of satisfied entrepreneurs across Kenya. Register or check your credit eligibility today.
+                  Discover financial literacy guides, success stories, and impact updates from Neema HEEP.
                 </p>
 
                 <div className="pt-2 space-y-3">
                   <Link 
-                    to="/registration" 
+                    to="/blog" 
                     className="w-full bg-[#C0991B] hover:bg-[#a38217] text-[#074504] font-black py-3.5 px-6 rounded-xl shadow-lg transition-all hover:scale-[1.02] flex items-center justify-center gap-2 text-xs uppercase tracking-widest text-center"
                   >
-                    <span>Register to Join</span>
+                    <span>Read Blog Articles</span>
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                   
                   <Link 
-                    to="/pre-qualification" 
+                    to="/registration" 
                     className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md font-bold py-3.5 px-6 rounded-xl transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-widest text-center"
                   >
-                    <span>Check Eligibility</span>
+                    <span>Register to Join</span>
                   </Link>
                 </div>
               </div>

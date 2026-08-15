@@ -219,7 +219,7 @@ function getNavForPath(pathname: string): NavMapping {
   if (cleanPath === '/contact' || cleanPath === '/talk-to-us' || cleanPath === '/request-callback') {
     return {
       prev: { path: '/faq', label: 'Frequently Asked Questions' },
-      next: { path: '/portal', label: 'Members Portal' }
+      next: { path: '/blog', label: 'Blog & Articles' }
     };
   }
 

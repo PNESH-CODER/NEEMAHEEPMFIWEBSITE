@@ -142,15 +142,15 @@ export default function Volunteer() {
          <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
                <div>
-                  <div className="text-4xl md:text-6xl font-black text-[#074504] mb-2 tracking-tighter">150+</div>
+                  <div className="text-4xl md:text-6xl font-black text-[#074504] mb-2 tracking-tighter">10+</div>
                   <div className="text-[10px] font-black text-[#C0991B] uppercase tracking-[0.3em]">Active Mentors</div>
                </div>
                <div>
-                  <div className="text-4xl md:text-6xl font-black text-[#074504] mb-2 tracking-tighter">4.8k</div>
+                  <div className="text-4xl md:text-6xl font-black text-[#074504] mb-2 tracking-tighter">2k</div>
                   <div className="text-[10px] font-black text-[#C0991B] uppercase tracking-[0.3em]">Hours Served</div>
                </div>
                <div>
-                  <div className="text-4xl md:text-6xl font-black text-[#074504] mb-2 tracking-tighter">2k+</div>
+                  <div className="text-4xl md:text-6xl font-black text-[#074504] mb-2 tracking-tighter">100+</div>
                   <div className="text-[10px] font-black text-[#C0991B] uppercase tracking-[0.3em]">Students Guided</div>
                </div>
                <div>

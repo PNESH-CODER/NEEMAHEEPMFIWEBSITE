@@ -39,14 +39,39 @@ export default function Programs() {
     {
       icon: <HeartPulse className="w-10 h-10" />,
       value: "50+",
-      label: "Medical Camps Hosted",
-      description: "Bringing essential healthcare services directly to marginalized areas across the Mount Kenya region.",
+      label: "Health Outreaches Conducted",
+      description: "Bringing essential preventive screenings, consultations, and healthcare support directly to marginalized communities across Mount Kenya.",
       to: "/programs/community-health",
       cta: "Health Initiatives"
     }
   ];
 
   const flagshipPrograms = [
+    {
+      id: "mosquito-net-programme",
+      title: "Neema Mosquito Net Distribution Programme",
+      subtitle: "Preventing Malaria. Saving Medical Costs. Protecting Livelihoods.",
+      icon: <ShieldCheck className="w-10 h-10 text-[#074504]" />,
+      badge: "Malaria Prevention & Health",
+      loanId: "wash",
+      loanName: "Health & WASH Integration",
+      loanLink: "/loans/wash",
+      description: "Initiated in September 2013, the Neema Mosquito Net Distribution Programme provides long-lasting insecticide-treated mosquito nets (LLINs) to microfinance clients, expectant mothers, children under 5, the elderly, and vulnerable rural households in malaria-endemic regions across Mount Kenya and Eastern Kenya.",
+      loanContext: "Malaria inflicts severe financial strain through unexpected medical bills and lost productivity. By preventing malaria, households protect their physical health and preserve hard-earned money to invest in micro-enterprises and economic empowerment.",
+      impactTitle: "Creating Measurable Health & Economic Impact",
+      impactPoints: [
+        "Distributed over 5,000+ long-lasting insecticide-treated mosquito nets across rural counties",
+        "Targeted protection for expectant mothers, children under 5, and microfinance borrower groups",
+        "Prevented catastrophic hospital bill expenses, preserving client working capital",
+        "Special seasonal distribution during high-risk rain periods (e.g., El Niño heavy rains)"
+      ],
+      coopImpact: "For client groups, local schools, and community institutions, the program reduces malaria-induced absenteeism, improves child school attendance, and fosters resilient local economies.",
+      partnerTitle: "Partner With Us to Eliminate Malaria",
+      partnerDesc: "We welcome health organizations, donors, rotary clubs, development partners, and international well-wishers to join Neema HEEP Ltd in expanding mosquito net distribution to vulnerable rural households.",
+      brandTagline: "Neema HEEP Ltd. Financing Sustainable Livelihoods.",
+      accentBg: "bg-[#074504]/5 border-[#074504]/20",
+      badgeBg: "bg-[#C0991B] text-[#074504]"
+    },
     {
       id: "ngdpp",
       title: "Neema Green Dairy Partnership Programme (NGDPP)",
@@ -167,8 +192,8 @@ export default function Programs() {
       title: "Community Health",
       icon: <HeartPulse className="w-12 h-12" />,
       tagline: "Well-being is the foundation of wealth.",
-      description: "Promoting well-being by financing maternal care, medical camps, and targeted WASH loans to ensure families stay healthy and productive.",
-      highlights: ["Maternal Care Financing", "Healthcare Camps", "WASH Initiatives"],
+      description: "Promoting well-being by combining preventive health outreaches, mosquito net distribution, maternal care support, and WASH loans to ensure families stay healthy and productive.",
+      highlights: ["Preventive Health Outreaches", "Mosquito Net Distribution", "WASH & Hygiene Loans"],
       to: "/programs/community-health",
       associatedLoan: "/loans/wash",
       associatedLoanName: "WASH Loan",

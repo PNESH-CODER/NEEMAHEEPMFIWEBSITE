@@ -12,7 +12,7 @@ const quickLinks = [
 
 const programsMap = [
   { label: "Arise & Shine Education", path: "/programs/education-support" },
-  { label: "Mosquito Net Distribution", path: "/programs/community-health" },
+  { label: "Mosquito Net Distribution", path: "/programs#mosquito-net-programme" },
   { label: "Community Health", path: "/programs/community-health" },
   { label: "Economic Empowerment", path: "/programs/economic-empowerment" },
 ];

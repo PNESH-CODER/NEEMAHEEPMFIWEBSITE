@@ -13,42 +13,65 @@ import StickyWhatsApp from './components/StickyWhatsApp';
 import TrackingManager from './components/TrackingManager';
 import AdminGuard from './components/AdminGuard';
 
-// Lazy loading for pages
-const Home = lazy(() => import('./pages/Home'));
-const AboutUs = lazy(() => import('./pages/AboutUs'));
-const LoanProduct = lazy(() => import('./pages/LoanProduct'));
-const LoanProductsIndex = lazy(() => import('./pages/LoanProductsIndex'));
-const JoinUs = lazy(() => import('./pages/JoinUs'));
-const Volunteer = lazy(() => import('./pages/Volunteer'));
-const ContactUs = lazy(() => import('./pages/ContactUs'));
-const Programs = lazy(() => import('./pages/Programs'));
-const EducationSupport = lazy(() => import('./pages/EducationSupport'));
-const CommunityHealth = lazy(() => import('./pages/CommunityHealth'));
-const EconomicEmpowerment = lazy(() => import('./pages/EconomicEmpowerment'));
-const Careers = lazy(() => import('./pages/Careers'));
-const Beneficiaries = lazy(() => import('./pages/Beneficiaries'));
-const SponsorshipRequest = lazy(() => import('./pages/SponsorshipRequest'));
-const Donors = lazy(() => import('./pages/Donors'));
-const Registration = lazy(() => import('./pages/Registration'));
-const Blog = lazy(() => import('./pages/Blog'));
-const Article = lazy(() => import('./pages/Article'));
-const AuthorProfile = lazy(() => import('./pages/AuthorProfile'));
-const FAQ = lazy(() => import('./pages/FAQ'));
-const MembersPortal = lazy(() => import('./pages/MembersPortal'));
-const LegalPage = lazy(() => import('./pages/LegalPage'));
-const CurrentRates = lazy(() => import('./pages/CurrentRates'));
-const PreQualification = lazy(() => import('./pages/PreQualification'));
-const ClientTestimonials = lazy(() => import('./pages/ClientTestimonials'));
-const ProcessAndCompliance = lazy(() => import('./pages/ProcessAndCompliance'));
-const ChecklistsPage = lazy(() => import('./pages/ChecklistsPage'));
-const TalkToUsPage = lazy(() => import('./pages/TalkToUsPage'));
-const RequirementsPage = lazy(() => import('./pages/RequirementsPage'));
-const JobApplication = lazy(() => import('./pages/JobApplication'));
-const RequestCallBack = lazy(() => import('./pages/RequestCallBack'));
-const RequestPartnership = lazy(() => import('./pages/RequestPartnership'));
-const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
-const NewsletterSubscribe = lazy(() => import('./pages/NewsletterSubscribe'));
-const ThankYou = lazy(() => import('./pages/ThankYou'));
+// Direct imports for core primary pages to guarantee immediate availability without dynamic chunk errors
+import Home from './pages/Home';
+import AboutUs from './pages/AboutUs';
+import ContactUs from './pages/ContactUs';
+import LoanProductsIndex from './pages/LoanProductsIndex';
+import Programs from './pages/Programs';
+import JoinUs from './pages/JoinUs';
+import Careers from './pages/Careers';
+import FAQ from './pages/FAQ';
+import Blog from './pages/Blog';
+
+// Robust lazy loading helper with automatic retry for chunk load failures
+function lazyWithRetry(componentImport: () => Promise<any>) {
+  return lazy(async () => {
+    const pageHasBeenRetried = JSON.parse(
+      window.sessionStorage.getItem('retry-lazy-refreshed') || 'false'
+    );
+    try {
+      const component = await componentImport();
+      window.sessionStorage.setItem('retry-lazy-refreshed', 'false');
+      return component;
+    } catch (error) {
+      if (!pageHasBeenRetried) {
+        window.sessionStorage.setItem('retry-lazy-refreshed', 'true');
+        window.location.reload();
+        return new Promise(() => {});
+      }
+      throw error;
+    }
+  });
+}
+
+// Lazy loaded secondary/extended pages
+const LoanProduct = lazyWithRetry(() => import('./pages/LoanProduct'));
+const Volunteer = lazyWithRetry(() => import('./pages/Volunteer'));
+const EducationSupport = lazyWithRetry(() => import('./pages/EducationSupport'));
+const CommunityHealth = lazyWithRetry(() => import('./pages/CommunityHealth'));
+const EconomicEmpowerment = lazyWithRetry(() => import('./pages/EconomicEmpowerment'));
+const Beneficiaries = lazyWithRetry(() => import('./pages/Beneficiaries'));
+const SponsorshipRequest = lazyWithRetry(() => import('./pages/SponsorshipRequest'));
+const Donors = lazyWithRetry(() => import('./pages/Donors'));
+const Registration = lazyWithRetry(() => import('./pages/Registration'));
+const Article = lazyWithRetry(() => import('./pages/Article'));
+const AuthorProfile = lazyWithRetry(() => import('./pages/AuthorProfile'));
+const MembersPortal = lazyWithRetry(() => import('./pages/MembersPortal'));
+const LegalPage = lazyWithRetry(() => import('./pages/LegalPage'));
+const CurrentRates = lazyWithRetry(() => import('./pages/CurrentRates'));
+const PreQualification = lazyWithRetry(() => import('./pages/PreQualification'));
+const ClientTestimonials = lazyWithRetry(() => import('./pages/ClientTestimonials'));
+const ProcessAndCompliance = lazyWithRetry(() => import('./pages/ProcessAndCompliance'));
+const ChecklistsPage = lazyWithRetry(() => import('./pages/ChecklistsPage'));
+const TalkToUsPage = lazyWithRetry(() => import('./pages/TalkToUsPage'));
+const RequirementsPage = lazyWithRetry(() => import('./pages/RequirementsPage'));
+const JobApplication = lazyWithRetry(() => import('./pages/JobApplication'));
+const RequestCallBack = lazyWithRetry(() => import('./pages/RequestCallBack'));
+const RequestPartnership = lazyWithRetry(() => import('./pages/RequestPartnership'));
+const AdminDashboard = lazyWithRetry(() => import('./pages/AdminDashboard'));
+const NewsletterSubscribe = lazyWithRetry(() => import('./pages/NewsletterSubscribe'));
+const ThankYou = lazyWithRetry(() => import('./pages/ThankYou'));
 
 function PageLoader() {
   return (
