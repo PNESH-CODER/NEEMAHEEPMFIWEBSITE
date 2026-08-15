@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Image as ImageIcon, Folder, Layers, UploadCloud, Clock, 
-  Trash2, BarChart3, ShieldAlert, Sparkles, Plus, Search, 
-  Check, Filter, ShieldCheck, Zap, Bell, RefreshCw 
+  Trash2, BarChart3, ShieldAlert, Plus, Search, 
+  Check, Filter, ShieldCheck, Bell, RefreshCw 
 } from 'lucide-react';
 import { damStore } from '../lib/damStore';
 import { MediaItem, DAMSubModule } from '../types/dam';

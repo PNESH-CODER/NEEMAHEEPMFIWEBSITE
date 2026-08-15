@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { 
   X, Crop, RotateCw, FlipHorizontal, FlipVertical, Sliders, 
-  Sparkles, Save, Undo, Redo, Eye, Image as ImageIcon, 
+  Save, Undo, Redo, Eye, Image as ImageIcon, 
   Check, Lock, Unlock, ShieldAlert 
 } from 'lucide-react';
 import { MediaItem, ImageEditOptions } from '../../types/dam';
@@ -228,7 +228,7 @@ export function ImageEditorModal({ media, onClose, onSave }: Props) {
                     activeTab === 'watermark' ? 'bg-[#074504] text-white shadow-xs' : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
-                  <Sparkles className="w-3.5 h-3.5" /> Watermark
+                  <ShieldAlert className="w-3.5 h-3.5" /> Watermark
                 </button>
               </div>
 

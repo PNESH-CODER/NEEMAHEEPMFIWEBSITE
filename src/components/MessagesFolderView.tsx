@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { 
   Mail, Search, Star, Trash2, Reply, CheckCircle2, AlertCircle, 
   Send, User, Phone, Calendar, Tag, Shield, Download, FileText, 
-  HelpCircle, Sparkles, Filter, Check, RefreshCw, Printer,
+  HelpCircle, Filter, Check, RefreshCw, Printer,
   FileSpreadsheet, FileCode, Plus, X, Settings
 } from 'lucide-react';
 import { 
@@ -432,7 +432,7 @@ export default function MessagesFolderView() {
       {/* Toast Feedback */}
       {toast && (
         <div className="fixed bottom-6 right-6 z-50 bg-[#074504] text-white px-5 py-3 rounded-2xl shadow-2xl border border-[#C0991B] text-xs font-bold flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-[#C0991B]" /> {toast}
+          <CheckCircle2 className="w-4 h-4 text-[#C0991B]" /> {toast}
         </div>
       )}
 

@@ -4,7 +4,7 @@ import {
   UserPlus, Sliders, Activity, Clock, AlertTriangle, CheckCircle2, XCircle, 
   Search, Filter, Download, Upload, Plus, Trash2, Edit3, Eye, Copy, Check, 
   RefreshCw, Cpu, Database, Globe, Smartphone, Mail, FileText, Settings, 
-  BarChart3, Zap, Layers, Bell, Key, LockKeyhole, Terminal, ArrowRight, 
+  BarChart3, Layers, Bell, Key, LockKeyhole, Terminal, ArrowRight, 
   SmartphoneNfc, HelpCircle, HardDrive, Wand2, Info, ChevronRight, ShieldQuestion,
   Fingerprint, Monitor, Radio, AlertCircle, FileCode, CheckSquare, X, LayoutGrid
 } from 'lucide-react';
@@ -844,7 +844,7 @@ export default function EnterpriseAdminModule({ className = '' }: { className?: 
     { id: 'devices', label: 'Trusted Devices', icon: Monitor, badge: `${metrics.trustedDevicesCount}` },
     { id: 'sessions', label: 'Active Sessions', icon: Activity, badge: `${metrics.activeSessionsCount}` },
     { id: 'login_history', label: 'Login History', icon: Clock, badge: 'Audit' },
-    { id: 'health', label: 'Account Health', icon: Zap, badge: `${metrics.avgHealth}/100` },
+    { id: 'health', label: 'Account Health', icon: ShieldCheck, badge: `${metrics.avgHealth}/100` },
     { id: 'lockout', label: 'Account Lockout', icon: Lock, badge: `${metrics.lockedUsers}` },
     { id: 'policies', label: 'Security Policies', icon: ShieldAlert, badge: 'Rules' },
     { id: 'audit_logs', label: 'Audit Logs', icon: FileText, badge: `${auditLogs.length}` },
@@ -983,7 +983,7 @@ export default function EnterpriseAdminModule({ className = '' }: { className?: 
             <div className="bg-white p-5 rounded-2xl border-t-4 border-t-emerald-600 border-x border-b border-gray-200 shadow-xs space-y-2">
               <div className="flex items-center justify-between text-gray-500">
                 <span className="text-[10px] font-black uppercase tracking-wider">System Health Index</span>
-                <Zap className="w-5 h-5 text-emerald-600" />
+                <ShieldCheck className="w-5 h-5 text-emerald-600" />
               </div>
               <div className="flex items-baseline gap-2">
                 <span className="text-2xl font-black text-emerald-700">{metrics.avgHealth}/100</span>

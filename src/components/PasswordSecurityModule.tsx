@@ -1,9 +1,9 @@
 import React, { useState, useMemo } from 'react';
 import { 
   Lock, KeyRound, KeySquare, ShieldCheck, ShieldAlert, Eye, EyeOff, 
-  Sparkles, CheckCircle2, XCircle, AlertTriangle, Wand2, Copy, Check, 
+  CheckCircle2, XCircle, AlertTriangle, Wand2, Copy, Check, 
   Info, History, Sliders, Shield, RefreshCw, BookOpen, AlertCircle,
-  Users, UserCheck, Bell, Activity, TrendingUp, BarChart3, Zap, Globe, 
+  Users, UserCheck, Bell, Activity, TrendingUp, BarChart3, Globe, 
   Smartphone, Mail, FileText, CheckSquare, Settings, Clock, Cpu, 
   Layers, Search, Filter, Download, ToggleLeft, ToggleRight, LockKeyhole, 
   UserCog, UserX, Database, ArrowRight, SmartphoneNfc
@@ -449,7 +449,7 @@ export default function PasswordSecurityModule({
             <div className="bg-gradient-to-br from-[#074504] to-[#042d02] text-white p-6 rounded-2xl border border-[#C0991B] space-y-4 shadow-md">
               <div className="flex items-center justify-between border-b border-white/10 pb-3">
                 <div className="flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-[#C0991B]" />
+                  <ShieldCheck className="w-5 h-5 text-[#C0991B]" />
                   <h3 className="font-black text-sm uppercase text-[#C0991B]">Smart Password Generator</h3>
                 </div>
                 <span className="text-[10px] font-bold text-amber-200 bg-white/10 px-2.5 py-1 rounded-full border border-white/20">

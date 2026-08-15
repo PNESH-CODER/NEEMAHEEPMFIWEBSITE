@@ -7,7 +7,6 @@ import {
   ShieldCheck, 
   FileText, 
   Smartphone, 
-  Zap,
   User, 
   Users,
   Camera, 

@@ -146,7 +146,7 @@ const INITIAL_COLLECTIONS: Collection[] = [
     id: 'col_marketing',
     name: 'Marketing Assets',
     description: 'Vector SVG logos, brand guidelines, and M-PESA integration badges.',
-    icon: 'Zap',
+    icon: 'Briefcase',
     color: '#7c3aed',
     mediaIds: ['media_9', 'media_10'],
     isSystemCollection: false,

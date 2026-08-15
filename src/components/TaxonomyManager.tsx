@@ -3,7 +3,7 @@ import {
   FolderTree, Tag as TagIcon, Plus, Search, Filter, 
   Trash2, Edit3, ArrowRight, Layers, CheckCircle2, AlertCircle, 
   RefreshCw, Download, Upload, Copy, ExternalLink, HelpCircle, 
-  ChevronRight, ChevronDown, Check, ShieldCheck, Sparkles,
+  ChevronRight, ChevronDown, Check, ShieldCheck,
   List, Grid, Hash, AlertTriangle, X, Info
 } from 'lucide-react';
 import { blogStore, BlogCategory, BlogTag, BlogPostItem } from '../lib/blogStore';

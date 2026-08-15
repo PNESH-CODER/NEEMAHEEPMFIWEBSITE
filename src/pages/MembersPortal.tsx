@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   Lock, User, ShieldCheck, ShieldAlert, LogIn,
-  Loader2, KeySquare, Eye, EyeOff, Sparkles, BookOpen,
+  Loader2, KeySquare, Eye, EyeOff, BookOpen,
   Mail, Phone, ArrowLeft, CheckCircle2, RotateCw, KeyRound,
   Shield, UserCheck
 } from 'lucide-react';
@@ -415,7 +415,7 @@ export default function MembersPortal() {
 
             <div className="p-3 bg-amber-50 border border-[#C0991B]/40 rounded-xl text-center space-y-1.5">
               <div className="text-[10px] font-black text-amber-900 uppercase flex items-center justify-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-[#C0991B]" /> Demo OTP Code: <span className="font-mono text-sm tracking-widest text-[#074504]">{sentOtp}</span>
+                <KeySquare className="w-3.5 h-3.5 text-[#C0991B]" /> Demo OTP Code: <span className="font-mono text-sm tracking-widest text-[#074504]">{sentOtp}</span>
               </div>
               <button
                 type="button"

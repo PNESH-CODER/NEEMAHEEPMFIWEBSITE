@@ -4,7 +4,7 @@ import {
   AlignLeft, AlignCenter, AlignRight, AlignJustify,
   List, ListOrdered, CheckSquare, Table, Link as LinkIcon,
   RotateCcw, RotateCw, Search, Maximize2, Minimize2,
-  Palette, Paintbrush, Type, Check, X, RefreshCw, Sparkles
+  Palette, Paintbrush, Type, Check, X, RefreshCw
 } from 'lucide-react';
 
 export interface ArticleRichTextToolbarProps {
@@ -437,7 +437,7 @@ export default function ArticleRichTextToolbar({
         />
         <div className="flex items-center justify-between pt-1 border-t border-gray-100 text-[10px] font-bold text-gray-400">
           <span className="flex items-center gap-1">
-            <Sparkles className="w-3 h-3 text-[#C0991B]" /> {content.length} characters | {content.split(/\s+/).filter(Boolean).length} words
+            <Type className="w-3 h-3 text-[#C0991B]" /> {content.length} characters | {content.split(/\s+/).filter(Boolean).length} words
           </span>
           <span>Rich Text Enabled</span>
         </div>

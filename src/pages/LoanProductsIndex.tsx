@@ -13,7 +13,6 @@ import {
   Home, 
   TrendingUp, 
   ChevronDown, 
-  Zap, 
   Calculator,
   Banknote,
   Car,
@@ -23,8 +22,7 @@ import {
   Clock,
   Sun,
   ShieldCheck,
-  Coins,
-  Sparkles
+  Coins
 } from 'lucide-react';
 import WhatsAppIcon from '../components/WhatsAppIcon';
 

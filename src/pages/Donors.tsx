@@ -1,4 +1,4 @@
-import { ArrowRight, Heart, Handshake, ShieldCheck, Globe, Users, Briefcase, Zap, MessageSquare, Copy, Building2, BookOpen, Smartphone, CheckCircle2, AlertCircle } from 'lucide-react';
+import { ArrowRight, Heart, Handshake, ShieldCheck, Globe, Users, Briefcase, TrendingUp, MessageSquare, Copy, Building2, BookOpen, Smartphone, CheckCircle2, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import React, { useState } from 'react';
@@ -189,7 +189,7 @@ export default function Donors() {
                   </div>
                   <div className="flex gap-6">
                      <div className="w-14 h-14 rounded-2xl bg-[#C0991B] flex items-center justify-center text-[#074504] shrink-0 shadow-lg">
-                        <Zap className="w-8 h-8" />
+                        <TrendingUp className="w-8 h-8" />
                      </div>
                      <div>
                         <h4 className="text-xl font-black text-[#074504] uppercase mb-2">Measurable Growth</h4>

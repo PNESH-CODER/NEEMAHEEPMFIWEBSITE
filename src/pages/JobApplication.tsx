@@ -3,7 +3,7 @@ import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { 
   ArrowLeft, Send, Upload, User, Mail, Phone, Briefcase, 
   MapPin, CheckCircle2, ChevronRight, ChevronLeft, FileText, Globe, 
-  AlertCircle, ShieldCheck, Lock, Sparkles, Building2, Calendar, 
+  AlertCircle, ShieldCheck, Lock, Building2, Calendar, 
   Award, BookOpen, Plus, Trash2, Check, Download, Shield
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -331,7 +331,7 @@ export default function JobApplication() {
                   type="submit"
                   className="w-full py-3.5 bg-[#074504] text-[#C0991B] font-black text-xs uppercase rounded-xl shadow-lg hover:bg-[#053203] transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  <Sparkles className="w-4 h-4" />
+                  <ShieldCheck className="w-4 h-4" />
                   <span>Send Verification OTP Codes</span>
                 </button>
               </form>

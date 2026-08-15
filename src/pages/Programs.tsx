@@ -12,7 +12,7 @@ import {
   Droplets, 
   Sun, 
   Handshake, 
-  Sparkles, 
+  Award, 
   ShieldCheck, 
   Coins 
 } from 'lucide-react';
@@ -259,11 +259,78 @@ export default function Programs() {
         </div>
       </section>
 
+      {/* Programs Grid (Core Support Initiatives) */}
+      <section className="max-w-7xl mx-auto px-6 lg:px-12 pt-28 pb-12">
+        <div className="text-center mb-16">
+           <div className="inline-flex items-center gap-2 text-[#599200] font-black uppercase text-xs tracking-widest mb-4">
+              <span className="w-6 h-0.5 bg-[#C0991B]"></span> COMMUNITY INITIATIVES <span className="w-6 h-0.5 bg-[#C0991B]"></span>
+           </div>
+           <h2 className="text-3xl md:text-5xl font-extrabold text-[#074504] uppercase tracking-tight">Broad Social <span className="text-[#C0991B]">Upliftment</span></h2>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {coreInitiatives.map((program, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: idx * 0.1 }}
+              whileHover={{ y: -6 }}
+              className="h-full"
+            >
+              <div 
+                className="group h-full bg-white border border-gray-100 p-10 rounded-[2.5rem] flex flex-col items-start hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] hover:border-[#C0991B]/20 transition-all duration-500"
+              >
+                <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center mb-8 group-hover:bg-[#C0991B]/10 transition-colors duration-500">
+                  <div className={`${program.iconColor} group-hover:scale-110 transition-transform duration-500`}>
+                    {program.icon}
+                  </div>
+                </div>
+                
+                <h3 className="text-3xl font-extrabold text-[#074504] mb-2 uppercase tracking-tight">{program.title}</h3>
+                <p className="text-[#C0991B] font-bold text-sm mb-4 tracking-wide uppercase">{program.tagline}</p>
+                <p className="text-gray-600 mb-8 leading-relaxed font-semibold text-sm">
+                  {program.description}
+                </p>
+                
+                <div className="space-y-3 mb-8 w-full flex-grow">
+                  {program.highlights.map((item, i) => (
+                    <div key={i} className="flex items-center gap-3 text-sm font-bold text-[#074504]/80">
+                      <CheckCircle2 className="w-4 h-4 text-[#599200]" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="space-y-2 w-full pt-6 border-t border-gray-100 mt-auto">
+                  <Link 
+                    to={program.to}
+                    className="flex items-center justify-between text-[#074504] font-black uppercase text-[10px] tracking-widest hover:text-[#599200] transition-colors w-full"
+                  >
+                    <span>Read More</span>
+                    <ArrowRight className="w-4 h-4 text-[#C0991B]" />
+                  </Link>
+
+                  <Link 
+                    to={program.associatedLoan}
+                    className="flex items-center justify-between text-xs font-bold text-[#C0991B] hover:text-[#074504] transition-colors w-full pt-1"
+                  >
+                    <span>{program.associatedLoanName}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       {/* Featured Strategic Programmes (Detailed User-Requested Programs) */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-12 pt-28 pb-16">
+      <section className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 text-[#599200] font-black uppercase text-xs tracking-widest mb-4">
-            <Sparkles className="w-4 h-4 text-[#C0991B]" /> FLAGSHIP PARTNERSHIP PROGRAMMES
+            <Award className="w-4 h-4 text-[#C0991B]" /> FLAGSHIP PARTNERSHIP PROGRAMMES
           </div>
           <h2 className="text-3xl md:text-5xl font-extrabold text-[#074504] uppercase tracking-tight">
             Integrated <span className="text-[#C0991B]">Programme Frameworks</span>
@@ -394,73 +461,6 @@ export default function Programs() {
                       <Handshake className="w-4 h-4 text-[#C0991B]" />
                     </Link>
                   </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* Programs Grid (Core Support Initiatives) */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
-        <div className="text-center mb-16">
-           <div className="inline-flex items-center gap-2 text-[#599200] font-black uppercase text-xs tracking-widest mb-4">
-              <span className="w-6 h-0.5 bg-[#C0991B]"></span> COMMUNITY INITIATIVES <span className="w-6 h-0.5 bg-[#C0991B]"></span>
-           </div>
-           <h2 className="text-3xl md:text-5xl font-extrabold text-[#074504] uppercase tracking-tight">Broad Social <span className="text-[#C0991B]">Upliftment</span></h2>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {coreInitiatives.map((program, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
-              whileHover={{ y: -6 }}
-              className="h-full"
-            >
-              <div 
-                className="group h-full bg-white border border-gray-100 p-10 rounded-[2.5rem] flex flex-col items-start hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] hover:border-[#C0991B]/20 transition-all duration-500"
-              >
-                <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center mb-8 group-hover:bg-[#C0991B]/10 transition-colors duration-500">
-                  <div className={`${program.iconColor} group-hover:scale-110 transition-transform duration-500`}>
-                    {program.icon}
-                  </div>
-                </div>
-                
-                <h3 className="text-3xl font-extrabold text-[#074504] mb-2 uppercase tracking-tight">{program.title}</h3>
-                <p className="text-[#C0991B] font-bold text-sm mb-4 tracking-wide uppercase">{program.tagline}</p>
-                <p className="text-gray-600 mb-8 leading-relaxed font-semibold text-sm">
-                  {program.description}
-                </p>
-                
-                <div className="space-y-3 mb-8 w-full flex-grow">
-                  {program.highlights.map((item, i) => (
-                    <div key={i} className="flex items-center gap-3 text-sm font-bold text-[#074504]/80">
-                      <CheckCircle2 className="w-4 h-4 text-[#599200]" />
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="space-y-2 w-full pt-6 border-t border-gray-100 mt-auto">
-                  <Link 
-                    to={program.to}
-                    className="flex items-center justify-between text-[#074504] font-black uppercase text-[10px] tracking-widest hover:text-[#599200] transition-colors w-full"
-                  >
-                    <span>Read More</span>
-                    <ArrowRight className="w-4 h-4 text-[#C0991B]" />
-                  </Link>
-
-                  <Link 
-                    to={program.associatedLoan}
-                    className="flex items-center justify-between text-xs font-bold text-[#C0991B] hover:text-[#074504] transition-colors w-full pt-1"
-                  >
-                    <span>{program.associatedLoanName}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
                 </div>
               </div>
             </motion.div>

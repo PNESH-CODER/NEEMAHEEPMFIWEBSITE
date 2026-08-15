@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail, Clock, Send, MessageCircle, Building2, ChevronRight, FileText, Activity, ShieldCheck, Check, ArrowRight, Zap } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, MessageCircle, Building2, ChevronRight, FileText, Activity, ShieldCheck, Check, ArrowRight } from 'lucide-react';
 import WhatsAppIcon from '../components/WhatsAppIcon';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -350,7 +350,7 @@ export default function ContactUs() {
 
              <div className="relative z-10 max-w-3xl mx-auto">
                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full border border-[#C0991B]/40 mb-6">
-                 <Zap className="w-3.5 h-3.5 text-[#C0991B]" />
+                 <Phone className="w-3.5 h-3.5 text-[#C0991B]" />
                  <span className="text-[11px] font-black uppercase tracking-[0.2em] text-[#C0991B]">Remote Services & M-PESA Support</span>
                </div>
 

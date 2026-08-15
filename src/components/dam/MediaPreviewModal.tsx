@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { 
-  X, Download, Copy, Check, Sparkles, Crop, ExternalLink, 
+  X, Download, Copy, Check, Crop, ExternalLink, 
   Info, Tag, Calendar, User, FileText, Music, Video, ShieldCheck 
 } from 'lucide-react';
 import { MediaItem } from '../../types/dam';
@@ -101,7 +101,7 @@ export function MediaPreviewModal({ media, onClose, onOpenEditor, onOpenAIAssist
                 }}
                 className="p-2.5 bg-[#074504] text-white font-extrabold text-xs rounded-xl flex items-center justify-center gap-1 cursor-pointer"
               >
-                <Sparkles className="w-3.5 h-3.5 text-[#C0991B]" /> Metadata Inspector
+                <ShieldCheck className="w-3.5 h-3.5 text-[#C0991B]" /> Metadata Inspector
               </button>
 
               {media.fileType === 'image' && (

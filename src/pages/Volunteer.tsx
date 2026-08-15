@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Heart, Users, BookOpen, Star, ArrowRight, ShieldCheck, Zap, Handshake, Mail, Smartphone } from 'lucide-react';
+import { Heart, Users, BookOpen, Star, ArrowRight, ShieldCheck, Award, Handshake, Mail, Smartphone } from 'lucide-react';
 import { Helmet } from '../components/Helmet';
 import SmartLeadForm from '../components/SmartLeadForm';
 
@@ -22,7 +22,7 @@ export default function Volunteer() {
       desc: "Assist in identifying deserving students in grassroots areas and supporting our field operations."
     },
     {
-      icon: <Zap className="w-8 h-8" />,
+      icon: <Award className="w-8 h-8" />,
       title: "Life Skills Trainer",
       desc: "Facilitate workshops on leadership, financial literacy, and social responsibility for our beneficiaries."
     }

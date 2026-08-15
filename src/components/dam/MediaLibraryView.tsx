@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { 
   Grid, List, LayoutGrid, Image as ImageIcon, Calendar, 
   Search, Filter, ArrowUpDown, CheckSquare, Square, 
-  Eye, Crop, Download, Copy, Trash2, Tag, Sparkles, 
-  Folder, MoreVertical, Check, ShieldCheck, Zap, Maximize2, Clock 
+  Eye, Crop, Download, Copy, Trash2, Tag, 
+  Folder, MoreVertical, Check, ShieldCheck, Maximize2, Clock 
 } from 'lucide-react';
 import { damStore } from '../../lib/damStore';
 import { MediaItem, ViewMode, MediaType } from '../../types/dam';
@@ -337,7 +337,7 @@ export function MediaLibraryView({
                       className="p-2 bg-white text-[#074504] hover:bg-[#C0991B] rounded-xl font-bold text-xs shadow-md"
                       title="Smart Alt Text Inspector"
                     >
-                      <Sparkles className="w-4 h-4 text-[#C0991B]" />
+                      <Tag className="w-4 h-4 text-[#C0991B]" />
                     </button>
                   </div>
                 </div>

@@ -29,8 +29,6 @@ import {
   Unlock,
   Key,
   Cpu,
-  Zap,
-  Sparkles,
   Plus,
   Minus,
   Eye,
@@ -829,7 +827,7 @@ $$;`
                 </div>
 
                 <div className="p-3.5 bg-white/10 rounded-xl border border-white/10 flex items-start gap-3">
-                  <Zap className="w-5 h-5 text-amber-300 shrink-0 mt-0.5" />
+                  <ShieldCheck className="w-5 h-5 text-amber-300 shrink-0 mt-0.5" />
                   <div>
                     <h4 className="text-xs font-black text-white">Pre-Update Snapshot Safety Hooks</h4>
                     <p className="text-[11px] text-gray-200 mt-0.5">
@@ -1109,7 +1107,7 @@ $$;`
                     onClick={handleRunManualBackup}
                     className="w-full py-3.5 bg-[#C0991B] hover:bg-[#a88414] text-[#074504] font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
                   >
-                    <Zap className="w-4 h-4 fill-current" /> Execute On-Demand Backup
+                    <Play className="w-4 h-4 fill-current" /> Execute On-Demand Backup
                   </button>
                 )}
               </div>

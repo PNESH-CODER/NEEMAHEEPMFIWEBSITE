@@ -3,7 +3,7 @@ import {
   User, Users, Globe, CheckCircle2, X, Edit3, Trash2, 
   Search, Mail, Phone, ImageIcon, FileText, Briefcase, GraduationCap, 
   Award, TrendingUp, Eye, Grid, List, ShieldCheck, Check, Plus,
-  Sparkles, Lock, ArrowUpRight, ShieldAlert, BookOpen, Clock, HeartHandshake, Calculator, Layers
+  Lock, ArrowUpRight, ShieldAlert, BookOpen, Clock, HeartHandshake, Calculator, Layers
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { profilesStore, ExtendedUserProfile } from '../lib/profilesStore';
@@ -404,7 +404,7 @@ export default function UserProfileManager() {
             exit={{ opacity: 0, y: -20 }}
             className="fixed top-6 right-6 z-50 bg-[#074504] text-[#C0991B] px-5 py-3 rounded-2xl shadow-2xl border-2 border-[#C0991B] flex items-center gap-3 font-bold text-xs uppercase tracking-wide"
           >
-            <Sparkles className="w-4 h-4 text-[#C0991B] animate-pulse" />
+            <ShieldCheck className="w-4 h-4 text-[#C0991B] animate-pulse" />
             <span>{toastMessage}</span>
           </motion.div>
         )}
@@ -1887,7 +1887,7 @@ export default function UserProfileManager() {
                 <div className="bg-gradient-to-r from-[#074504] via-[#095906] to-[#074504] p-4 rounded-2xl border border-[#C0991B] text-white space-y-3">
                   <div className="flex items-center justify-between text-xs font-black uppercase text-[#C0991B]">
                     <span>Explore Neema HEEP Solutions</span>
-                    <Sparkles className="w-3.5 h-3.5" />
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#C0991B]" />
                   </div>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px]">
                     <button onClick={() => { triggerToast('Navigating to Micro-Loans...'); window.location.hash = '/loans'; }} className="p-2 bg-[#C0991B] text-[#074504] font-black rounded-lg uppercase truncate hover:bg-amber-400 cursor-pointer">

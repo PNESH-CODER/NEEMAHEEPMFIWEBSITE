@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { 
   User, Mail, Phone, MapPin, Award, BookOpen, ArrowLeft, ArrowUpRight, 
-  CheckCircle2, ShieldCheck, Briefcase, GraduationCap, Globe, Sparkles 
+  CheckCircle2, ShieldCheck, Briefcase, GraduationCap, Globe 
 } from 'lucide-react';
 import { BLOG_POSTS } from '../lib/blogData';
 
@@ -177,7 +177,7 @@ export default function AuthorProfile() {
 
           <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-xs space-y-4">
             <h3 className="text-xs font-black uppercase text-[#074504] tracking-wider border-b pb-2 flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4 text-[#C0991B]" /> Core Expertise
+              <Award className="w-4 h-4 text-[#C0991B]" /> Core Expertise
             </h3>
             <div className="flex flex-wrap gap-2">
               {author.expertise.map((exp, i) => (

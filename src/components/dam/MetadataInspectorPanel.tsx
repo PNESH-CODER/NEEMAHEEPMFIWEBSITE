@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   X, Tag, Calendar, User, Eye, Download, Copy, 
-  ExternalLink, Sparkles, Crop, Trash2, Check, ShieldCheck, 
+  ExternalLink, Crop, Trash2, Check, ShieldCheck, 
   Building2, FileText, Share2, Info 
 } from 'lucide-react';
 import { MediaItem } from '../../types/dam';
@@ -110,7 +110,7 @@ export function MetadataInspectorPanel({
             onClick={() => onOpenAIAssistant(media)}
             className="p-2.5 bg-gradient-to-r from-[#074504] to-[#053203] text-white text-xs font-extrabold rounded-xl transition-all shadow-xs flex items-center justify-center gap-1.5 border border-[#C0991B]/40 cursor-pointer"
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#C0991B]" /> Auto Metadata
+            <ShieldCheck className="w-3.5 h-3.5 text-[#C0991B]" /> Auto Metadata
           </button>
 
           {media.fileType === 'image' && (

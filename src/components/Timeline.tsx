@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FileText, ShieldCheck, Award, Zap, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { FileText, ShieldCheck, Award, Smartphone, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export default function Timeline() {
@@ -37,7 +37,7 @@ export default function Timeline() {
       title: 'Mobile Disbursement',
       desc: 'Funds are disbursed directly and securely to your M-PESA phone number or bank account.',
       tag: 'Instant M-PESA',
-      icon: Zap,
+      icon: Smartphone,
       color: 'from-[#074504] to-[#042d03]',
       accentColor: '#C0991B'
     }
@@ -116,7 +116,7 @@ export default function Timeline() {
         <div className="bg-white/10 border border-white/15 rounded-3xl p-6 sm:p-8 backdrop-blur-md flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4 text-left">
             <div className="w-12 h-12 rounded-2xl bg-[#599200] flex items-center justify-center text-white shrink-0 shadow-md">
-              <Zap className="w-6 h-6" />
+              <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
               <h4 className="text-lg font-extrabold text-white">Ready to Access Growth Capital?</h4>

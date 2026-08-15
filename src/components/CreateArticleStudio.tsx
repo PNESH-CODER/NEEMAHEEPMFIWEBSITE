@@ -3,9 +3,9 @@ import ArticleRichTextToolbar from './ArticleRichTextToolbar';
 import { useAuth } from '../hooks/useAuth';
 import { blogStore } from '../lib/blogStore';
 import { 
-  PenTool, CheckCircle, ArrowLeft, Save, Eye, Sparkles, Plus, 
+  PenTool, CheckCircle, ArrowLeft, Save, Eye, Plus, 
   Trash2, ArrowUp, ArrowDown, Image as ImageIcon, FileText, 
-  Heading, Quote, Zap, Tag, Folder, User, Globe, Search, Award, Check,
+  Heading, Quote, Send, Tag, Folder, User, Globe, Search, Award, Check,
   Upload, Link as LinkIcon, Video, Focus, ShieldCheck, Share2, Sliders, X, Maximize2, Layers, Film,
   Lock, FolderPlus, Layers3, Calendar, Clock, RotateCw, Archive, AlertCircle, CalendarDays
 } from 'lucide-react';
@@ -407,7 +407,7 @@ export default function CreateArticleStudio({
             onClick={handlePublishNow}
             className="px-5 py-2.5 bg-[#074504] hover:bg-[#053203] text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center gap-1.5 cursor-pointer border border-[#C0991B]/50"
           >
-            <Zap className="w-4 h-4 text-[#C0991B]" /> Publish Article Now
+            <Send className="w-4 h-4 text-[#C0991B]" /> Publish Article Now
           </button>
         </div>
       </div>
@@ -885,7 +885,7 @@ export default function CreateArticleStudio({
                 onClick={() => handleAddBlock('tip')}
                 className="px-3.5 py-2 bg-gray-100 hover:bg-emerald-600 hover:text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer group shadow-2xs"
               >
-                <Zap className="w-3.5 h-3.5 text-amber-600 group-hover:text-white" /> Key Takeaway
+                <Award className="w-3.5 h-3.5 text-amber-600 group-hover:text-white" /> Key Takeaway
               </button>
               <button
                 type="button"
@@ -925,7 +925,7 @@ export default function CreateArticleStudio({
                       {block.type === 'paragraph' && <FileText className="w-3.5 h-3.5 text-blue-600" />}
                       {block.type === 'quote' && <Quote className="w-3.5 h-3.5 text-[#C0991B]" />}
                       {block.type === 'image' && <ImageIcon className="w-3.5 h-3.5 text-purple-600" />}
-                      {block.type === 'tip' && <Zap className="w-3.5 h-3.5 text-amber-600" />}
+                      {block.type === 'tip' && <Award className="w-3.5 h-3.5 text-amber-600" />}
                       <span className="text-[#074504] font-black">{block.type} Block</span>
                       <span className="text-[9px] font-bold text-gray-400 normal-case bg-white px-2 py-0.5 rounded-md border border-gray-200">
                         Auto-Formatted
@@ -1185,7 +1185,7 @@ export default function CreateArticleStudio({
                 onClick={() => handleAddBlock('tip')}
                 className="px-3 py-1.5 bg-gray-100 hover:bg-emerald-600 hover:text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
               >
-                <Zap className="w-3.5 h-3.5" /> Key Takeaway
+                <Award className="w-3.5 h-3.5" /> Key Takeaway
               </button>
               <button
                 type="button"
@@ -1204,7 +1204,7 @@ export default function CreateArticleStudio({
           <div className="p-6 bg-white rounded-3xl border border-gray-200 shadow-xs space-y-4">
             <div className="border-b border-gray-100 pb-3 flex items-center justify-between">
               <span className="text-xs font-black uppercase tracking-wider text-gray-900 flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-[#C0991B]" /> Publication Status
+                <ShieldCheck className="w-4 h-4 text-[#C0991B]" /> Publication Status
               </span>
               <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${
                 editorStatus === 'Published' ? 'bg-emerald-600 text-white shadow-xs' :

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
 import { LOAN_PRODUCTS } from '../lib/loanData';
 import { LoanType } from '../lib/loanEngine';
-import { CheckCircle2, ArrowRight, ChevronDown, ChevronUp, Users, UserCheck, Check, Sparkles, HelpCircle, ShieldCheck } from 'lucide-react';
+import { CheckCircle2, ArrowRight, ChevronDown, ChevronUp, Users, UserCheck, Check, HelpCircle, ShieldCheck } from 'lucide-react';
 import { trackHighInterestTimeOnPage } from '../services/trackingService';
 
 export default function LoanProduct() {
@@ -178,7 +178,7 @@ export default function LoanProduct() {
             {/* Header & Overview */}
             <div className="text-center space-y-3">
               <div className="inline-flex items-center gap-2 bg-[#074504]/10 text-[#074504] px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider">
-                <Sparkles className="w-4 h-4 text-[#C0991B]" /> {product.name} Overview
+                <ShieldCheck className="w-4 h-4 text-[#C0991B]" /> {product.name} Overview
               </div>
               <h2 className="text-3xl lg:text-4xl font-extrabold text-[#074504]">
                 {product.subHeading || product.tagline}

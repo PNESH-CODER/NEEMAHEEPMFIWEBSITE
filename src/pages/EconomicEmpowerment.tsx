@@ -1,4 +1,4 @@
-import { ArrowRight, TrendingUp, Handshake, Landmark, Briefcase, Zap, BarChart3, Globe } from 'lucide-react';
+import { ArrowRight, TrendingUp, Handshake, Landmark, Briefcase, CheckCircle2, BarChart3, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 
@@ -93,7 +93,7 @@ export default function EconomicEmpowerment() {
                     className="flex items-center gap-3 text-sm font-bold text-[#074504]/70"
                     whileHover={{ x: 5 }}
                   >
-                    <Zap className="w-4 h-4 text-[#599200]" />
+                    <CheckCircle2 className="w-4 h-4 text-[#599200]" />
                     <span>{item}</span>
                   </motion.div>
                 ))}
@@ -116,7 +116,7 @@ export default function EconomicEmpowerment() {
               {[
                 { icon: BarChart3, color: '#C0991B', value: '1000+', label: 'Active Enterprises' },
                 { icon: Globe, color: '#599200', value: '7', label: 'Counties Reached' },
-                { icon: Zap, color: '#C0991B', value: '98%', label: 'Loan Success Rate' }
+                { icon: TrendingUp, color: '#C0991B', value: '98%', label: 'Loan Success Rate' }
               ].map((stat, i) => (
                 <motion.div
                   key={i}

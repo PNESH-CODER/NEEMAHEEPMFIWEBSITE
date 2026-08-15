@@ -6,7 +6,7 @@ import {
   Sliders, Shield, ShieldCheck, ShieldAlert, Users, UserCheck, UserX, UserPlus, 
   CheckCircle2, XCircle, Search, Filter, Plus, Trash2, Edit3, Eye, EyeOff, Copy, Check, 
   RefreshCw, ChevronRight, CheckSquare, X, Info, Wand2, Layers, AlertCircle, 
-  ArrowRight, GitBranch, Key, Lock, Unlock, FileText, Download, Zap, Globe, SmartphoneNfc, Activity, Sparkles
+  ArrowRight, GitBranch, Key, Lock, Unlock, FileText, Download, Globe, SmartphoneNfc, Activity
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 

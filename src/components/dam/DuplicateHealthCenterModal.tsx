@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
-  ShieldAlert, X, Sparkles, AlertTriangle, CheckCircle2, 
-  FileX, Image as ImageIcon, Zap, Trash2, Check 
+  ShieldAlert, X, AlertTriangle, CheckCircle2, 
+  FileX, Image as ImageIcon, Tag, RefreshCw, Trash2, Check 
 } from 'lucide-react';
 import { damStore } from '../../lib/damStore';
 import { MediaItem } from '../../types/dam';
@@ -126,7 +126,7 @@ export function DuplicateHealthCenterModal({ onClose, onRefreshMedia }: Props) {
             <div className="p-4 bg-white rounded-2xl border border-gray-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div className="space-y-1">
                 <div className="text-xs font-extrabold text-gray-900 flex items-center gap-1.5">
-                  <Sparkles className="w-4 h-4 text-[#C0991B]" /> Auto-Generate Missing Alt Text
+                  <Tag className="w-4 h-4 text-[#C0991B]" /> Auto-Generate Missing Alt Text
                 </div>
                 <p className="text-[11px] text-gray-600 font-medium">
                   {missingAlt.length} files currently lack accessible alt text. Click to auto-generate WCAG 2.2 compliant descriptions.
@@ -146,7 +146,7 @@ export function DuplicateHealthCenterModal({ onClose, onRefreshMedia }: Props) {
             <div className="p-4 bg-white rounded-2xl border border-gray-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div className="space-y-1">
                 <div className="text-xs font-extrabold text-gray-900 flex items-center gap-1.5">
-                  <Zap className="w-4 h-4 text-[#074504]" /> Bulk Compress Oversized Assets
+                  <RefreshCw className="w-4 h-4 text-[#074504]" /> Bulk Compress Oversized Assets
                 </div>
                 <p className="text-[11px] text-gray-600 font-medium">
                   {oversizedFiles.length} files exceed 2MB. Apply lossy WebP compression to improve site loading speed by up to 50%.

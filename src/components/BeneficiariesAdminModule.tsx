@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import * as XLSX from 'xlsx';
 import { 
   Users, Calendar, Plus, Edit, Trash2, Download, Upload, Eye, CheckCircle2, 
-  Clock, Shield, Sparkles, RefreshCw, ChevronRight, BarChart3, PieChart, 
+  Clock, Shield, RefreshCw, ChevronRight, BarChart3, PieChart, 
   TrendingUp, Sliders, UserCheck, X, Check, Copy, ExternalLink, Award, 
   BookOpen, Lock, Globe, Database, Terminal, ShieldCheck, Mail, Phone, 
   Search, Filter, ArrowUp, ArrowDown, FileText, AlertCircle, FileSpreadsheet,
@@ -457,7 +457,7 @@ export default function BeneficiariesAdminModule({
             exit={{ opacity: 0, y: -20 }}
             className="fixed top-6 right-6 z-50 bg-[#074504] text-[#C0991B] px-5 py-3 rounded-2xl shadow-2xl border border-[#C0991B]/40 font-bold text-xs flex items-center gap-2"
           >
-            <Sparkles className="w-4 h-4 text-[#C0991B]" />
+            <ShieldCheck className="w-4 h-4 text-[#C0991B]" />
             <span>{toastMessage}</span>
           </motion.div>
         )}

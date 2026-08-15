@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Share2, Save, Plus, Trash2, CheckCircle2, ExternalLink, RefreshCw, Eye, Globe, X,
-  MessageCircle, Code, Database, Sparkles, Smartphone, Settings, Check
+  MessageCircle, Code, Database, Smartphone, Settings, Check
 } from 'lucide-react';
 import { blogStore, SocialLinkItem, WhatsAppSettings } from '../lib/blogStore';
 import { renderPlatformIcon, HeaderSocialIcons, FooterSocialIcons } from './SocialIcons';
@@ -389,7 +389,7 @@ export default function SocialMediaAdminModule() {
                 <div className="flex items-center justify-between gap-2 border-b border-gray-200/60 pb-3 mb-3">
                   <div>
                     <h4 className="text-xs font-black text-gray-900 flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-emerald-600" />
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                       3. Pre-filled Text Starter
                     </h4>
                     <p className="text-[11px] text-gray-500 font-medium">

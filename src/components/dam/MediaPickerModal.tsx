@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   X, Check, Search, Filter, Image as ImageIcon, 
-  UploadCloud, Sparkles, Folder 
+  UploadCloud, Folder 
 } from 'lucide-react';
 import { damStore } from '../../lib/damStore';
 import { MediaItem } from '../../types/dam';

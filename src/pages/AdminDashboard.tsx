@@ -10,7 +10,7 @@ import {
   X, RefreshCw, Shield, Building2, UserPlus, Users, UserCheck, MessageSquare, AlertCircle,
   FolderTree, Tag, Mail, Palette, Globe, Database, Download, Upload, Play, CheckSquare, Flame, Rss, ArrowUpRight, Send,
   Key, KeyRound, LockKeyhole, Activity, TrendingUp, PieChart, Filter, HelpCircle, Menu, Briefcase, Target, Layers,
-  Wallet, Coins, ShieldCheck, Clock, Zap, Sun, Home, ArrowUp, HardDrive, Sliders, Calendar as CalendarIcon, ArrowDown, Server, Share2, PenTool
+  Wallet, Coins, ShieldCheck, Clock, Sun, Home, ArrowUp, HardDrive, Sliders, Calendar as CalendarIcon, ArrowDown, Server, Share2, PenTool
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useAuth } from '../hooks/useAuth';

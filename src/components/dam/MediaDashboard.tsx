@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   BarChart3, Image as ImageIcon, Video, Music, FileText, 
-  Archive, Zap, ArrowUpRight, Sparkles 
+  Archive, UploadCloud, ShieldCheck, ArrowUpRight 
 } from 'lucide-react';
 import { damStore } from '../../lib/damStore';
 import { MediaItem } from '../../types/dam';
@@ -63,7 +63,7 @@ export function MediaDashboard({ onNavigateSubmodule, onPreviewMedia }: Props) {
       <div className="bg-gradient-to-br from-[#074504] via-[#053203] to-[#032002] text-white p-6 md:p-8 rounded-3xl shadow-lg relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border border-[#C0991B]/30">
         <div className="space-y-2 z-10">
           <div className="inline-flex items-center gap-2 bg-[#C0991B]/20 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-widest text-[#C0991B] border border-[#C0991B]/30">
-            <Sparkles className="w-3.5 h-3.5" /> Digital Assets Monitoring
+            <ShieldCheck className="w-3.5 h-3.5" /> Digital Assets Monitoring
           </div>
           <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-white">
             Digital Asset Analytics
@@ -78,7 +78,7 @@ export function MediaDashboard({ onNavigateSubmodule, onPreviewMedia }: Props) {
             onClick={() => onNavigateSubmodule('uploads')}
             className="px-5 py-2.5 bg-[#C0991B] hover:bg-[#a38012] text-[#074504] font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center gap-1.5 cursor-pointer"
           >
-            <Zap className="w-4 h-4" /> Quick Upload
+            <UploadCloud className="w-4 h-4" /> Quick Upload
           </button>
           <button
             onClick={() => onNavigateSubmodule('library')}

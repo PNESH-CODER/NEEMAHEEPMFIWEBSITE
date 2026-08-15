@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, PhoneCall, Building2, TrendingUp, Zap, MapPin, MousePointer2 } from 'lucide-react';
+import { ArrowRight, PhoneCall, Building2, TrendingUp, Clock, MapPin, MousePointer2 } from 'lucide-react';
 import CountUp from 'react-countup';
 import { motion, AnimatePresence } from 'motion/react';
 import WhyChooseUs from '../components/WhyChooseUs';
@@ -171,7 +171,7 @@ export default function Home() {
               {[
                 { num: 1000, suffix: "+", label: "SMEs FUNDED", icon: Building2, color: "#C0991B" },
                 { num: 56, suffix: "%", label: "RURAL OUTREACH", icon: TrendingUp, color: "#C0991B" },
-                { num: 6, suffix: "hrs", label: "AVERAGE RESPONSE", iconImage: "/average_response_gold.png", icon: Zap, color: "#C0991B" },
+                { num: 6, suffix: "hrs", label: "AVERAGE RESPONSE", iconImage: "/average_response_gold.png", icon: Clock, color: "#C0991B" },
                 { num: 7, suffix: "", label: "COUNTIES SERVED", icon: MapPin, color: "#C0991B" }
               ].map((stat, i) => (
                 <motion.div 

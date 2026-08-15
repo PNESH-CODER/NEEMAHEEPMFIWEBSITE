@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
-  Sparkles, X, Check, FileText, Tag, ShieldCheck, 
-  Search, RefreshCw, Award, Copy, CheckCircle2, Zap 
+  X, Check, FileText, Tag, ShieldCheck, 
+  Search, RefreshCw, Award, Copy, CheckCircle2 
 } from 'lucide-react';
 import { MediaItem } from '../../types/dam';
 
@@ -84,7 +84,7 @@ export function AIMediaAssistantModal({ media, onClose, onApplySuggestions }: Pr
         <div className="bg-gradient-to-r from-[#074504] to-[#053203] text-white p-5 px-6 flex items-center justify-between border-b border-[#C0991B]/30">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-2xl bg-[#C0991B] text-[#074504] flex items-center justify-center shadow-md">
-              <Sparkles className="w-5 h-5 animate-pulse" />
+              <ShieldCheck className="w-5 h-5 animate-pulse" />
             </div>
             <div>
               <h3 className="text-sm font-black uppercase tracking-wide text-white">

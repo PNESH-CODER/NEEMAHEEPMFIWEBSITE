@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { 
   MessageSquare, ShieldAlert, CheckCircle2, AlertTriangle, Trash2, Eye, EyeOff, 
-  Search, Filter, RefreshCw, Sparkles, UserX, Ban, UserCheck, Flag, Download, 
+  Search, Filter, RefreshCw, UserX, Ban, UserCheck, Flag, Download, 
   Printer, Plus, ChevronRight, ChevronDown, ChevronUp, Edit3, CornerDownRight, 
   Clock, Award, Activity, BarChart2, Shield, Settings, Sliders, Check, X, 
-  Info, Cpu, ExternalLink, ThumbsUp, Send, User, Layers, FileText, Globe, Smartphone, Monitor, Lock, Zap, Wand2
+  Info, Cpu, ExternalLink, ThumbsUp, Send, User, Layers, FileText, Globe, Smartphone, Monitor, Lock, Wand2
 } from 'lucide-react';
 import { 
   communityStore, EnterpriseComment, ModeratedUser, ModerationRules, 
@@ -258,7 +258,7 @@ export default function CommentsModerationModule({ className = '' }: { className
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed bottom-6 right-6 z-50 bg-[#074504] text-[#C0991B] px-5 py-3 rounded-2xl shadow-2xl border border-[#C0991B] font-black text-xs uppercase flex items-center gap-2 animate-in slide-in-from-bottom-5">
-          <Sparkles className="w-4 h-4 text-[#C0991B] animate-spin" />
+          <RefreshCw className="w-4 h-4 text-[#C0991B] animate-spin" />
           <span>{toastMessage}</span>
         </div>
       )}

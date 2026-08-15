@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { 
   Briefcase, Plus, Search, Filter, Download, FileText, CheckCircle2, 
   Clock, AlertCircle, AlertTriangle, Building2, MapPin, Users, Calendar, Eye, Edit3, 
-  Trash2, FileSpreadsheet, Printer, Send, Shield, Sparkles, RefreshCw, 
+  Trash2, FileSpreadsheet, Printer, Send, Shield, RefreshCw, 
   ChevronRight, ArrowUpRight, BarChart3, PieChart, TrendingUp, Layers, 
   Sliders, UserCheck, X, Check, Copy, ExternalLink, Award, BookOpen, 
   Lock, Globe, Database, Terminal, ShieldCheck, Mail, Phone, Flame, ArrowLeft, Archive
@@ -690,7 +690,7 @@ export default function VacanciesAdminModule({ className = '' }: { className?: s
             exit={{ opacity: 0, y: -20 }}
             className="fixed top-6 right-6 z-50 bg-[#074504] text-white px-5 py-3 rounded-2xl shadow-2xl border border-[#C0991B]/40 flex items-center gap-3 font-bold text-xs"
           >
-            <Sparkles className="w-4 h-4 text-[#C0991B]" />
+            <ShieldCheck className="w-4 h-4 text-[#C0991B]" />
             <span>{toastMessage}</span>
           </motion.div>
         )}

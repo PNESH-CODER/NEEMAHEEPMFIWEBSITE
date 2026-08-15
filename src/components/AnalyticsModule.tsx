@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { 
   BarChart3, TrendingUp, Users, Eye, FileText, MessageSquare, ArrowUpRight, ArrowDownRight,
-  Search, Filter, Calendar, Download, RefreshCw, Zap, ShieldCheck, CheckCircle2, AlertTriangle,
-  Globe, Smartphone, Laptop, Clock, Share2, Layers, Award, Target, Sparkles, Sliders, Mail,
+  Search, Filter, Calendar, Download, RefreshCw, ShieldCheck, CheckCircle2, AlertTriangle,
+  Globe, Smartphone, Laptop, Clock, Share2, Layers, Award, Target, Sliders, Mail,
   ChevronDown, ChevronRight, FileSpreadsheet, FileText as PdfIcon, Send, Database, Activity,
   Server, Lock, PieChart as PieChartIcon, Bell, ArrowUp, ArrowDown, HelpCircle, MapPin, Check,
   Radio, BarChart2, CornerRightDown, ExternalLink, RefreshCcw, Cpu, Bookmark, ThumbsUp, BookOpen,
@@ -828,7 +828,7 @@ export function AnalyticsModule({ showToast = (msg) => console.log(msg) }: Analy
                     <CheckCircle2 className="w-4 h-4" /> SEO: Excellent
                   </div>
                   <div className="flex items-center gap-1.5 text-amber-300">
-                    <Zap className="w-4 h-4" /> Speed: 1.2s LCP
+                    <Clock className="w-4 h-4" /> Speed: 1.2s LCP
                   </div>
                 </div>
               </div>
@@ -1546,7 +1546,7 @@ export function AnalyticsModule({ showToast = (msg) => console.log(msg) }: Analy
               <div className="p-5 bg-gradient-to-br from-emerald-50 to-emerald-100/60 rounded-2xl border border-emerald-200 space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-extrabold text-emerald-900 uppercase tracking-wider flex items-center gap-1.5">
-                    <Sparkles className="w-4 h-4 text-emerald-600" /> Fresh First-Time Visitors
+                    <Users className="w-4 h-4 text-emerald-600" /> Fresh First-Time Visitors
                   </span>
                   <span className="px-2.5 py-1 bg-emerald-800 text-white text-xs font-black rounded-lg">58% Share</span>
                 </div>
@@ -1585,7 +1585,7 @@ export function AnalyticsModule({ showToast = (msg) => console.log(msg) }: Analy
           {/* Header Banner */}
           <div className="bg-gradient-to-r from-[#074504] via-[#053203] to-[#022002] p-6 rounded-3xl text-white shadow-xl border border-[#C0991B]/30 space-y-3">
             <div className="flex items-center gap-2 text-[#C0991B] font-extrabold text-xs uppercase tracking-widest">
-              <Zap className="w-4 h-4" /> Audience Dwell, Page Depth &amp; Exit Mitigation
+              <Activity className="w-4 h-4" /> Audience Dwell, Page Depth &amp; Exit Mitigation
             </div>
             <h3 className="text-2xl font-black tracking-tight">
               Engagement Metrics: Exit Pages, Pages Per Session &amp; Bounce Rate

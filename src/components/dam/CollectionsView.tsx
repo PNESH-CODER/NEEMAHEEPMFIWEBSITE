@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   Layers, Plus, Search, Share2, Copy, Check, Trash2, 
-  FileText, Award, Briefcase, Users, FileCheck, Zap, Folder as FolderIcon, FolderPlus, X
+  FileText, Award, Briefcase, Users, FileCheck, Folder as FolderIcon, FolderPlus, X
 } from 'lucide-react';
 import { damStore } from '../../lib/damStore';
 import { Collection, FolderColor } from '../../types/dam';

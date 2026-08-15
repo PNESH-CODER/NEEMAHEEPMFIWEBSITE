@@ -1,4 +1,4 @@
-import { ArrowLeft, Search, GraduationCap, School, MapPin, Printer, Download, Award, Users, Calendar } from 'lucide-react';
+import { ArrowLeft, Search, GraduationCap, School, MapPin, Printer, Download, Award, Users, Calendar, Filter } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { useState, useEffect } from 'react';
@@ -8,9 +8,22 @@ import { printHtmlReport } from '../lib/pdfPrintUtils';
 
 export default function Beneficiaries() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [activeYear, setActiveYear] = useState('All');
   const [selectedSchool, setSelectedSchool] = useState('All');
   const [publishedData, setPublishedData] = useState(() => beneficiariesStore.getPublishedLists());
+
+  // Determine available years and the most current year (highest numerical year)
+  const availableYears = Array.from(new Set(publishedData.map(d => d.year)))
+    .sort((a, b) => Number(b) - Number(a));
+  const mostCurrentYear = availableYears[0] || '2026';
+
+  // Active year defaults to the most current year dynamically
+  const [activeYear, setActiveYear] = useState<string>(() => {
+    const initialLists = beneficiariesStore.getPublishedLists();
+    const years = Array.from(new Set(initialLists.map(d => d.year))).sort((a, b) => Number(b) - Number(a));
+    return years[0] || '2026';
+  });
+
+  const [prevTopYear, setPrevTopYear] = useState(mostCurrentYear);
 
   useEffect(() => {
     let isMounted = true;
@@ -34,21 +47,42 @@ export default function Beneficiaries() {
     };
   }, []);
 
-  const years = ['All', ...Array.from(new Set(publishedData.map(d => d.year)))];
+  // When publishedData updates with a new latest year, auto-switch activeYear to the new most current year
+  useEffect(() => {
+    if (mostCurrentYear && (mostCurrentYear !== prevTopYear || !activeYear)) {
+      setActiveYear(mostCurrentYear);
+      setPrevTopYear(mostCurrentYear);
+    }
+  }, [mostCurrentYear, prevTopYear, activeYear]);
 
-  // Extract all unique schools across cohorts
+  // Year options for dropdown (no duplicate "Most Current" option)
+  const yearOptions = [
+    { id: 'All', label: 'All Years' },
+    ...availableYears.map(y => ({ id: y, label: `Year ${y}` }))
+  ];
+
+  // Extract all unique high schools across all cohorts
   const allSchools = ['All', ...Array.from(new Set(
     publishedData.flatMap(d => d.students.map(s => s.school))
   )).filter(Boolean).sort()];
 
-  const filteredData = publishedData.filter(data => 
-    activeYear === 'All' || data.year === activeYear
-  ).map(yearGroup => ({
+  const isSchoolPicked = selectedSchool !== 'All';
+  const isSearchPicked = searchTerm.trim().length > 0;
+  const isMostCurrentDefault = activeYear === mostCurrentYear && !isSchoolPicked && !isSearchPicked;
+
+  // Filter Data Logic: Display matching beneficiaries according to activeYear, selectedSchool, and searchTerm
+  const filteredData = publishedData.filter(yearGroup => {
+    if (activeYear === 'All') {
+      return true;
+    }
+    return yearGroup.year === activeYear;
+  }).map(yearGroup => ({
     ...yearGroup,
     students: yearGroup.students.filter(s => {
-      const matchSearch = s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          s.school.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchSchool = selectedSchool === 'All' || s.school === selectedSchool;
+      const matchSearch = !isSearchPicked ||
+        s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        s.school.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchSchool = !isSchoolPicked || s.school === selectedSchool;
       return matchSearch && matchSchool;
     })
   })).filter(yearGroup => yearGroup.students.length > 0);
@@ -65,10 +99,16 @@ export default function Beneficiaries() {
       ])
     );
 
+    const yearScopeText = activeYear === 'All' 
+      ? 'All Years' 
+      : `Year ${activeYear}`;
+
+    const schoolScopeText = isSchoolPicked ? ` - ${selectedSchool}` : '';
+
     printHtmlReport({
       title: 'NEEMA HEEP - ARISE & SHINE EDUCATION PROGRAMME',
-      subtitle: `Official Beneficiaries Roster (${activeYear === 'All' ? 'All Cohorts 2011-2026' : activeYear + ' Cohort'}) - ${rows.length} Scholars Listed`,
-      columns: ['S.NO', 'Student Name', 'High School Attending', 'Cohort Year'],
+      subtitle: `Official Beneficiaries Roster (${yearScopeText}${schoolScopeText}) - ${rows.length} Scholars Listed`,
+      columns: ['S.NO', 'Student Name', 'High School Attending', 'Year'],
       rows: rows
     });
   };
@@ -160,7 +200,7 @@ export default function Beneficiaries() {
 
       {/* Filter & Search Bar */}
       <section className="max-w-7xl mx-auto px-6 -mt-8 relative z-20">
-         <div className="bg-white rounded-[2rem] shadow-2xl p-4 md:p-6 border border-gray-100 space-y-4">
+         <div className="bg-white rounded-[2rem] shadow-2xl p-4 md:p-6 border border-gray-100">
             <div className="flex flex-col lg:flex-row gap-4 items-center">
               <div className="relative flex-grow w-full">
                  <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -173,12 +213,27 @@ export default function Beneficiaries() {
                  />
               </div>
 
+              {/* Year Filter Dropdown */}
+              <div className="w-full lg:w-56 shrink-0">
+                <select
+                  value={activeYear}
+                  onChange={(e) => setActiveYear(e.target.value)}
+                  className="w-full bg-gray-50 border border-gray-100 rounded-2xl py-4 px-5 outline-none focus:ring-4 focus:ring-[#074504]/5 focus:border-[#C0991B] transition-all font-bold text-[#074504] text-xs uppercase cursor-pointer"
+                >
+                  {yearOptions.map(opt => (
+                    <option key={opt.id} value={opt.id}>
+                      {opt.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               {/* High School Filter Dropdown */}
-              <div className="w-full lg:w-72 shrink-0">
+              <div className="w-full lg:w-64 shrink-0">
                 <select
                   value={selectedSchool}
                   onChange={(e) => setSelectedSchool(e.target.value)}
-                  className="w-full bg-gray-50 border border-gray-100 rounded-2xl py-4 px-5 outline-none focus:ring-4 focus:ring-[#074504]/5 focus:border-[#C0991B] transition-all font-bold text-[#074504] text-xs uppercase"
+                  className="w-full bg-gray-50 border border-gray-100 rounded-2xl py-4 px-5 outline-none focus:ring-4 focus:ring-[#074504]/5 focus:border-[#C0991B] transition-all font-bold text-[#074504] text-xs uppercase cursor-pointer"
                 >
                   <option value="All">All High Schools ({allSchools.length - 1})</option>
                   {allSchools.filter(s => s !== 'All').map(school => (
@@ -190,35 +245,53 @@ export default function Beneficiaries() {
               {/* Print / Report Button */}
               <button
                 onClick={handlePrint}
-                className="w-full lg:w-auto bg-[#074504] hover:bg-[#052903] text-white px-6 py-4 rounded-2xl font-bold uppercase text-xs tracking-wider transition-all flex items-center justify-center gap-2 shrink-0 shadow-md"
+                className="w-full lg:w-auto bg-[#074504] hover:bg-[#052903] text-white px-6 py-4 rounded-2xl font-bold uppercase text-xs tracking-wider transition-all flex items-center justify-center gap-2 shrink-0 shadow-md cursor-pointer"
               >
                 <Printer className="w-4 h-4 text-[#C0991B]" />
                 Print Roster
               </button>
             </div>
-
-            {/* Year Selector Tabs */}
-            <div className="flex gap-2 w-full overflow-x-auto pb-2 no-scrollbar border-t border-gray-100 pt-3">
-               <span className="text-[10px] font-black uppercase text-gray-400 flex items-center pr-2 shrink-0">Cohort Year:</span>
-               {years.map(y => (
-                 <button
-                   key={y}
-                   onClick={() => setActiveYear(y)}
-                   className={`px-5 py-2.5 rounded-xl font-black uppercase text-[10px] tracking-widest transition-all whitespace-nowrap ${
-                     activeYear === y 
-                     ? 'bg-[#074504] text-white shadow-lg' 
-                     : 'bg-gray-50 text-gray-500 hover:bg-gray-100'
-                   }`}
-                 >
-                   {y === 'All' ? 'All Cohorts' : `${y}`}
-                 </button>
-               ))}
-            </div>
          </div>
       </section>
 
       {/* Beneficiaries List */}
-      <section className="max-w-7xl mx-auto px-6 py-16">
+      <section className="max-w-7xl mx-auto px-6 py-12">
+         {/* Status & Filter Indicator Banner (Shown when non-default filters or search terms are applied) */}
+         {!isMostCurrentDefault && (
+           <div className="mb-8 p-4 bg-[#C0991B]/10 border border-[#C0991B]/30 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+             <div className="flex flex-wrap items-center gap-2 text-[#074504] font-bold">
+               <Filter className="w-4 h-4 text-[#C0991B] shrink-0" />
+               <span className="uppercase font-black text-[10px] tracking-wider">Active Filter:</span>
+               <span className="bg-white px-2.5 py-1 rounded-lg border border-gray-200 text-[#074504] uppercase font-black text-[10px]">
+                 {activeYear === 'All' ? 'All Years' : `Year ${activeYear}`}
+               </span>
+               {isSchoolPicked && (
+                 <span className="bg-white px-2.5 py-1 rounded-lg border border-gray-200 text-[#074504] uppercase font-black text-[10px]">
+                   School: {selectedSchool}
+                 </span>
+               )}
+               {isSearchPicked && (
+                 <span className="bg-white px-2.5 py-1 rounded-lg border border-gray-200 text-[#074504] uppercase font-black text-[10px]">
+                   Search: "{searchTerm}"
+                 </span>
+               )}
+               <span className="text-[#074504]/70 font-bold ml-1">
+                 ({filteredData.reduce((acc, y) => acc + y.students.length, 0)} Scholars listed)
+               </span>
+             </div>
+             <button
+               onClick={() => {
+                 setActiveYear(mostCurrentYear);
+                 setSelectedSchool('All');
+                 setSearchTerm('');
+               }}
+               className="text-[10px] font-black uppercase text-[#074504] hover:bg-[#074504] hover:text-white transition-all cursor-pointer bg-white px-3 py-1.5 rounded-xl border border-gray-200 shadow-2xs shrink-0"
+             >
+               Reset to Most Current Only
+             </button>
+           </div>
+         )}
+
          {filteredData.length > 0 ? (
            <div className="space-y-16">
              {filteredData.map((yearGroup, idx) => (
@@ -234,7 +307,7 @@ export default function Beneficiaries() {
                     <div className="flex items-center gap-2 bg-[#074504] text-white px-5 py-2 rounded-full shadow-md">
                       <GraduationCap className="w-4 h-4 text-[#C0991B]" />
                       <h2 className="text-base md:text-lg font-black uppercase tracking-tight">
-                        Selected Cohort <span className="text-[#C0991B]">{yearGroup.year}</span>
+                        Year <span className="text-[#C0991B]">{yearGroup.year}</span>
                       </h2>
                       <span className="bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded-full ml-1">
                         {yearGroup.students.length} Scholars
@@ -250,7 +323,7 @@ export default function Beneficiaries() {
                              <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[0.2em] border-r border-[#074504]/10 w-24 text-center">S.NO</th>
                              <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[0.2em] border-r border-[#074504]/10">Student's Name</th>
                              <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[0.2em] border-r border-[#074504]/10">High School Attending</th>
-                             <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-center w-32">Cohort</th>
+                             <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-center w-32">Year</th>
                           </tr>
                        </thead>
                        <tbody>

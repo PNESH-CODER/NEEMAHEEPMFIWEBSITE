@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { 
   X, UploadCloud, Link as LinkIcon, FolderPlus, FileArchive, 
-  Sparkles, ShieldCheck, Check, AlertCircle, Pause, Play, 
+  ShieldCheck, Check, AlertCircle, Pause, Play, 
   RotateCcw, FileText, Image as ImageIcon, Music, Video, Archive, Layers, Folder as FolderIcon, Plus 
 } from 'lucide-react';
 import { damStore } from '../../lib/damStore';
