@@ -12,10 +12,10 @@ export default function ChecklistsPage() {
       ] 
     },
     { 
-      title: 'Group Loan (Chama) Requirements', 
+      title: 'Group Loan (Chama)', 
       items: [
-        'Members ID numbers', 
-        'Members KRA PIN certificates'
+        'Group/ willingness to join or form one', 
+        'ID Copy'
       ] 
     },
     { 
@@ -39,14 +39,13 @@ export default function ChecklistsPage() {
         {checklists.map((c, i) => (
           <div key={i} className="bg-white p-6 rounded-2xl border border-gray-200 shadow-xs space-y-4">
             <h3 className="font-bold text-sm text-gray-900 border-b pb-2">{c.title}</h3>
-            <ul className="space-y-2 text-xs text-gray-600">
+            <ol className="space-y-2 text-xs text-gray-600 list-decimal list-inside">
               {c.items.map((item, idx) => (
-                <li key={idx} className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#074504] mt-1.5 shrink-0" />
+                <li key={idx} className="font-medium leading-relaxed">
                   <span>{item}</span>
                 </li>
               ))}
-            </ul>
+            </ol>
           </div>
         ))}
       </div>

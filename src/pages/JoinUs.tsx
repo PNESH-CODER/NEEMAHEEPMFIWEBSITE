@@ -434,60 +434,56 @@ export default function JoinUs() {
                 </>
               )}
 
-              <div className="md:col-span-2 grid grid-cols-3 gap-4">
+              <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                    <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1 ml-1">County</label>
                    <select 
                     value={formData.county}
                     onChange={e => setFormData({...formData, county: e.target.value, constituency: '', ward: ''})}
-                    className="w-full bg-gray-50 border border-gray-100 rounded-2xl px-4 py-4 outline-none font-bold text-[#074504]"
+                    className="w-full bg-gray-50 border border-gray-100 rounded-2xl px-4 py-4 outline-none font-bold text-[#074504] focus:border-[#599200]"
                    >
                      <option value="">Select County</option>
                      {COUNTIES.map(c => <option key={c} value={c}>{c}</option>)}
                    </select>
                 </div>
                 <div>
-                  <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1 ml-1">Sub-county</label>
-                  {COUNTY_DATA[formData.county] ? (
+                  <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1 ml-1">Sub-county (Constituency)</label>
+                  {formData.county ? (
                     <select 
                       value={formData.constituency}
                       onChange={e => setFormData({...formData, constituency: e.target.value, ward: ''})}
-                      className="w-full bg-gray-50 border border-gray-100 rounded-2xl px-4 py-4 outline-none font-bold text-[#074504]"
+                      className="w-full bg-gray-50 border border-gray-100 rounded-2xl px-4 py-4 outline-none font-bold text-[#074504] focus:border-[#599200]"
                     >
                       <option value="">Select Sub-county</option>
-                      {(COUNTY_DATA[formData.county].constituencies || []).map(c => <option key={c} value={c}>{c}</option>)}
+                      {COUNTY_DATA[formData.county].subCounties.map(sc => (
+                        <option key={sc} value={sc}>{sc}</option>
+                      ))}
                       <option value="Other">Other</option>
                     </select>
                   ) : (
-                    <input 
-                      type="text" 
-                      value={formData.constituency}
-                      onChange={e => setFormData({...formData, constituency: e.target.value})}
-                      placeholder="Enter Sub-county"
-                      className="w-full bg-gray-50 border border-gray-100 rounded-2xl px-4 py-4 outline-none font-bold text-[#074504]" 
-                    />
+                    <select disabled className="w-full bg-gray-100 border border-gray-100 rounded-2xl px-4 py-4 outline-none font-bold text-gray-400 cursor-not-allowed">
+                      <option value="">Select County First</option>
+                    </select>
                   )}
                 </div>
                 <div>
-                  <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1 ml-1">Ward</label>
-                  {COUNTY_DATA[formData.county]?.wards[formData.constituency] ? (
+                  <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1 ml-1">Ward Location</label>
+                  {formData.county && formData.constituency ? (
                     <select 
                       value={formData.ward}
                       onChange={e => setFormData({...formData, ward: e.target.value})}
-                      className="w-full bg-gray-50 border border-gray-100 rounded-2xl px-4 py-4 outline-none font-bold text-[#074504]"
+                      className="w-full bg-gray-50 border border-gray-100 rounded-2xl px-4 py-4 outline-none font-bold text-[#074504] focus:border-[#599200]"
                     >
                       <option value="">Select Ward</option>
-                      {COUNTY_DATA[formData.county].wards[formData.constituency].map(w => <option key={w} value={w}>{w}</option>)}
+                      {COUNTY_DATA[formData.county].wards[formData.constituency].map(w => (
+                        <option key={w} value={w}>{w}</option>
+                      ))}
                       <option value="Other">Other</option>
                     </select>
                   ) : (
-                    <input 
-                      type="text" 
-                      value={formData.ward}
-                      onChange={e => setFormData({...formData, ward: e.target.value})}
-                      placeholder="Enter Ward"
-                      className="w-full bg-gray-50 border border-gray-100 rounded-2xl px-4 py-4 outline-none font-bold text-[#074504]" 
-                    />
+                    <select disabled className="w-full bg-gray-100 border border-gray-100 rounded-2xl px-4 py-4 outline-none font-bold text-gray-400 cursor-not-allowed">
+                      <option value="">Select Sub-county First</option>
+                    </select>
                   )}
                 </div>
               </div>

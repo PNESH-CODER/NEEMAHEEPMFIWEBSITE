@@ -11,6 +11,7 @@ import {
   useJobs, KENYAN_COUNTIES, EducationRecord, EmploymentRecord, 
   MembershipRecord, ReferenceRecord 
 } from '../hooks/useJobs';
+import { COUNTY_DATA } from '../lib/countyData';
 
 export default function JobApplication() {
   const location = useLocation();
@@ -47,7 +48,9 @@ export default function JobApplication() {
     kraPinCertName: '',
     phone: '',
     email: '',
-    county: 'Nyeri'
+    county: 'Nyeri',
+    subCounty: '',
+    ward: ''
   });
 
   // Step 2: Education History
@@ -530,17 +533,62 @@ export default function JobApplication() {
                     />
                   </div>
 
-                  <div className="space-y-1">
-                    <label className="text-xs font-bold text-gray-700">County of Residence (47 Counties) *</label>
-                    <select
-                      value={identity.county}
-                      onChange={e => setIdentity(prev => ({ ...prev, county: e.target.value }))}
-                      className="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs font-bold text-[#074504]"
-                    >
-                      {KENYAN_COUNTIES.map(c => (
-                        <option key={c} value={c}>{c} County</option>
-                      ))}
-                    </select>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:col-span-2">
+                    <div className="space-y-1">
+                      <label className="text-xs font-bold text-gray-700">County of Residence *</label>
+                      <select
+                        value={identity.county}
+                        onChange={e => setIdentity(prev => ({ ...prev, county: e.target.value, subCounty: '', ward: '' }))}
+                        className="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs font-bold text-[#074504]"
+                      >
+                        <option value="">Select County</option>
+                        {KENYAN_COUNTIES.map(c => (
+                          <option key={c} value={c}>{c} County</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="space-y-1">
+                      <label className="text-xs font-bold text-gray-700">Sub-county (Constituency)</label>
+                      {identity.county ? (
+                        <select
+                          value={identity.subCounty}
+                          onChange={e => setIdentity(prev => ({ ...prev, subCounty: e.target.value, ward: '' }))}
+                          className="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs font-bold text-[#074504]"
+                        >
+                          <option value="">Select Sub-county</option>
+                          {COUNTY_DATA[identity.county].subCounties.map(sc => (
+                            <option key={sc} value={sc}>{sc}</option>
+                          ))}
+                          <option value="Other">Other</option>
+                        </select>
+                      ) : (
+                        <select disabled className="w-full p-2.5 bg-gray-100 border border-gray-200 rounded-xl text-xs font-bold text-gray-400 cursor-not-allowed">
+                          <option value="">Select County First</option>
+                        </select>
+                      )}
+                    </div>
+
+                    <div className="space-y-1">
+                      <label className="text-xs font-bold text-gray-700">Ward Location</label>
+                      {identity.county && identity.subCounty ? (
+                        <select
+                          value={identity.ward}
+                          onChange={e => setIdentity(prev => ({ ...prev, ward: e.target.value }))}
+                          className="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs font-bold text-[#074504]"
+                        >
+                          <option value="">Select Ward</option>
+                          {COUNTY_DATA[identity.county].wards[identity.subCounty].map(w => (
+                            <option key={w} value={w}>{w}</option>
+                          ))}
+                          <option value="Other">Other</option>
+                        </select>
+                      ) : (
+                        <select disabled className="w-full p-2.5 bg-gray-100 border border-gray-200 rounded-xl text-xs font-bold text-gray-400 cursor-not-allowed">
+                          <option value="">Select Sub-county First</option>
+                        </select>
+                      )}
+                    </div>
                   </div>
                 </div>
 

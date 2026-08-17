@@ -475,7 +475,7 @@ export default function SponsorshipRequest() {
 
                         <div>
                           <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-1">Sub-county (Constituency)</label>
-                          {COUNTY_DATA[form.county] ? (
+                          {form.county ? (
                             <select
                               name="subCounty"
                               value={form.subCounty || ''}
@@ -494,23 +494,16 @@ export default function SponsorshipRequest() {
                               <option value="Other">Other</option>
                             </select>
                           ) : (
-                            <input
-                              type="text"
-                              name="subCounty"
-                              value={form.subCounty || ''}
-                              onChange={handleTextChange}
-                              placeholder="Enter Sub-county"
-                              className={`w-full border rounded-xl px-4 py-3 text-xs font-bold text-[#074504] focus:ring-2 focus:ring-[#C0991B] outline-none ${
-                                errors.subCounty ? 'border-red-400 focus:ring-red-400' : 'border-gray-200'
-                              }`}
-                            />
+                            <select disabled className="w-full border border-gray-200 bg-gray-100 rounded-xl px-4 py-3 text-xs font-bold text-gray-400 cursor-not-allowed outline-none">
+                              <option value="">Select County First</option>
+                            </select>
                           )}
                           {errors.subCounty && <p className="text-red-500 font-bold text-[9px] uppercase tracking-wider mt-1">{errors.subCounty}</p>}
                         </div>
 
                         <div>
                           <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-1">Ward Location</label>
-                          {COUNTY_DATA[form.county]?.wards[form.subCounty || ''] ? (
+                          {form.county && form.subCounty ? (
                             <select
                               name="ward"
                               value={form.ward}
@@ -518,22 +511,15 @@ export default function SponsorshipRequest() {
                               className="w-full border border-gray-200 rounded-xl px-4 py-3 text-xs font-bold text-[#074504] focus:ring-2 focus:ring-[#C0991B] bg-white outline-none"
                             >
                               <option value="">Select Ward</option>
-                              {COUNTY_DATA[form.county].wards[form.subCounty || ''].map(w => (
+                              {COUNTY_DATA[form.county].wards[form.subCounty].map(w => (
                                 <option key={w} value={w}>{w}</option>
                               ))}
                               <option value="Other">Other</option>
                             </select>
                           ) : (
-                            <input 
-                              type="text"
-                              name="ward"
-                              value={form.ward}
-                              onChange={handleTextChange}
-                              placeholder="Enter Ward"
-                              className={`w-full border rounded-xl px-4 py-3 text-xs font-bold text-[#074504] focus:ring-2 focus:ring-[#C0991B] outline-none ${
-                                errors.ward ? 'border-red-400 focus:ring-red-400' : 'border-gray-200'
-                              }`}
-                            />
+                            <select disabled className="w-full border border-gray-200 bg-gray-100 rounded-xl px-4 py-3 text-xs font-bold text-gray-400 cursor-not-allowed outline-none">
+                              <option value="">Select Sub-county First</option>
+                            </select>
                           )}
                           {errors.ward && <p className="text-red-500 font-bold text-[9px] uppercase tracking-wider mt-1">{errors.ward}</p>}
                         </div>

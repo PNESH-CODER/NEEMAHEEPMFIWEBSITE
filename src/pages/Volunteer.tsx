@@ -1,8 +1,68 @@
-import React from 'react';
-import { motion } from 'motion/react';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useInView, animate } from 'motion/react';
 import { Heart, Users, BookOpen, Star, ArrowRight, ShieldCheck, Award, Handshake, Mail, Smartphone } from 'lucide-react';
 import { Helmet } from '../components/Helmet';
 import SmartLeadForm from '../components/SmartLeadForm';
+
+interface StatItemProps {
+  value: string;
+  label: string;
+  index: number;
+}
+
+function StatItem({ value, label, index }: StatItemProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-40px' });
+  const [displayText, setDisplayText] = useState('0');
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    const numericMatch = value.match(/[\d.]+/);
+    if (!numericMatch) {
+      setDisplayText(value);
+      return;
+    }
+
+    const targetNum = parseFloat(numericMatch[0]);
+    const prefix = value.substring(0, value.indexOf(numericMatch[0]));
+    const suffix = value.substring(value.indexOf(numericMatch[0]) + numericMatch[0].length);
+
+    const controls = animate(0, targetNum, {
+      duration: 1.8,
+      delay: index * 0.15,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate(latest) {
+        const isFloat = targetNum % 1 !== 0;
+        const formatted = isFloat ? latest.toFixed(1) : Math.floor(latest).toLocaleString();
+        setDisplayText(`${prefix}${formatted}${suffix}`);
+      }
+    });
+
+    return () => controls.stop();
+  }, [isInView, value, index]);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 35, scale: 0.92 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.5, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -6, scale: 1.04 }}
+      className="p-6 md:p-8 rounded-3xl bg-white hover:bg-emerald-50/50 border border-gray-100 hover:border-[#074504]/20 shadow-xs hover:shadow-xl transition-all duration-300 group cursor-default"
+    >
+      <motion.div 
+        className="text-4xl md:text-6xl font-black text-[#074504] group-hover:text-[#599200] mb-2 tracking-tighter transition-colors"
+      >
+        {displayText}
+      </motion.div>
+      <div className="text-[10px] md:text-[11px] font-black text-[#C0991B] uppercase tracking-[0.25em] group-hover:tracking-[0.3em] transition-all">
+        {label}
+      </div>
+    </motion.div>
+  );
+}
 
 export default function Volunteer() {
   const volunteerRoles = [
@@ -26,6 +86,13 @@ export default function Volunteer() {
       title: "Life Skills Trainer",
       desc: "Facilitate workshops on leadership, financial literacy, and social responsibility for our beneficiaries."
     }
+  ];
+
+  const socialProofStats = [
+    { value: '10+', label: 'Active Mentors' },
+    { value: '2k', label: 'Hours Served' },
+    { value: '100+', label: 'Students Guided' },
+    { value: '100%', label: 'Impact Felt' },
   ];
 
   return (
@@ -137,26 +204,18 @@ export default function Volunteer() {
          </div>
       </section>
 
-      {/* Impact Stats */}
+      {/* Impact Stats (Animated Social Proof Metrics) */}
       <section className="bg-white py-24 border-t border-gray-100">
          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
-               <div>
-                  <div className="text-4xl md:text-6xl font-black text-[#074504] mb-2 tracking-tighter">10+</div>
-                  <div className="text-[10px] font-black text-[#C0991B] uppercase tracking-[0.3em]">Active Mentors</div>
-               </div>
-               <div>
-                  <div className="text-4xl md:text-6xl font-black text-[#074504] mb-2 tracking-tighter">2k</div>
-                  <div className="text-[10px] font-black text-[#C0991B] uppercase tracking-[0.3em]">Hours Served</div>
-               </div>
-               <div>
-                  <div className="text-4xl md:text-6xl font-black text-[#074504] mb-2 tracking-tighter">100+</div>
-                  <div className="text-[10px] font-black text-[#C0991B] uppercase tracking-[0.3em]">Students Guided</div>
-               </div>
-               <div>
-                  <div className="text-4xl md:text-6xl font-black text-[#074504] mb-2 tracking-tighter">100%</div>
-                  <div className="text-[10px] font-black text-[#C0991B] uppercase tracking-[0.3em]">Impact Felt</div>
-               </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
+               {socialProofStats.map((stat, idx) => (
+                 <StatItem 
+                   key={stat.label}
+                   value={stat.value}
+                   label={stat.label}
+                   index={idx}
+                 />
+               ))}
             </div>
          </div>
       </section>

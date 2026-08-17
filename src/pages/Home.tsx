@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, PhoneCall, Building2, TrendingUp, Clock, MapPin, MousePointer2 } from 'lucide-react';
+import { ArrowRight, PhoneCall, Building2, TrendingUp, Clock, MapPin, MousePointer2, Users } from 'lucide-react';
 import CountUp from 'react-countup';
 import { motion, AnimatePresence } from 'motion/react';
 import WhyChooseUs from '../components/WhyChooseUs';
@@ -169,7 +169,7 @@ export default function Home() {
           <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
-                { num: 1000, suffix: "+", label: "SMEs FUNDED", icon: Building2, color: "#C0991B" },
+                { num: 8600, suffix: "+", label: "FAMILIES REACHED", icon: Users, color: "#C0991B" },
                 { num: 56, suffix: "%", label: "RURAL OUTREACH", icon: TrendingUp, color: "#C0991B" },
                 { num: 6, suffix: "hrs", label: "AVERAGE RESPONSE", iconImage: "/average_response_gold.png", icon: Clock, color: "#C0991B" },
                 { num: 7, suffix: "", label: "COUNTIES SERVED", icon: MapPin, color: "#C0991B" }
@@ -295,7 +295,7 @@ export default function Home() {
             {/* Animated Impact Metrics Below Start Your Journey Today */}
             <div className="pt-10 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
               {[
-                { label: "SMEs Funded", val: 1000, suffix: "+", color: "#C0991B" },
+                { label: "Families Reached", val: 8600, suffix: "+", color: "#C0991B" },
                 { label: "Years of Impact", val: 15, suffix: "+", color: "#599200" },
                 { label: "Counties Served", val: 7, suffix: "", color: "#C0991B" },
                 { label: "Satisfaction Rate", val: 98.4, suffix: "%", isDecimal: true, color: "#599200" }

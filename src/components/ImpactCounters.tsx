@@ -1,5 +1,5 @@
 import React from 'react';
-import { Building2, TrendingUp, MapPin, Award } from 'lucide-react';
+import { Users, TrendingUp, MapPin, Award } from 'lucide-react';
 import CountUp from 'react-countup';
 
 interface StatItem {
@@ -13,7 +13,7 @@ interface StatItem {
 
 export default function ImpactCounters() {
   const stats: StatItem[] = [
-    { label: 'SMEs Funded', num: 1000, suffix: '+', icon: Building2 },
+    { label: 'Families Reached', num: 8600, suffix: '+', icon: Users },
     { label: 'Years Empowering Communities', num: 15, suffix: '+', icon: Award },
     { label: 'Counties Served', num: 7, suffix: '', icon: MapPin },
     { label: 'Repayment & Growth Rate', num: 98.4, suffix: '%', isDecimal: true, icon: TrendingUp },
