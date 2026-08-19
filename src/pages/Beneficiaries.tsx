@@ -8,17 +8,18 @@ import { beneficiaryService } from '../services/beneficiaryService';
 export default function Beneficiaries() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedSchool, setSelectedSchool] = useState('All');
-  const [publishedData, setPublishedData] = useState(() => beneficiariesStore.getPublishedLists());
+  const [publishedData, setPublishedData] = useState(() => beneficiariesStore.getPublishedLists().filter(d => d.year !== '2027'));
 
   // Determine available years and the most current year (highest numerical year)
   const availableYears = Array.from(new Set(publishedData.map(d => d.year)))
+    .filter(y => y !== '2027')
     .sort((a, b) => Number(b) - Number(a));
   const mostCurrentYear = availableYears[0] || '2026';
 
   // Active year defaults to the most current year dynamically
   const [activeYear, setActiveYear] = useState<string>(() => {
-    const initialLists = beneficiariesStore.getPublishedLists();
-    const years = Array.from(new Set(initialLists.map(d => d.year))).sort((a, b) => Number(b) - Number(a));
+    const initialLists = beneficiariesStore.getPublishedLists().filter(d => d.year !== '2027');
+    const years = Array.from(new Set(initialLists.map(d => d.year))).filter(y => y !== '2027').sort((a, b) => Number(b) - Number(a));
     return years[0] || '2026';
   });
 
@@ -29,7 +30,7 @@ export default function Beneficiaries() {
     const loadBeneficiaries = async () => {
       const data = await beneficiaryService.getPublishedBeneficiaries();
       if (isMounted && data && data.length > 0) {
-        setPublishedData(data);
+        setPublishedData(data.filter(d => d.year !== '2027'));
       }
     };
 

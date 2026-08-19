@@ -11,16 +11,18 @@ export const beneficiaryService = {
         .from('beneficiaries')
         .select('*')
         .eq('status', 'Active')
+        .neq('year', '2027')
         .order('serial_number', { ascending: true });
 
       if (error || !data || data.length === 0) {
-        return beneficiariesStore.getPublishedLists();
+        return beneficiariesStore.getPublishedLists().filter(d => d.year !== '2027');
       }
 
       // Group by year
       const grouped: { [year: string]: { id: string; name: string; school: string }[] } = {};
       data.forEach(item => {
         const yr = item.year || '2026';
+        if (yr === '2027') return;
         if (!grouped[yr]) grouped[yr] = [];
         grouped[yr].push({
           id: String(item.serial_number || 1).padStart(3, '0'),
@@ -29,14 +31,14 @@ export const beneficiaryService = {
         });
       });
 
-      const years = Object.keys(grouped).sort((a, b) => b.localeCompare(a));
+      const years = Object.keys(grouped).filter(yr => yr !== '2027').sort((a, b) => b.localeCompare(a));
       return years.map(yr => ({
         year: yr,
         title: `Arise & Shine Beneficiaries - ${yr} Cohort`,
         students: grouped[yr]
       }));
     } catch {
-      return beneficiariesStore.getPublishedLists();
+      return beneficiariesStore.getPublishedLists().filter(d => d.year !== '2027');
     }
   },
 

@@ -359,11 +359,11 @@ class BeneficiariesStore {
 
         if (storedL) {
           let parsedL: AnnualBeneficiaryList[] = JSON.parse(storedL);
-          // Filter out 2025 list if present
-          parsedL = parsedL.filter(l => l.year !== '2025');
+          // Filter out 2025 and 2027 lists if present
+          parsedL = parsedL.filter(l => l.year !== '2025' && l.year !== '2027');
           // Merge missing initial lists
           INITIAL_LISTS.forEach(initL => {
-            if (!parsedL.some(l => l.id === initL.id || l.year === initL.year)) {
+            if (initL.year !== '2027' && !parsedL.some(l => l.id === initL.id || l.year === initL.year)) {
               parsedL.push(initL);
             }
           });
@@ -372,11 +372,11 @@ class BeneficiariesStore {
 
         if (storedR) {
           let parsedR: BeneficiaryRecord[] = JSON.parse(storedR);
-          // Filter out 2025 records if present
-          parsedR = parsedR.filter(r => r.year !== '2025' && r.listId !== 'list_2025');
+          // Filter out 2025 and 2027 records if present
+          parsedR = parsedR.filter(r => r.year !== '2025' && r.year !== '2027' && r.listId !== 'list_2025' && r.listId !== 'list_2027');
           // Merge missing initial records
           INITIAL_RECORDS.forEach(initR => {
-            if (initR.year !== '2025' && !parsedR.some(r => r.id === initR.id)) {
+            if (initR.year !== '2025' && initR.year !== '2027' && !parsedR.some(r => r.id === initR.id)) {
               parsedR.push(initR);
             }
           });
@@ -413,7 +413,7 @@ class BeneficiariesStore {
   }
 
   public getPublishedLists(): { year: string; title: string; students: { id: string; name: string; school: string }[] }[] {
-    const published = this.lists.filter(l => l.status === 'Published' || l.status === 'Archived');
+    const published = this.lists.filter(l => (l.status === 'Published' || l.status === 'Archived') && l.year !== '2027');
     
     // Sort by year descending
     published.sort((a, b) => b.year.localeCompare(a.year));

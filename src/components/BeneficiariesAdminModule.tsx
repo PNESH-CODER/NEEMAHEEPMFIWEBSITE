@@ -125,7 +125,7 @@ export default function BeneficiariesAdminModule({
   }, [allRecords]);
 
   // Create List Form State
-  const [newYear, setNewYear] = useState('2027');
+  const [newYear, setNewYear] = useState('2026');
   const [newTitle, setNewTitle] = useState('');
   const [newDesc, setNewDesc] = useState('');
   const [newStatus, setNewStatus] = useState<'Draft' | 'Published'>('Draft');
