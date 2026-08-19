@@ -98,7 +98,7 @@ export default function EligibilityQuiz() {
       email: contact.email,
       phone: formattedPhone,
       consentGiven: "Yes",
-      signupSource: window.location.href,
+      signupSource: typeof window !== 'undefined' ? `Pre-Qualification Quiz Page (${window.location.pathname})` : 'Pre-Qualification Page',
       details: { 
         ...data, 
         score: 85

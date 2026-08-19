@@ -4,6 +4,8 @@
  * user reputation & bans, moderation rules, audit logs, and real-time event dispatch.
  */
 
+import { supabase } from './supabase';
+
 export interface CommentReport {
   id: string;
   reason: 'Spam' | 'Harassment' | 'Hate Speech' | 'False Information' | 'Abuse' | 'Offensive Language' | 'Scams' | 'Other';
@@ -946,6 +948,36 @@ export const communityStore = {
     }
 
     this.saveComments(comments);
+
+    // Save to Supabase article_comments table
+    (async () => {
+      try {
+        const { error } = await supabase.from('article_comments').insert([{
+          post_slug: newComm.postSlug,
+          post_title: newComm.postTitle,
+          author_name: newComm.authorName,
+          author_email: newComm.authorEmail,
+          content: newComm.content,
+          status: newComm.status,
+          created_at: new Date().toISOString()
+        }]);
+
+        if (error) {
+          console.warn('Supabase article_comments notice:', error);
+          await supabase.from('leads').insert([{
+            full_name: newComm.authorName,
+            email: newComm.authorEmail,
+            type: 'Comment',
+            details: newComm,
+            status: 'New',
+            signup_source: `Article: ${newComm.postSlug}`,
+            created_at: new Date().toISOString()
+          }]);
+        }
+      } catch (err) {
+        console.warn('Exception saving comment to Supabase:', err);
+      }
+    })();
 
     // Audit log
     this.logAudit(

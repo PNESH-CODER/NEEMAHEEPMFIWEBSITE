@@ -338,6 +338,9 @@ export function useJobs() {
     // Update vacancy applicationsCount
     setVacancies(prev => prev.map(v => v.id === appData.vacancyId ? { ...v, applicationsCount: v.applicationsCount + 1 } : v));
 
+    // Save job application to Supabase job_applications table
+    jobService.submitJobApplication(newApp).catch(e => console.warn(e));
+
     return newApp;
   };
 

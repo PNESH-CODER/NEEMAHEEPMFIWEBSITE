@@ -108,6 +108,56 @@ export const jobService = {
     }
   },
 
+  async submitJobApplication(appData: any): Promise<void> {
+    try {
+      const payload = {
+        full_name: `${appData.personalInfo?.firstName || ''} ${appData.personalInfo?.lastName || ''}`.trim() || appData.applicantName || '',
+        email: appData.personalInfo?.email || appData.email || '',
+        phone: appData.personalInfo?.phone || appData.phone || '',
+        vacancy_id: appData.vacancyId || '',
+        vacancy_title: appData.vacancyTitle || '',
+        vacancy_ref: appData.vacancyRef || '',
+        department: appData.department || '',
+        app_number: appData.appNumber || '',
+        id_number: appData.personalInfo?.idNumber || '',
+        kra_pin: appData.personalInfo?.kraPin || '',
+        county: appData.personalInfo?.county || '',
+        sub_county: appData.personalInfo?.constituency || appData.personalInfo?.subCounty || '',
+        ward: appData.personalInfo?.ward || '',
+        education: appData.education || [],
+        employment: appData.employmentHistory || [],
+        memberships: appData.professionalMemberships || [],
+        references: appData.references || [],
+        cv_info: appData.cvInfo || {},
+        status: appData.status || 'Received',
+        signup_source: appData.signupSource || (typeof window !== 'undefined' ? `Careers Page (${window.location.pathname})` : 'Careers Page'),
+        created_at: new Date().toISOString()
+      };
+
+      const { error } = await supabase
+        .from('job_applications')
+        .insert([payload]);
+
+      if (error) {
+        console.warn('[jobService] Supabase job application save error, attempting fallback to leads:', error);
+        try {
+          await supabase.from('leads').insert([{
+            full_name: payload.full_name,
+            email: payload.email,
+            phone: payload.phone,
+            type: 'Career',
+            details: payload,
+            status: 'New',
+            signup_source: 'Job Application',
+            created_at: new Date().toISOString()
+          }]);
+        } catch {}
+      }
+    } catch (err) {
+      console.warn('[jobService] Exception submitting job application to Supabase:', err);
+    }
+  },
+
   subscribeToJobs(onUpdate: () => void) {
     try {
       const channel = supabase

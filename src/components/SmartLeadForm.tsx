@@ -321,17 +321,19 @@ export default function SmartLeadForm({
     const phoneNumber = parsePhoneNumberFromString(phoneVal, 'KE');
     const formattedPhone = phoneNumber ? phoneNumber.format('E.164') : phoneVal;
 
+    const pageSource = typeof window !== 'undefined' ? `${title || type} Form on ${window.location.pathname}` : `${type} Form`;
+
     submitLead({
       type,
       name: formData['name'] || formData['fullName'] || 'Anonymous',
       email: formData['email'] || '',
       phone: formattedPhone,
       consentGiven: "Yes",
-      signupSource: window.location.href,
+      signupSource: pageSource,
       details: {
         ...updatedDetails,
         consentGiven: "Yes",
-        signupSource: window.location.href,
+        signupSource: pageSource,
         userAgent: navigator.userAgent
       }
     });

@@ -33,6 +33,7 @@ import imageCompression from 'browser-image-compression';
 // --- CONSTANTS & TYPES ---
 
 import { COUNTY_DATA, KENYA_COUNTIES as COUNTIES } from '../lib/countyData';
+import { supabase } from '../lib/supabase';
 
 const INDIVIDUAL_FEE = 2000;
 const GROUP_FEE_PER_MEMBER = 600;
@@ -222,11 +223,39 @@ export default function JoinUs() {
   const handleSubmitRegistration = async () => {
     setIsSubmitting(true);
     try {
-      // Form handling relies on local state simulation intentionally to 
-      // guarantee seamless execution during sharing without Firebase credentials.
+      const payload = {
+        registration_type: regType,
+        full_name: regType === 'individual' ? `${formData.firstName} ${formData.lastName}`.trim() : formData.groupName,
+        phone: formData.phone || formData.repPhone || '',
+        id_number: formData.idNumber || formData.repIdNumber || '',
+        county: formData.county || '',
+        sub_county: formData.constituency || '',
+        ward: formData.ward || '',
+        payment_ref: manualTxId || '',
+        group_members: groupMembers || [],
+        details: formData,
+        status: 'Submitted',
+        signup_source: typeof window !== 'undefined' ? `Join Us Membership Portal (${window.location.pathname})` : 'Join Us Portal',
+        created_at: new Date().toISOString()
+      };
 
-      // Simulate network request delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Save to Supabase membership_registrations table
+      const { error } = await supabase.from('membership_registrations').insert([payload]);
+      if (error) {
+        console.warn('Supabase membership_registrations notice:', error);
+        // Fallback to leads
+        try {
+          await supabase.from('leads').insert([{
+            full_name: payload.full_name,
+            phone: payload.phone,
+            type: 'Registration',
+            details: payload,
+            status: 'New',
+            signup_source: 'Join Us Portal',
+            created_at: new Date().toISOString()
+          }]);
+        } catch {}
+      }
 
       const mockRegId = "REG-" + Date.now().toString(36).toUpperCase();
       setRegistrationId(mockRegId);

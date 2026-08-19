@@ -171,7 +171,7 @@ export default function Home() {
               {[
                 { num: 8600, suffix: "+", label: "FAMILIES REACHED", icon: Users, color: "#C0991B" },
                 { num: 56, suffix: "%", label: "RURAL OUTREACH", icon: TrendingUp, color: "#C0991B" },
-                { num: 6, suffix: "hrs", label: "AVERAGE RESPONSE", iconImage: "/average_response_gold.png", icon: Clock, color: "#C0991B" },
+                { num: 6, suffix: "hrs", label: "AVERAGE RESPONSE", icon: Clock, color: "#C0991B" },
                 { num: 7, suffix: "", label: "COUNTIES SERVED", icon: MapPin, color: "#C0991B" }
               ].map((stat, i) => (
                 <motion.div 
@@ -189,19 +189,7 @@ export default function Home() {
                   <div 
                     className="w-14 h-14 rounded-2xl flex items-center justify-center mb-10 group-hover:rotate-12 transition-transform duration-500 shadow-inner bg-[#C0991B]/15 border border-[#C0991B]/30 text-[#C0991B]"
                   >
-                    {stat.iconImage ? (
-                      <img 
-                        src={stat.iconImage} 
-                        alt={stat.label}
-                        onError={(e) => {
-                          const target = e.currentTarget;
-                          target.style.display = 'none';
-                        }}
-                        className="w-8 h-8 object-contain filter drop-shadow-sm"
-                      />
-                    ) : (
-                      <stat.icon className="w-7 h-7 text-[#C0991B]" strokeWidth={2.5} />
-                    )}
+                    <stat.icon className="w-7 h-7 text-[#C0991B]" strokeWidth={2.5} />
                   </div>
                   
                   <div className="flex flex-col items-start">

@@ -1,9 +1,32 @@
 import React, { useState } from 'react';
 import { PhoneCall, CheckCircle2 } from 'lucide-react';
+import { useLeads } from '../hooks/useLeads';
 
 export default function RequestCallBack() {
   const [phone, setPhone] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { submitLead } = useLeads();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!phone) return;
+    setIsSubmitting(true);
+    try {
+      await submitLead({
+        type: 'Callback',
+        name: 'Callback Request',
+        phone,
+        signupSource: 'Request Call Back Page',
+        details: { phoneRequested: phone }
+      });
+      setSubmitted(true);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="max-w-md mx-auto my-12 p-8 bg-white rounded-3xl border border-gray-200 shadow-sm space-y-6">
@@ -22,7 +45,7 @@ export default function RequestCallBack() {
           <p className="text-xs text-gray-600">A customer representative is calling you shortly.</p>
         </div>
       ) : (
-        <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-xs font-bold text-gray-700 mb-1">Mobile Phone Number</label>
             <input
@@ -34,8 +57,8 @@ export default function RequestCallBack() {
               className="w-full px-3 py-2 text-xs border border-gray-300 rounded-xl"
             />
           </div>
-          <button type="submit" className="w-full py-2.5 bg-[#074504] text-white font-bold text-xs rounded-xl hover:bg-[#053203]">
-            Call Me Back
+          <button type="submit" disabled={isSubmitting} className="w-full py-2.5 bg-[#074504] text-white font-bold text-xs rounded-xl hover:bg-[#053203] disabled:opacity-50">
+            {isSubmitting ? 'Submitting...' : 'Call Me Back'}
           </button>
         </form>
       )}

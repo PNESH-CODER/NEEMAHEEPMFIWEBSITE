@@ -2,11 +2,26 @@ import { supabase } from '../lib/supabase';
 
 export type LeadType = 'Registration' | 'Pre-Qualification' | 'Contact' | 'Resource' | 'Career' | 'Partnership' | 'Callback' | 'Volunteer' | 'Member Activation' | 'Sponsorship';
 
+export const FORM_TABLE_MAP: Record<string, string> = {
+  'Contact': 'contact_inquiries',
+  'Sponsorship': 'sponsorship_requests',
+  'Career': 'job_applications',
+  'Pre-Qualification': 'pre_qualifications',
+  'Volunteer': 'volunteer_applications',
+  'Partnership': 'partnership_requests',
+  'Callback': 'callback_requests',
+  'Registration': 'membership_registrations',
+  'Member Activation': 'membership_registrations',
+  'Resource': 'newsletter_subscriptions',
+  'Newsletter': 'newsletter_subscriptions',
+  'Comment': 'article_comments'
+};
+
 export interface Lead {
   id: string;
   type: LeadType;
   name: string;
-  email: string;
+  email?: string;
   phone?: string;
   details?: any;
   status: 'New' | 'Followed-up' | 'Qualified' | 'Closed';
@@ -112,24 +127,51 @@ class LeadService {
     }
   }
 
-  public async submitLead(leadData: Omit<Lead, 'id' | 'status' | 'timestamp'>) {
+  public async submitLead(leadData: Omit<Lead, 'id' | 'status' | 'timestamp'> & { customTable?: string }) {
+    const targetTable = leadData.customTable || FORM_TABLE_MAP[leadData.type] || 'leads';
+    const payload = {
+      full_name: leadData.name || 'Anonymous',
+      email: leadData.email || '',
+      phone: leadData.phone || '',
+      type: leadData.type,
+      details: leadData.details || {},
+      status: 'New',
+      consent_given: leadData.consentGiven ? 'Yes' : 'No',
+      signup_source: leadData.signupSource || (typeof window !== 'undefined' ? window.location.href : ''),
+      created_at: new Date().toISOString()
+    };
+
     try {
-      const { data, error } = await supabase.from('leads').insert([{
-        full_name: leadData.name,
-        email: leadData.email,
-        phone: leadData.phone || '',
-        type: leadData.type,
-        details: leadData.details || {},
-        status: 'New'
-      }]).select().single();
+      // 1. Primary insert to form-specific individual Supabase table
+      const { data, error } = await supabase
+        .from(targetTable)
+        .insert([payload])
+        .select()
+        .single();
 
       if (error) {
-        throw error;
+        console.warn(`[leadService] Primary insert into ${targetTable} notice:`, error.message);
+        // Fallback to generic leads table
+        const { data: fbData } = await supabase
+          .from('leads')
+          .insert([payload])
+          .select()
+          .single();
+        return { id: fbData?.id || 'temp-' + Date.now(), ...leadData };
       }
 
-      return { id: data.id, ...leadData };
+      // 2. Also record in leads table for consolidated tracking
+      if (targetTable !== 'leads') {
+        (async () => {
+          try {
+            await supabase.from('leads').insert([payload]);
+          } catch {}
+        })();
+      }
+
+      return { id: data?.id || 'temp-' + Date.now(), ...leadData };
     } catch (error) {
-      console.error("Error submitting lead to Supabase: ", error);
+      console.error(`Error submitting lead to Supabase (${targetTable}): `, error);
       return { id: 'temp-' + Date.now(), ...leadData };
     }
   }

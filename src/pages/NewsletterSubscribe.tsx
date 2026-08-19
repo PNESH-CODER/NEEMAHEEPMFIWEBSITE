@@ -49,7 +49,7 @@ export default function NewsletterSubscribe() {
     setIsVerifying(false);
     try {
       await submitLead({
-        type: 'Contact',
+        type: 'Newsletter',
         name: formData.name,
         email: formData.email,
         phone: formData.phone || undefined,

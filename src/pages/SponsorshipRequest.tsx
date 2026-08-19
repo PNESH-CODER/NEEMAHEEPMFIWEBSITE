@@ -209,7 +209,7 @@ export default function SponsorshipRequest() {
         phone: form.phone,
         type: 'Sponsorship' as const,
         consentGiven: form.consentApproved,
-        signupSource: 'Sponsorship Portal',
+        signupSource: typeof window !== 'undefined' ? `Sponsorship Application Page (${window.location.pathname})` : 'Sponsorship Portal',
         details: {
           programStream: SCHOLARSHIP_PROGRAM.name,
           sponsorshipKind: form.sponsorshipKind,
