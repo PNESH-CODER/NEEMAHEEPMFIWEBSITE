@@ -23,14 +23,17 @@ export default function Beneficiaries() {
     return years[0] || '2026';
   });
 
-  const [prevTopYear, setPrevTopYear] = useState(mostCurrentYear);
-
   useEffect(() => {
     let isMounted = true;
     const loadBeneficiaries = async () => {
       const data = await beneficiaryService.getPublishedBeneficiaries();
       if (isMounted && data && data.length > 0) {
-        setPublishedData(data.filter(d => d.year !== '2027'));
+        const cleanData = data.filter(d => d.year !== '2027');
+        setPublishedData(cleanData);
+        const topYear = cleanData.map(d => d.year).sort((a, b) => Number(b) - Number(a))[0];
+        if (topYear) {
+          setActiveYear(prev => prev || topYear);
+        }
       }
     };
 
@@ -46,14 +49,6 @@ export default function Beneficiaries() {
       window.removeEventListener('neema_cms_beneficiaries_lists_updated', refreshData);
     };
   }, []);
-
-  // When publishedData updates with a new latest year, auto-switch activeYear to the new most current year
-  useEffect(() => {
-    if (mostCurrentYear && (mostCurrentYear !== prevTopYear || !activeYear)) {
-      setActiveYear(mostCurrentYear);
-      setPrevTopYear(mostCurrentYear);
-    }
-  }, [mostCurrentYear, prevTopYear, activeYear]);
 
   // Year options for dropdown (no duplicate "Most Current" option)
   const yearOptions = [

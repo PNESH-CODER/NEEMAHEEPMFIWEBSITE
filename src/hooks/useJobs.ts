@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { jobService } from '../services/jobService';
 import { blogStore } from '../lib/blogStore';
 
@@ -223,6 +223,11 @@ export function useJobs() {
     };
   }, []);
 
+  const vacanciesRef = useRef(vacancies);
+  useEffect(() => {
+    vacanciesRef.current = vacancies;
+  }, [vacancies]);
+
   useEffect(() => {
     localStorage.setItem('neema_vacancies_data', JSON.stringify(vacancies));
     blogStore.saveVacancies(vacancies);
@@ -254,7 +259,9 @@ export function useJobs() {
             }
             return v;
           });
-          setVacancies(autoArchived);
+          if (JSON.stringify(autoArchived) !== JSON.stringify(vacanciesRef.current)) {
+            setVacancies(autoArchived);
+          }
         } catch (e) {
           console.error(e);
         }
