@@ -1,10 +1,9 @@
-import { ArrowLeft, Search, GraduationCap, School, MapPin, Printer, Download, Award, Users, Calendar, Filter } from 'lucide-react';
+import { ArrowLeft, Search, GraduationCap, School, MapPin, Download, Award, Users, Calendar, Filter } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { useState, useEffect } from 'react';
 import { beneficiariesStore, maskBeneficiaryName } from '../lib/beneficiariesStore';
 import { beneficiaryService } from '../services/beneficiaryService';
-import { printHtmlReport } from '../lib/pdfPrintUtils';
 
 export default function Beneficiaries() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -88,30 +87,6 @@ export default function Beneficiaries() {
   })).filter(yearGroup => yearGroup.students.length > 0);
 
   const totalStudentsCount = publishedData.reduce((acc, curr) => acc + curr.students.length, 0);
-
-  const handlePrint = () => {
-    const rows = filteredData.flatMap(y => 
-      y.students.map(s => [
-        s.id,
-        maskBeneficiaryName(s.name),
-        s.school,
-        y.year
-      ])
-    );
-
-    const yearScopeText = activeYear === 'All' 
-      ? 'All Years' 
-      : `Year ${activeYear}`;
-
-    const schoolScopeText = isSchoolPicked ? ` - ${selectedSchool}` : '';
-
-    printHtmlReport({
-      title: 'NEEMA HEEP - ARISE & SHINE EDUCATION PROGRAMME',
-      subtitle: `Official Beneficiaries Roster (${yearScopeText}${schoolScopeText}) - ${rows.length} Scholars Listed`,
-      columns: ['S.NO', 'Student Name', 'High School Attending', 'Year'],
-      rows: rows
-    });
-  };
 
   return (
     <main className="flex-grow bg-[#f8faf8] pb-20 font-sans">
@@ -241,15 +216,6 @@ export default function Beneficiaries() {
                   ))}
                 </select>
               </div>
-
-              {/* Print / Report Button */}
-              <button
-                onClick={handlePrint}
-                className="w-full lg:w-auto bg-[#074504] hover:bg-[#052903] text-white px-6 py-4 rounded-2xl font-bold uppercase text-xs tracking-wider transition-all flex items-center justify-center gap-2 shrink-0 shadow-md cursor-pointer"
-              >
-                <Printer className="w-4 h-4 text-[#C0991B]" />
-                Print Roster
-              </button>
             </div>
          </div>
       </section>
